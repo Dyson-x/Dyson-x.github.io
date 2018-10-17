@@ -87,13 +87,14 @@
 <meta property="og:site_name" content="Dyson&#39;s blog">
 <meta property="og:description" content="标题：插入排序 插入排序基本思想 : 每一步将一个待排序的元素，按其排序码的大小，插入到前面已经排好序的一组元素的合适位置上去，直到元素全部插完为止。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/img/20181017insertSort.png">
-<meta property="og:image" content="https://github.com/Dyson-x/gitphoto/blob/master/20180910161255722.png">
-<meta property="og:updated_time" content="2018-10-17T14:43:04.919Z">
+<meta property="og:image" content="http://yoursite.com/img/InsertSort/20181017-2.png">
+<meta property="og:image" content="http://yoursite.com/img/InsertSort/20181017-1.png">
+<meta property="og:image" content="http://yoursite.com/img/InsertSort/20181017-3.png">
+<meta property="og:updated_time" content="2018-10-17T14:54:30.101Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="InsertSort">
 <meta name="twitter:description" content="标题：插入排序 插入排序基本思想 : 每一步将一个待排序的元素，按其排序码的大小，插入到前面已经排好序的一组元素的合适位置上去，直到元素全部插完为止。">
-<meta name="twitter:image" content="http://yoursite.com/img/20181017insertSort.png">
+<meta name="twitter:image" content="http://yoursite.com/img/InsertSort/20181017-2.png">
 
 
 
@@ -307,13 +308,13 @@
 <h2 id="标题：插入排序"><a href="#标题：插入排序" class="headerlink" title="标题：插入排序"></a>标题：插入排序</h2><hr>
 <h3 id="插入排序基本思想-每一步将一个待排序的元素，按其排序码的大小，插入到前面已经排好序的一组元素的合适位置上去，直到元素全部插完为止。"><a href="#插入排序基本思想-每一步将一个待排序的元素，按其排序码的大小，插入到前面已经排好序的一组元素的合适位置上去，直到元素全部插完为止。" class="headerlink" title="插入排序基本思想 : 每一步将一个待排序的元素，按其排序码的大小，插入到前面已经排好序的一组元素的合适位置上去，直到元素全部插完为止。"></a>插入排序基本思想 : 每一步将一个待排序的元素，按其排序码的大小，插入到前面已经排好序的一组元素的合适位置上去，直到元素全部插完为止。</h3><a id="more"></a>
 <hr>
-<h3 id="【直接插入排序】-当插入第i-i-gt-1-个元素时，前面的array-0-array-1-…-array-i-1-已经排好序，此时用array-i-的排序码与array-i-1-array-i-2-…的排序码顺序-进行比较，找到插入位置即将array-i-插入，原来位置上的元素顺序后移"><a href="#【直接插入排序】-当插入第i-i-gt-1-个元素时，前面的array-0-array-1-…-array-i-1-已经排好序，此时用array-i-的排序码与array-i-1-array-i-2-…的排序码顺序-进行比较，找到插入位置即将array-i-插入，原来位置上的元素顺序后移" class="headerlink" title="【直接插入排序】:当插入第i(i&gt;=1)个元素时，前面的array[0],array[1],…,array[i-1]已经排好序，此时用array[i]的排序码与array[i-1],array[i-2],…的排序码顺序 进行比较，找到插入位置即将array[i]插入，原来位置上的元素顺序后移"></a>【直接插入排序】:当插入第i(i&gt;=1)个元素时，前面的array[0],array[1],…,array[i-1]已经排好序，此时用array[i]的排序码与array[i-1],array[i-2],…的排序码顺序 进行比较，找到插入位置即将array[i]插入，原来位置上的元素顺序后移</h3><p><a href="https://github.com/Dyson-x/data-structure/blob/master/photo.png" target="_blank" rel="noopener">图片链接</a></p>
+<h3 id="【直接插入排序】-当插入第i-i-gt-1-个元素时，前面的array-0-array-1-…-array-i-1-已经排好序，此时用array-i-的排序码与array-i-1-array-i-2-…的排序码顺序-进行比较，找到插入位置即将array-i-插入，原来位置上的元素顺序后移"><a href="#【直接插入排序】-当插入第i-i-gt-1-个元素时，前面的array-0-array-1-…-array-i-1-已经排好序，此时用array-i-的排序码与array-i-1-array-i-2-…的排序码顺序-进行比较，找到插入位置即将array-i-插入，原来位置上的元素顺序后移" class="headerlink" title="【直接插入排序】:当插入第i(i&gt;=1)个元素时，前面的array[0],array[1],…,array[i-1]已经排好序，此时用array[i]的排序码与array[i-1],array[i-2],…的排序码顺序 进行比较，找到插入位置即将array[i]插入，原来位置上的元素顺序后移"></a>【直接插入排序】:当插入第i(i&gt;=1)个元素时，前面的array[0],array[1],…,array[i-1]已经排好序，此时用array[i]的排序码与array[i-1],array[i-2],…的排序码顺序 进行比较，找到插入位置即将array[i]插入，原来位置上的元素顺序后移</h3><p><img src="/img/InsertSort/20181017-2.png" alt="插入排序示意图"></p>
 <h3 id="如上图所示各趟排序后的结果"><a href="#如上图所示各趟排序后的结果" class="headerlink" title="如上图所示各趟排序后的结果 :"></a>如上图所示各趟排序后的结果 :</h3><pre><code>元素集合越接近有序, 直接插入排序算法的时间复杂度越高
 最优的情况下 : 时间复杂度为 O(n)
 最差的情况下 : 时间复杂度为 O(n^2)
 空间复杂度 : O(1) , 它是一种稳定的排序算法
 </code></pre><h3 id="【希尔排序】-又称缩小增量排序，是对直接插入排序的优化-如下图所示-以3为间隔-每次进行排序-使数组接近于有序"><a href="#【希尔排序】-又称缩小增量排序，是对直接插入排序的优化-如下图所示-以3为间隔-每次进行排序-使数组接近于有序" class="headerlink" title="【希尔排序】: 又称缩小增量排序，是对直接插入排序的优化 , 如下图所示 , 以3为间隔 , 每次进行排序 , 使数组接近于有序 ,"></a>【希尔排序】: 又称缩小增量排序，是对直接插入排序的优化 , 如下图所示 , 以3为间隔 , 每次进行排序 , 使数组接近于有序 ,</h3><pre><code>这样就能减少元素后移的次数 , 这样在大量数据排序时 , 效率会大大提高 ; 在下面的测试中会有明显的差别
-</code></pre><p><img src="/img/20181017insertSort.png" alt="插入排序示意"></p>
+</code></pre><p><img src="/img/InsertSort/20181017-1.png" alt="希尔排序示意图"></p>
 <h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><pre><code class="c"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span>
 <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span>
 <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span>
@@ -391,7 +392,7 @@
     <span class="keyword">return</span> <span class="number">0</span>;
 }
 </code></pre>
-<h4 id="在上面的代码中随机生成了100000个数据用直接插入排序和希尔排序分别进行测试-调试结果如下"><a href="#在上面的代码中随机生成了100000个数据用直接插入排序和希尔排序分别进行测试-调试结果如下" class="headerlink" title="在上面的代码中随机生成了100000个数据用直接插入排序和希尔排序分别进行测试 , 调试结果如下 :"></a>在上面的代码中随机生成了100000个数据用直接插入排序和希尔排序分别进行测试 , 调试结果如下 :</h4><p><img src="https://github.com/Dyson-x/gitphoto/blob/master/20180910161255722.png" alt="图片链接"></p>
+<h4 id="在上面的代码中随机生成了100000个数据用直接插入排序和希尔排序分别进行测试-调试结果如下"><a href="#在上面的代码中随机生成了100000个数据用直接插入排序和希尔排序分别进行测试-调试结果如下" class="headerlink" title="在上面的代码中随机生成了100000个数据用直接插入排序和希尔排序分别进行测试 , 调试结果如下 :"></a>在上面的代码中随机生成了100000个数据用直接插入排序和希尔排序分别进行测试 , 调试结果如下 :</h4><p><img src="/img/InsertSort/20181017-3.png" alt="调试结果示意图">master/20180910161255722.png)</p>
 
       
     </div>
