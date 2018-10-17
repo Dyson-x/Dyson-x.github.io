@@ -87,12 +87,13 @@
 <meta property="og:site_name" content="Dyson&#39;s blog">
 <meta property="og:description" content="标题：插入排序 插入排序基本思想 : 每一步将一个待排序的元素，按其排序码的大小，插入到前面已经排好序的一组元素的合适位置上去，直到元素全部插完为止。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/img/20181017insertSort.png">
 <meta property="og:image" content="https://github.com/Dyson-x/gitphoto/blob/master/20180910161255722.png">
-<meta property="og:updated_time" content="2018-10-17T12:43:26.760Z">
+<meta property="og:updated_time" content="2018-10-17T12:59:48.357Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Inser">
 <meta name="twitter:description" content="标题：插入排序 插入排序基本思想 : 每一步将一个待排序的元素，按其排序码的大小，插入到前面已经排好序的一组元素的合适位置上去，直到元素全部插完为止。">
-<meta name="twitter:image" content="https://github.com/Dyson-x/gitphoto/blob/master/20180910161255722.png">
+<meta name="twitter:image" content="http://yoursite.com/img/20181017insertSort.png">
 
 
 
@@ -312,7 +313,7 @@
 最差的情况下 : 时间复杂度为 O(n^2)
 空间复杂度 : O(1) , 它是一种稳定的排序算法
 </code></pre><h3 id="【希尔排序】-又称缩小增量排序，是对直接插入排序的优化-如下图所示-以3为间隔-每次进行排序-使数组接近于有序"><a href="#【希尔排序】-又称缩小增量排序，是对直接插入排序的优化-如下图所示-以3为间隔-每次进行排序-使数组接近于有序" class="headerlink" title="【希尔排序】: 又称缩小增量排序，是对直接插入排序的优化 , 如下图所示 , 以3为间隔 , 每次进行排序 , 使数组接近于有序 ,"></a>【希尔排序】: 又称缩小增量排序，是对直接插入排序的优化 , 如下图所示 , 以3为间隔 , 每次进行排序 , 使数组接近于有序 ,</h3><pre><code>这样就能减少元素后移的次数 , 这样在大量数据排序时 , 效率会大大提高 ; 在下面的测试中会有明显的差别
-</code></pre><p><a href="https://github.com/Dyson-x/gitphoto/blob/master/20180910152730141.png" target="_blank" rel="noopener">图片链接</a></p>
+</code></pre><p><img src="/img/20181017insertSort.png" alt="插入排序示意"></p>
 <h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><pre><code class="c"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span>
 <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span>
 <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span>
