@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="交换排序," />
 
 
 
@@ -79,17 +79,21 @@
 
 
 
-<meta name="description" content="起风而沐！">
+<meta name="description" content="标题：交换排序 冒泡排序（Bubble Sort）：是一种计算机科学领域的较简单的排序算法。算法描述：它重复地走访过要排序的元素列，依次比较两个相邻的元素，如果他们的顺序（如从大到小、首字母从A到Z）错误就把他们交换过来。走访元素的工作是重复地进行直到没有相邻元素需要交换，也就是说该元素已经排序完成。 这个算法的名字由来是因为越大的元素会经由交换慢慢“浮”到数列的顶端（升序或降序排列），就如同碳">
+<meta name="keywords" content="交换排序">
 <meta property="og:type" content="article">
 <meta property="og:title" content="交换排序">
 <meta property="og:url" content="http://yoursite.com/2018/10/19/交换排序/index.html">
 <meta property="og:site_name" content="Dyson&#39;s blog">
-<meta property="og:description" content="起风而沐！">
+<meta property="og:description" content="标题：交换排序 冒泡排序（Bubble Sort）：是一种计算机科学领域的较简单的排序算法。算法描述：它重复地走访过要排序的元素列，依次比较两个相邻的元素，如果他们的顺序（如从大到小、首字母从A到Z）错误就把他们交换过来。走访元素的工作是重复地进行直到没有相邻元素需要交换，也就是说该元素已经排序完成。 这个算法的名字由来是因为越大的元素会经由交换慢慢“浮”到数列的顶端（升序或降序排列），就如同碳">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-19T07:37:09.462Z">
+<meta property="og:image" content="http://yoursite.com/img/SwapSort/20181019-1.png">
+<meta property="og:image" content="http://yoursite.com/img/SwapSort/20181019-2.png">
+<meta property="og:updated_time" content="2018-10-19T10:40:19.551Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="交换排序">
-<meta name="twitter:description" content="起风而沐！">
+<meta name="twitter:description" content="标题：交换排序 冒泡排序（Bubble Sort）：是一种计算机科学领域的较简单的排序算法。算法描述：它重复地走访过要排序的元素列，依次比较两个相邻的元素，如果他们的顺序（如从大到小、首字母从A到Z）错误就把他们交换过来。走访元素的工作是重复地进行直到没有相邻元素需要交换，也就是说该元素已经排序完成。 这个算法的名字由来是因为越大的元素会经由交换慢慢“浮”到数列的顶端（升序或降序排列），就如同碳">
+<meta name="twitter:image" content="http://yoursite.com/img/SwapSort/20181019-1.png">
 
 
 
@@ -317,7 +321,46 @@
       
 
       
-        
+        <hr>
+<h2 id="标题：交换排序"><a href="#标题：交换排序" class="headerlink" title="标题：交换排序"></a>标题：交换排序</h2><hr>
+<h3 id="冒泡排序（Bubble-Sort）：是一种计算机科学领域的较简单的排序算法。"><a href="#冒泡排序（Bubble-Sort）：是一种计算机科学领域的较简单的排序算法。" class="headerlink" title="冒泡排序（Bubble Sort）：是一种计算机科学领域的较简单的排序算法。"></a>冒泡排序（Bubble Sort）：是一种计算机科学领域的较简单的排序算法。</h3><h4 id="算法描述：它重复地走访过要排序的元素列，依次比较两个相邻的元素，如果他们的顺序（如从大到小、首字母从A到Z）错误就把他们交换过来。走访元素的工作是重复地进行直到没有相邻元素需要交换，也就是说该元素已经排序完成。"><a href="#算法描述：它重复地走访过要排序的元素列，依次比较两个相邻的元素，如果他们的顺序（如从大到小、首字母从A到Z）错误就把他们交换过来。走访元素的工作是重复地进行直到没有相邻元素需要交换，也就是说该元素已经排序完成。" class="headerlink" title="算法描述：它重复地走访过要排序的元素列，依次比较两个相邻的元素，如果他们的顺序（如从大到小、首字母从A到Z）错误就把他们交换过来。走访元素的工作是重复地进行直到没有相邻元素需要交换，也就是说该元素已经排序完成。"></a>算法描述：它重复地走访过要排序的元素列，依次比较两个相邻的元素，如果他们的顺序（如从大到小、首字母从A到Z）错误就把他们交换过来。走访元素的工作是重复地进行直到没有相邻元素需要交换，也就是说该元素已经排序完成。</h4><ul>
+<li>这个算法的名字由来是因为越大的元素会经由交换慢慢“浮”到数列的顶端（升序或降序排列），就如同碳酸饮料中二氧化碳的气泡最终会上浮到顶端一样，故名“冒泡排序”。</li>
+</ul>
+<h4 id="冒泡排序算法步骤如下："><a href="#冒泡排序算法步骤如下：" class="headerlink" title="冒泡排序算法步骤如下："></a>冒泡排序算法步骤如下：</h4><ol>
+<li>比较相邻的元素。如果第一个比第二个大，就交换他们两个。</li>
+<li>对每一对相邻元素做同样的工作，从开始第一对到结尾的最后一对。在这一点，最后的元素应该会是最大的数。</li>
+<li>针对所有的元素重复以上的步骤，除了最后一个。</li>
+<li>持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。</li>
+</ol>
+<h4 id="冒泡排序复杂度问题："><a href="#冒泡排序复杂度问题：" class="headerlink" title="冒泡排序复杂度问题："></a>冒泡排序复杂度问题：</h4><ul>
+<li>冒泡排序最好情况时间复杂度O(n)，冒泡排序最坏情况下时间复杂度O(n^2)  冒泡排序空间复杂度O(1)  冒泡排序是一种稳定的排序算法</li>
+</ul>
+<h4 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//冒泡排序</span></span><br><span class="line"><span class="comment">//使用flag作为标记,当flag为1时,证明数组已将为有序数组,直接可以跳出循环</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BubbleSort</span><span class="params">(<span class="keyword">int</span> *a, <span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	assert(a);</span><br><span class="line">	<span class="keyword">int</span> flag = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len - <span class="number">1</span>; i++)&#123;</span><br><span class="line">		flag = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; len - i - <span class="number">1</span>; j++)&#123;</span><br><span class="line">                        <span class="comment">//比较是否需要交换</span></span><br><span class="line">			<span class="keyword">if</span> (a[j] &gt; a[j+<span class="number">1</span>])&#123;</span><br><span class="line">				Swap(&amp;a[j], &amp;a[j + <span class="number">1</span>]);</span><br><span class="line">				flag = <span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//如果数组已经有序则直接跳出循环</span></span><br><span class="line">		<span class="keyword">if</span> (flag)</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><h4 id="算法描述：快速排序由C-A-R-Hoare在1962年提出。它的基本思想是：通过一趟排序将要排序的数据以一个枢纽div-分割成独立的两部分，其中左半部分的所有数据都比div要小-右半部分的所有数据都比div要大，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。"><a href="#算法描述：快速排序由C-A-R-Hoare在1962年提出。它的基本思想是：通过一趟排序将要排序的数据以一个枢纽div-分割成独立的两部分，其中左半部分的所有数据都比div要小-右半部分的所有数据都比div要大，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。" class="headerlink" title="算法描述：快速排序由C. A. R. Hoare在1962年提出。它的基本思想是：通过一趟排序将要排序的数据以一个枢纽div 分割成独立的两部分，其中左半部分的所有数据都比div要小,右半部分的所有数据都比div要大，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。"></a>算法描述：快速排序由C. A. R. Hoare在1962年提出。它的基本思想是：通过一趟排序将要排序的数据以一个枢纽div 分割成独立的两部分，其中左半部分的所有数据都比div要小,右半部分的所有数据都比div要大，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。</h4><h4 id="递归实现："><a href="#递归实现：" class="headerlink" title="递归实现："></a>递归实现：</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//快速排序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">QuickSort</span><span class="params">(<span class="keyword">int</span> *a, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (left &gt;= right)</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	assert(a);</span><br><span class="line">	<span class="comment">//按照基准经left和right标记区间划分成两个部分</span></span><br><span class="line">	<span class="keyword">int</span> div = PartionOne(a, left, right);</span><br><span class="line">	<span class="comment">//排列左半部分</span></span><br><span class="line">	QuickSort(a, left, div - <span class="number">1</span>);</span><br><span class="line">	<span class="comment">//排列右半部分</span></span><br><span class="line">	QuickSort(a, div + <span class="number">1</span>, right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="Partion-为进行一次库快速排序的算法-常见的方法有-左右指针法-挖坑法-前后指针法"><a href="#Partion-为进行一次库快速排序的算法-常见的方法有-左右指针法-挖坑法-前后指针法" class="headerlink" title="Partion()为进行一次库快速排序的算法, 常见的方法有 左右指针法 , 挖坑法 , 前后指针法"></a>Partion()为进行一次库快速排序的算法, 常见的方法有 左右指针法 , 挖坑法 , 前后指针法</h5><h4 id="左右指针法"><a href="#左右指针法" class="headerlink" title="左右指针法:"></a>左右指针法:</h4><ol>
+<li>这里选取数组中最后一个数( 第一个数 )作为关键字key</li>
+<li>设置两个变量begin和end分别数组的起始和结束下标</li>
+<li>begin从前往后, 当找到一个比key大的值时, right从后往前走, 当找到一个比key小的值时, 将其交换</li>
+<li>继续重复上述步骤, 直到begin和end相遇, 再将key记录的数放到begin的位置, 并且返回begin</li>
+</ol>
+<p><img src="/img/SwapSort/20181019-1.png" alt=""></p>
+<ul>
+<li>如上图所示 , 当begin&gt;=end时, 一趟快速排序就完成了, 并在最后将key和begin的值进行交换,结 果就为 16  25  25  34  58  49</li>
+</ul>
+<h5 id="代码实现如下："><a href="#代码实现如下：" class="headerlink" title="代码实现如下："></a>代码实现如下：</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//(左右指针法)寻找一个枢轴作为记录</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">PartionOne</span><span class="params">(<span class="keyword">int</span> *a, <span class="keyword">int</span> begin, <span class="keyword">int</span> end)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//选取序列的末尾作为关键字</span></span><br><span class="line">	<span class="keyword">int</span> key = a[end];</span><br><span class="line">        <span class="comment">//index用来记录关键字所在的下标</span></span><br><span class="line">	<span class="keyword">int</span> index = end;</span><br><span class="line">	<span class="comment">//保证key的左边都小于key,右边都大于key</span></span><br><span class="line">	<span class="keyword">while</span> (begin &lt; end)&#123;</span><br><span class="line">		<span class="comment">//从左向右寻找比key大的数</span></span><br><span class="line">		<span class="keyword">if</span> (begin &lt; end &amp;&amp; a[begin] &lt;= key)</span><br><span class="line">			begin++;</span><br><span class="line">		<span class="comment">//从右向左寻找比key小的数</span></span><br><span class="line">		<span class="keyword">if</span> (begin &lt; end &amp;&amp; a[end] &gt;= key)</span><br><span class="line">			end--;</span><br><span class="line">		<span class="comment">//交换</span></span><br><span class="line">		Swap(&amp;a[begin], &amp;a[end]);</span><br><span class="line">	&#125;</span><br><span class="line">	Swap(&amp;a[begin], &amp;a[index]);</span><br><span class="line">	<span class="keyword">return</span> begin;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="挖坑法："><a href="#挖坑法：" class="headerlink" title="挖坑法："></a>挖坑法：</h4><ol>
+<li>这里选取数组中最后一个数( 第一个数 )作为关键字key, 也为初始坑位</li>
+<li>设置两个变量begin和end分别数组的起始和结束下标</li>
+<li>begin从前往后, 当找到一个比key大的值时, 将该数放到坑中, 这时的坑位就变作begin</li>
+<li>right从后往前走, 当找到一个比key小的值时, 将该数放到坑中, 这时的坑位就变作end</li>
+<li>重复上述步骤直到begin和end相遇, 在将key放入到最后一个坑位</li>
+</ol>
+<p><img src="/img/SwapSort/20181019-2.png" alt=""></p>
+<ul>
+<li>当begin&gt;=end时, 将key放到最后一个坑中, 就完成了一次排序</li>
+</ul>
+
       
     </div>
     
@@ -331,6 +374,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/交换排序/" rel="tag"># 交换排序</a>
+          
+        </div>
       
 
       
@@ -401,8 +450,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -434,7 +492,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -471,6 +529,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#标题：交换排序"><span class="nav-number">1.</span> <span class="nav-text">标题：交换排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#冒泡排序（Bubble-Sort）：是一种计算机科学领域的较简单的排序算法。"><span class="nav-number">1.1.</span> <span class="nav-text">冒泡排序（Bubble Sort）：是一种计算机科学领域的较简单的排序算法。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法描述：它重复地走访过要排序的元素列，依次比较两个相邻的元素，如果他们的顺序（如从大到小、首字母从A到Z）错误就把他们交换过来。走访元素的工作是重复地进行直到没有相邻元素需要交换，也就是说该元素已经排序完成。"><span class="nav-number">1.1.1.</span> <span class="nav-text">算法描述：它重复地走访过要排序的元素列，依次比较两个相邻的元素，如果他们的顺序（如从大到小、首字母从A到Z）错误就把他们交换过来。走访元素的工作是重复地进行直到没有相邻元素需要交换，也就是说该元素已经排序完成。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#冒泡排序算法步骤如下："><span class="nav-number">1.1.2.</span> <span class="nav-text">冒泡排序算法步骤如下：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#冒泡排序复杂度问题："><span class="nav-number">1.1.3.</span> <span class="nav-text">冒泡排序复杂度问题：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码如下："><span class="nav-number">1.1.4.</span> <span class="nav-text">代码如下：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快速排序"><span class="nav-number">1.2.</span> <span class="nav-text">快速排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法描述：快速排序由C-A-R-Hoare在1962年提出。它的基本思想是：通过一趟排序将要排序的数据以一个枢纽div-分割成独立的两部分，其中左半部分的所有数据都比div要小-右半部分的所有数据都比div要大，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。"><span class="nav-number">1.2.1.</span> <span class="nav-text">算法描述：快速排序由C. A. R. Hoare在1962年提出。它的基本思想是：通过一趟排序将要排序的数据以一个枢纽div 分割成独立的两部分，其中左半部分的所有数据都比div要小,右半部分的所有数据都比div要大，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#递归实现："><span class="nav-number">1.2.2.</span> <span class="nav-text">递归实现：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Partion-为进行一次库快速排序的算法-常见的方法有-左右指针法-挖坑法-前后指针法"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Partion()为进行一次库快速排序的算法, 常见的方法有 左右指针法 , 挖坑法 , 前后指针法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#左右指针法"><span class="nav-number">1.2.3.</span> <span class="nav-text">左右指针法:</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#代码实现如下："><span class="nav-number">1.2.3.1.</span> <span class="nav-text">代码实现如下：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#挖坑法："><span class="nav-number">1.2.4.</span> <span class="nav-text">挖坑法：</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
