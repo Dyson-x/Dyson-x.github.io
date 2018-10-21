@@ -250,6 +250,134 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/21/计数排序/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dyson">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/background.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dyson's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/21/计数排序/" itemprop="url">计数排序</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-21T09:10:18+08:00">
+                2018-10-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<h3 id="标题：计数排序"><a href="#标题：计数排序" class="headerlink" title="标题：计数排序"></a>标题：计数排序</h3><hr>
+<h3 id="计数排序基本思想：计数排序（Counting-Sort）又称为鸽巢原理，是对哈希直接定制法变形应用，是一种稳定的算法，它的优势在于在对一定范围内的整数排序时，它的复杂度为Ο-n-k-（其中k是整数的范围），快于任何比较排序算法，当然这是一种牺牲空间换取时间的做法，而且当O-k-gt-O-nlog-n-的时候其效率反而不如基于比较的排序（基于比较的排序的时间复杂度在理论上的下限是O-nlog-n-，如归并排序，堆排序）"><a href="#计数排序基本思想：计数排序（Counting-Sort）又称为鸽巢原理，是对哈希直接定制法变形应用，是一种稳定的算法，它的优势在于在对一定范围内的整数排序时，它的复杂度为Ο-n-k-（其中k是整数的范围），快于任何比较排序算法，当然这是一种牺牲空间换取时间的做法，而且当O-k-gt-O-nlog-n-的时候其效率反而不如基于比较的排序（基于比较的排序的时间复杂度在理论上的下限是O-nlog-n-，如归并排序，堆排序）" class="headerlink" title="计数排序基本思想：计数排序（Counting Sort）又称为鸽巢原理，是对哈希直接定制法变形应用，是一种稳定的算法，它的优势在于在对一定范围内的整数排序时，它的复杂度为Ο(n+k)（其中k是整数的范围），快于任何比较排序算法，当然这是一种牺牲空间换取时间的做法，而且当O(k)&gt;O(nlog(n))的时候其效率反而不如基于比较的排序（基于比较的排序的时间复杂度在理论上的下限是O(nlog(n))，如归并排序，堆排序）"></a>计数排序基本思想：计数排序（Counting Sort）又称为鸽巢原理，是对哈希直接定制法变形应用，是一种稳定的算法，它的优势在于在对一定范围内的整数排序时，它的复杂度为Ο(n+k)（其中k是整数的范围），快于任何比较排序算法，当然这是一种牺牲空间换取时间的做法，而且当O(k)&gt;O(n<em>log(n))的时候其效率反而不如基于比较的排序（基于比较的排序的时间复杂度在理论上的下限是O(n</em>log(n))，如归并排序，堆排序）</h3><hr>
+<h4 id="操作步骤："><a href="#操作步骤：" class="headerlink" title="操作步骤："></a>操作步骤：</h4><ul>
+<li>统计相同元素出现的次数</li>
+<li>根据统计的结果将序列回收到原来的序列中<br><img src="/img/CountingSort/20181021-1.png" alt=""></li>
+</ul>
+<hr>
+<h3 id="代码实现如下："><a href="#代码实现如下：" class="headerlink" title="代码实现如下："></a>代码实现如下：</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> <span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;assert.h&gt;</span></span></span><br><span class="line"> <span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="comment">//计数排序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">CountSort</span><span class="params">(<span class="keyword">int</span> *a, <span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	assert(a);</span><br><span class="line">	<span class="comment">//通过max和min计算出临时数组所需要开辟的空间大小</span></span><br><span class="line">	<span class="keyword">int</span> max = a[<span class="number">0</span>], min = a[<span class="number">0</span>];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)&#123;</span><br><span class="line">		<span class="keyword">if</span> (a[i] &gt; max)</span><br><span class="line">			max = a[i];</span><br><span class="line">		<span class="keyword">if</span> (a[i] &lt; min)</span><br><span class="line">			min = a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//使用calloc将数组都初始化为0</span></span><br><span class="line">	<span class="keyword">int</span> range = max - min + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">int</span> *b = (<span class="keyword">int</span> *)<span class="built_in">calloc</span>(range, <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">	<span class="comment">//使用临时数组记录原始数组中每个数的个数</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)&#123;</span><br><span class="line">		<span class="comment">//注意：这里在存储上要在原始数组数值上减去min才不会出现越界问题</span></span><br><span class="line">		b[a[i] - min] += <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">	<span class="comment">//根据统计结果，重新对元素进行回收</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; range; i++)&#123;</span><br><span class="line">		<span class="keyword">while</span> (b[i]--)&#123;</span><br><span class="line">			<span class="comment">//注意：要将i的值加上min才能还原到原始数据</span></span><br><span class="line">			a[j++] = i + min;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//释放临时数组</span></span><br><span class="line">	<span class="built_in">free</span>(b);</span><br><span class="line">	b = <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//打印数组</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PrintArray</span><span class="params">(<span class="keyword">int</span> *a, <span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d "</span>, a[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a[] = &#123; <span class="number">3</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">6</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">7</span> &#125;;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"排序前："</span>);</span><br><span class="line">	PrintArray(a, <span class="keyword">sizeof</span>(a) / <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">	CountSort(a, <span class="keyword">sizeof</span>(a) / <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"排序后："</span>);</span><br><span class="line">	PrintArray(a, <span class="keyword">sizeof</span>(a) / <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="调试结果如下："><a href="#调试结果如下：" class="headerlink" title="调试结果如下："></a>调试结果如下：</h4><h2 id=""><a href="#" class="headerlink" title=""></a><img src="/img/CountingSort/20181021-2.png" alt=""></h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/19/交换排序/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -914,7 +1042,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
