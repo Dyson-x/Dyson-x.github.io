@@ -88,7 +88,7 @@
 <meta property="og:description" content="标题：对象编程-类与方法上">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/img/类与方法/20181013180240910.png">
-<meta property="og:updated_time" content="2018-11-01T15:13:43.339Z">
+<meta property="og:updated_time" content="2018-11-01T15:19:15.644Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="类与方法">
 <meta name="twitter:description" content="标题：对象编程-类与方法上">
@@ -396,6 +396,23 @@ getter方法：取得属性内容
 </ul>
 <p>（a）Person （b）per1=（c）new（d）Person（）;</p>
 <p>特点：</p>
+<ol>
+<li>方法名称必须与类名称相同</li>
+<li>构造方法没有返回值类型声明 (重要）</li>
+<li>每个类必须至少存在一个构造方法（没有明确定定义的话，系统默认自动生成一个无参构造）</li>
+<li>若类中定义的构造方法，则默认的无参构造不再生成。（先赋值，再传参）</li>
+</ol>
+<h6 id="构造方法无返回值，为什么没有void声明？"><a href="#构造方法无返回值，为什么没有void声明？" class="headerlink" title="构造方法无返回值，为什么没有void声明？"></a>构造方法无返回值，为什么没有void声明？</h6><p>类的组成：属性，构造方法，普通方法</p>
+<ol>
+<li>属性是在对象开辟堆内存时开辟的空间</li>
+<li>构造方法是在使用new后调用的</li>
+<li>普通方法是在空间开辟了，构造方法执行之后可以多次调用的</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Person</span><span class="params">()</span></span>&#123;&#125;<span class="comment">//命名不标准的普通方法</span></span><br><span class="line"><span class="keyword">public</span> Person（）&#123;&#125;<span class="comment">//无参构造方法</span></span><br></pre></td></tr></table></figure>
+<h6 id="编译器是根据程序结构来区分普通方法与构造方法，因此构造方法前没有返回值类型声明"><a href="#编译器是根据程序结构来区分普通方法与构造方法，因此构造方法前没有返回值类型声明" class="headerlink" title="编译器是根据程序结构来区分普通方法与构造方法，因此构造方法前没有返回值类型声明"></a>编译器是根据程序结构来区分普通方法与构造方法，因此构造方法前没有返回值类型声明</h6><ul>
+<li>范例：使用构造方法设置对象属性</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span></span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -575,7 +592,7 @@ getter方法：取得属性内容
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#标题：对象编程-类与方法上"><span class="nav-number">1.</span> <span class="nav-text">标题：对象编程-类与方法上</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#面向对象三大特征"><span class="nav-number">1.1.</span> <span class="nav-text">面向对象三大特征</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#名词扩展："><span class="nav-number">1.1.1.</span> <span class="nav-text">名词扩展：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类与对象的定义和使用"><span class="nav-number">1.2.</span> <span class="nav-text">类与对象的定义和使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#类的组成："><span class="nav-number">1.2.1.</span> <span class="nav-text">类的组成：</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#java中类的定义语法"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">java中类的定义语法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#类与对象内存分析"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">类与对象内存分析</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#private实现封装处理（仅限于本类中访问）"><span class="nav-number">1.2.2.</span> <span class="nav-text">private实现封装处理（仅限于本类中访问）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#让内部操作对外部不可见-在类的外部不能直接使用对象来操作属性）可以使用private对属性进行封装，称为类的私有属性。（主类和主方法称为客户端）"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">让内部操作对外部不可见(在类的外部不能直接使用对象来操作属性）可以使用private对属性进行封装，称为类的私有属性。（主类和主方法称为客户端）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Java规范，1-所有私有属性要想访问与设置内容，提供对应getter与setter方法"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">Java规范，1.所有私有属性要想访问与设置内容，提供对应getter与setter方法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#类的设计原则："><span class="nav-number">1.2.2.3.</span> <span class="nav-text">类的设计原则：</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#构造方法"><span class="nav-number">1.2.3.</span> <span class="nav-text">构造方法</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#标题：对象编程-类与方法上"><span class="nav-number">1.</span> <span class="nav-text">标题：对象编程-类与方法上</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#面向对象三大特征"><span class="nav-number">1.1.</span> <span class="nav-text">面向对象三大特征</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#名词扩展："><span class="nav-number">1.1.1.</span> <span class="nav-text">名词扩展：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类与对象的定义和使用"><span class="nav-number">1.2.</span> <span class="nav-text">类与对象的定义和使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#类的组成："><span class="nav-number">1.2.1.</span> <span class="nav-text">类的组成：</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#java中类的定义语法"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">java中类的定义语法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#类与对象内存分析"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">类与对象内存分析</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#private实现封装处理（仅限于本类中访问）"><span class="nav-number">1.2.2.</span> <span class="nav-text">private实现封装处理（仅限于本类中访问）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#让内部操作对外部不可见-在类的外部不能直接使用对象来操作属性）可以使用private对属性进行封装，称为类的私有属性。（主类和主方法称为客户端）"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">让内部操作对外部不可见(在类的外部不能直接使用对象来操作属性）可以使用private对属性进行封装，称为类的私有属性。（主类和主方法称为客户端）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Java规范，1-所有私有属性要想访问与设置内容，提供对应getter与setter方法"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">Java规范，1.所有私有属性要想访问与设置内容，提供对应getter与setter方法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#类的设计原则："><span class="nav-number">1.2.2.3.</span> <span class="nav-text">类的设计原则：</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#构造方法"><span class="nav-number">1.2.3.</span> <span class="nav-text">构造方法</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#构造方法无返回值，为什么没有void声明？"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">构造方法无返回值，为什么没有void声明？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#编译器是根据程序结构来区分普通方法与构造方法，因此构造方法前没有返回值类型声明"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">编译器是根据程序结构来区分普通方法与构造方法，因此构造方法前没有返回值类型声明</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
