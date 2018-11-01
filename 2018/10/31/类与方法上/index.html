@@ -88,7 +88,7 @@
 <meta property="og:description" content="标题：对象编程-类与方法上">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/img/类与方法/20181013180240910.png">
-<meta property="og:updated_time" content="2018-11-01T14:58:20.664Z">
+<meta property="og:updated_time" content="2018-11-01T15:01:35.257Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="类与方法">
 <meta name="twitter:description" content="标题：对象编程-类与方法上">
@@ -386,7 +386,15 @@ Person per2=new Person（“Dyson”，20）；
 <li><p>范例：无封装程序</p>
 </li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">	String name;</span><br><span class="line">	<span class="keyword">int</span> age;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> getPersonInfo&#123;</span><br><span class="line">		System.out.println(<span class="string">"姓名"</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">	String name;</span><br><span class="line">	<span class="keyword">int</span> age;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> getPersonInfo&#123;</span><br><span class="line">		System.out.println(<span class="string">"姓名"</span>+name+<span class="string">" 年龄"</span>+age);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		Person person=<span class="keyword">new</span> Person();</span><br><span class="line">		person.name=<span class="string">"Dyson"</span>：</span><br><span class="line">		person.age=<span class="number">18</span>;</span><br><span class="line">		person.getPersonInfo();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>Java规范，1.所有私有属性要想访问与设置内容，提供对应getter与setter方法</p>
+<p>  setter方法：进行属性内容设置与更改</p>
+<p>  getter方法：取得属性内容</p>
+</li>
+</ul>
+<p>范例：扩展Person类的内容</p>
+
       
     </div>
     
