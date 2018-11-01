@@ -87,10 +87,12 @@
 <meta property="og:site_name" content="Dyson&#39;s blog">
 <meta property="og:description" content="标题：对象编程-类与方法上">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-01T14:50:53.177Z">
+<meta property="og:image" content="http://yoursite.com/img/类与方法/20181013180240910.png">
+<meta property="og:updated_time" content="2018-11-01T14:58:20.664Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="类与方法">
 <meta name="twitter:description" content="标题：对象编程-类与方法上">
+<meta name="twitter:image" content="http://yoursite.com/img/类与方法/20181013180240910.png">
 
 
 
@@ -336,9 +338,55 @@
 </ul>
 <h5 id="类的组成："><a href="#类的组成：" class="headerlink" title="类的组成："></a>类的组成：</h5><ul>
 <li>方法（操作的行为）</li>
-<li>属性（操作的数据，每个对象应该具有的特征）<h6 id="java中类的定义语法"><a href="#java中类的定义语法" class="headerlink" title="java中类的定义语法"></a>java中类的定义语法</h6>calss 类名称{<br>属性类型  属性名称1；<br>属性类型  属性名称2；<br>…<br>方法1（）{}；<br>方法2（）{}；<br>…<br>}</li>
-</ul>
+<li><p>属性（操作的数据，每个对象应该具有的特征）</p>
+<h6 id="java中类的定义语法"><a href="#java中类的定义语法" class="headerlink" title="java中类的定义语法"></a>java中类的定义语法</h6><pre><code>calss 类名称{
 
+属性类型  属性名称1；
+
+属性类型  属性名称2；
+
+ ...
+
+方法1（）{}；
+
+方法2（）{}；
+
+ ...
+
+ }
+</code></pre></li>
+</ul>
+<ul>
+<li>范例：定义一个Person类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> age;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name,<span class="keyword">int</span> age)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name=name;</span><br><span class="line">        <span class="keyword">this</span>.age=age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPersonInfo</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"姓名:"</span>+<span class="keyword">this</span>.name+<span class="string">"，年龄:"</span>+<span class="keyword">this</span>.age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;   </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </span><br><span class="line">        Person per=<span class="keyword">new</span> Person(<span class="string">"Dyson"</span>,<span class="number">20</span>);</span><br><span class="line">        System.out.println(per.getPersonInfo());</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>类中的属性和方法不在由主方法直接调用，而需要通过对象来调用。</p>
+<pre><code>对象声明语法：
+
+类名称 对象名称 = new 类名称（）；
+
+Person per1=new Person（）；
+
+Person per2=new Person（“Dyson”，20）；
+</code></pre><h6 id="类与对象内存分析"><a href="#类与对象内存分析" class="headerlink" title="类与对象内存分析"></a>类与对象内存分析</h6><p>new 关键字 - 在堆上开辟了新的空间</p>
+</li>
+</ul>
+<p>栈内存：存放的是局部变量（包含各种基本数据类型以及对象引用–对象的名称）</p>
+<p>堆内存：保存真正对象（对象的属性数据）</p>
+<p>Person per=new Person（）；</p>
+<p><img src="/img/类与方法/20181013180240910.png" alt=""></p>
+<ul>
+<li>对象（引用数据类型）必须在实例化后调用，否则会产生NullPointerException（运行时异常）</li>
+<li>垃圾空间：没有任何空间指向的堆内存空间</li>
+</ul>
+<h5 id="private实现封装处理（仅限于本类中访问）"><a href="#private实现封装处理（仅限于本类中访问）" class="headerlink" title="private实现封装处理（仅限于本类中访问）"></a>private实现封装处理（仅限于本类中访问）</h5><ul>
+<li><p>让内部操作对外部不可见(在类的外部不能直接使用对象来操作属性）可以使用private对属性进行封装，称为类的私有属性。（主类和主方法称为客户端）</p>
+</li>
+<li><p>范例：无封装程序</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">	String name;</span><br><span class="line">	<span class="keyword">int</span> age;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> getPersonInfo&#123;</span><br><span class="line">		System.out.println(<span class="string">"姓名"</span>)</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -517,7 +565,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#标题：对象编程-类与方法上"><span class="nav-number">1.</span> <span class="nav-text">标题：对象编程-类与方法上</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#面向对象三大特征"><span class="nav-number">1.1.</span> <span class="nav-text">面向对象三大特征</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#名词扩展："><span class="nav-number">1.1.1.</span> <span class="nav-text">名词扩展：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类与对象的定义和使用"><span class="nav-number">1.2.</span> <span class="nav-text">类与对象的定义和使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#类的组成："><span class="nav-number">1.2.1.</span> <span class="nav-text">类的组成：</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#java中类的定义语法"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">java中类的定义语法</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#标题：对象编程-类与方法上"><span class="nav-number">1.</span> <span class="nav-text">标题：对象编程-类与方法上</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#面向对象三大特征"><span class="nav-number">1.1.</span> <span class="nav-text">面向对象三大特征</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#名词扩展："><span class="nav-number">1.1.1.</span> <span class="nav-text">名词扩展：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类与对象的定义和使用"><span class="nav-number">1.2.</span> <span class="nav-text">类与对象的定义和使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#类的组成："><span class="nav-number">1.2.1.</span> <span class="nav-text">类的组成：</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#java中类的定义语法"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">java中类的定义语法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#类与对象内存分析"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">类与对象内存分析</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#private实现封装处理（仅限于本类中访问）"><span class="nav-number">1.2.2.</span> <span class="nav-text">private实现封装处理（仅限于本类中访问）</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
