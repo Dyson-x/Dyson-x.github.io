@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Dyson&#39;s blog">
 <meta property="og:description" content="数据库基础">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-06T12:00:27.223Z">
+<meta property="og:updated_time" content="2018-12-06T13:11:28.489Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库">
 <meta name="twitter:description" content="数据库基础">
@@ -328,7 +328,19 @@
 </ul>
 </li>
 </ul>
-<h4 id="主流数据库"><a href="#主流数据库" class="headerlink" title="主流数据库"></a>主流数据库</h4>
+<h4 id="主流数据库"><a href="#主流数据库" class="headerlink" title="主流数据库"></a>主流数据库</h4><ul>
+<li>SQL Sever：微软产品，.Net程序员的最爱，适合中大型项目</li>
+<li>Oracle：甲骨文产品，安全性好，适合大型项目，复杂的业务逻辑</li>
+<li>MySQL：并发性好，但不适合做复杂的业务，关系型数据库</li>
+<li>PostgreSQL：加州大学伯克利分校计算机系开发的关系型数据库</li>
+<li>SQLite：一种轻型数据库，适合嵌入式，它的占用资源非常低，在嵌入式设备中，可能就只需要几百K的内存</li>
+<li>H2：一个用于Java开发的嵌入式数据库，其本身就是一个类库</li>
+</ul>
+<h4 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h4><h5 id="连接服务器："><a href="#连接服务器：" class="headerlink" title="连接服务器："></a>连接服务器：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在window下以管理员身份运行cmd然后执行如下命令：</span><br><span class="line">mysql -h 127.0.0.1 -P 3306 -u root -p；</span><br><span class="line"></span><br><span class="line">一般情况下可以简写成：mysql -u root -p；</span><br></pre></td></tr></table></figure>
+<p><strong>缺少  -h 127.0.0.1  默认连接的是本地</strong></p>
+<p><strong>缺少  -P 3306  默认是连接3306端口号</strong></p>
+<h5 id="服务器，数据库，表之间的关系"><a href="#服务器，数据库，表之间的关系" class="headerlink" title="服务器，数据库，表之间的关系"></a>服务器，数据库，表之间的关系</h5><p> <a href="/img/database/数据库的基本结构.png"></a></p>
+
       
     </div>
     
@@ -501,7 +513,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库基础"><span class="nav-number">1.</span> <span class="nav-text">数据库基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于数据库"><span class="nav-number">1.0.1.</span> <span class="nav-text">关于数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数据库存储的介质"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">数据库存储的介质</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主流数据库"><span class="nav-number">1.0.2.</span> <span class="nav-text">主流数据库</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库基础"><span class="nav-number">1.</span> <span class="nav-text">数据库基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于数据库"><span class="nav-number">1.0.1.</span> <span class="nav-text">关于数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数据库存储的介质"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">数据库存储的介质</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主流数据库"><span class="nav-number">1.0.2.</span> <span class="nav-text">主流数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基本使用"><span class="nav-number">1.0.3.</span> <span class="nav-text">基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#连接服务器："><span class="nav-number">1.0.3.1.</span> <span class="nav-text">连接服务器：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#服务器，数据库，表之间的关系"><span class="nav-number">1.0.3.2.</span> <span class="nav-text">服务器，数据库，表之间的关系</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
