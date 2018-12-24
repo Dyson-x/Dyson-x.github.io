@@ -87,7 +87,8 @@
 <meta property="og:description" content="数据库基础">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/img/database/数据库的基本结构.png">
-<meta property="og:updated_time" content="2018-12-24T09:13:09.526Z">
+<meta property="og:image" content="http://yoursite.com/img/数据库/20181224-1.png">
+<meta property="og:updated_time" content="2018-12-24T11:58:27.225Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库">
 <meta name="twitter:description" content="数据库基础">
@@ -358,7 +359,77 @@
 <li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into student(表名称) (id,name,gender) values (1,&apos;Dyson&apos;,&apos;男&apos;);      //插入数据</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h4 id="SQL分类"><a href="#SQL分类" class="headerlink" title="SQL分类"></a>SQL分类</h4>
+<hr>
+<h4 id="SQL分类"><a href="#SQL分类" class="headerlink" title="SQL分类"></a>SQL分类</h4><p><strong>DDL数据定义语言，用来维护数据的结构</strong></p>
+<ul>
+<li>代表指令：creat，drop（删除），alter（修改）</li>
+</ul>
+<p><strong>DML数据操纵语言，用来对数据进行操作</strong></p>
+<ul>
+<li>代表指令：insert，delete，updata</li>
+<li>DML中又单独分了一个DQL，数据查询语言，代表指令：select</li>
+</ul>
+<p><strong>DCL数据控制语言，主要负责权限管理的事物</strong></p>
+<ul>
+<li>代表指令：grant（同意），revoke（取消），commit（提交）</li>
+</ul>
+<h4 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h4><h5 id="关于存储引擎（MySQL在V5-1之前默认存储引擎是MyISAM；在此之后的默认存储引擎是InnoDB）"><a href="#关于存储引擎（MySQL在V5-1之前默认存储引擎是MyISAM；在此之后的默认存储引擎是InnoDB）" class="headerlink" title="关于存储引擎（MySQL在V5.1之前默认存储引擎是MyISAM；在此之后的默认存储引擎是InnoDB）"></a>关于存储引擎（MySQL在V5.1之前默认存储引擎是MyISAM；在此之后的默认存储引擎是InnoDB）</h5><ul>
+<li>数据库管理系统如何存储数据，如何为存储的数据建立索引和如何更新，查询数据等技术的实现方法。</li>
+<li><strong>MySQl的核心就是插件式存储引擎，支持多种存储引擎</strong></li>
+</ul>
+<h5 id="查看存储引擎"><a href="#查看存储引擎" class="headerlink" title="查看存储引擎"></a>查看存储引擎</h5><ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show engines</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="/img/数据库/20181224-1.png" alt=""></p>
+<h5 id="常用的存储引擎介绍"><a href="#常用的存储引擎介绍" class="headerlink" title="常用的存储引擎介绍"></a>常用的存储引擎介绍</h5><ol>
+<li><strong>MyISAM</strong>是MySQLV5.1之前默认存储引擎。全表锁，拥有较高的执行速度一个写请求会阻塞另外相同表格的所有读写请求，并发性能差，占用空间相对较小，不支持事务，不支持外键</li>
+</ol>
+<p>小Tips：什么是事务？</p>
+<ul>
+<li>在计算机术语中是指访问可能更新数据库中各种数据项的一个程序执行单元(unit)。在关系型数据库中，一个事务可以是一条SQL语句，一组SQL语句或整个程序。举例来讲：A汇100块钱给B，A减少100，B增加100，这就相当于一个事务，在这个过程当中只有有任何的错误，该事务的所有操作都要被撤销。MyISAM不支持事物就意味着当有错误出现时，不能自动的撤销事物而是需要通过程序来进行撤销操作。InnoDB是支持事物的。</li>
+</ul>
+<p>小Tips：主键，外键，引索之间的关系及其作用定义</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th>主键</th>
+<th>外键</th>
+<th>引索</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">定义：</td>
+<td>唯一标识一条记录，不能有重复的，不允许为空</td>
+<td>表的外键是另一表的主键, 外键可以有重复的, 可以是空值</td>
+<td>该字段没有重复值，但可以有一个空值</td>
+</tr>
+<tr>
+<td style="text-align:left">作用：</td>
+<td>用来保证数据完整性</td>
+<td>用来和其他表建立联系用的</td>
+<td>是提高查询排序的速度</td>
+</tr>
+<tr>
+<td style="text-align:left">个数：</td>
+<td>主键只能有一个</td>
+<td>一个表可以有多个外键</td>
+<td>一个表可以有多个惟一索引</td>
+</tr>
+</tbody>
+</table>
+<ol start="2">
+<li><strong>InnoDB</strong>是MySQL默认存引擎。行级锁 ，并发能力强，占用空间是MyISAM的2.5倍，不支持全局索引（5.6开始支持），支持事务。相比MyISAM存储引擎，InnoDB写的处理效率差一些并且会占用更多的磁盘空间以保留数据和索引。</li>
+<li><strong>MEMORY(HEAP)</strong>：全表锁，使用存在内存中的内容来创建表。每个MEMORY表实际对应一个磁盘文件。MEMORY类型的表访问非常快，因为它的数据是存放在内存中的，并且默认使用HASH引索。但是一单服务器关闭，表中的数据就会丢失。</li>
+<li><strong>MERGE</strong>是一组MyISAM表的组合，这些MyISAM表必须结构完全相同。MERGE表本身没有数据，对MERGE类型的表进行查询，更新，删除等操作，就是在内部对MyISAM表进行的。</li>
+<li><strong>BDB</strong>提供数据安全。BDB被包含在为支持它的操作系统发布的MySQL-Max二进制分发版里。MySQL AB与Sleepycat紧密合作工作以保持MySQL/BDB接口的质量在高水平。即使Berkeley DB其本身是非常能经受考验和非常可靠的。MySQL接口仍然被认为是第三等质量的。 </li>
+<li><strong>ARCHIVE</strong>存储引擎被用来无索引地，非常小地覆盖存储的大量数据。</li>
+<li><strong>CSV</strong>存储引擎把数据以逗号分隔的格式存储在文本文件中。</li>
+</ol>
+<p><a href="http://www.cnblogs.com/duanxz/p/3709113.html" target="_blank" rel="noopener">搜索引擎详解</a></p>
+
       
     </div>
     
@@ -531,7 +602,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库基础"><span class="nav-number">1.</span> <span class="nav-text">数据库基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于数据库"><span class="nav-number">1.0.1.</span> <span class="nav-text">关于数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数据库存储的介质"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">数据库存储的介质</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主流数据库"><span class="nav-number">1.0.2.</span> <span class="nav-text">主流数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基本使用"><span class="nav-number">1.0.3.</span> <span class="nav-text">基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#连接服务器："><span class="nav-number">1.0.3.1.</span> <span class="nav-text">连接服务器：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#服务器，数据库，表之间的关系"><span class="nav-number">1.0.3.2.</span> <span class="nav-text">服务器，数据库，表之间的关系</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库基本使用语法"><span class="nav-number">1.0.4.</span> <span class="nav-text">数据库基本使用语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL分类"><span class="nav-number">1.0.5.</span> <span class="nav-text">SQL分类</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库基础"><span class="nav-number">1.</span> <span class="nav-text">数据库基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于数据库"><span class="nav-number">1.0.1.</span> <span class="nav-text">关于数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数据库存储的介质"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">数据库存储的介质</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主流数据库"><span class="nav-number">1.0.2.</span> <span class="nav-text">主流数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基本使用"><span class="nav-number">1.0.3.</span> <span class="nav-text">基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#连接服务器："><span class="nav-number">1.0.3.1.</span> <span class="nav-text">连接服务器：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#服务器，数据库，表之间的关系"><span class="nav-number">1.0.3.2.</span> <span class="nav-text">服务器，数据库，表之间的关系</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库基本使用语法"><span class="nav-number">1.0.4.</span> <span class="nav-text">数据库基本使用语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL分类"><span class="nav-number">1.0.5.</span> <span class="nav-text">SQL分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#存储引擎"><span class="nav-number">1.0.6.</span> <span class="nav-text">存储引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#关于存储引擎（MySQL在V5-1之前默认存储引擎是MyISAM；在此之后的默认存储引擎是InnoDB）"><span class="nav-number">1.0.6.1.</span> <span class="nav-text">关于存储引擎（MySQL在V5.1之前默认存储引擎是MyISAM；在此之后的默认存储引擎是InnoDB）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看存储引擎"><span class="nav-number">1.0.6.2.</span> <span class="nav-text">查看存储引擎</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#常用的存储引擎介绍"><span class="nav-number">1.0.6.3.</span> <span class="nav-text">常用的存储引擎介绍</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
