@@ -358,6 +358,74 @@
 <p>在主方法中调用该方法通过反射实例化一个·对象，而主方法是一个静态方法，所以该方法也必须为静态方法。</p>
 </li>
 </ul>
+<hr>
+<h3 id="反射与类操作"><a href="#反射与类操作" class="headerlink" title="反射与类操作"></a>反射与类操作</h3><h4 id="取得父类-amp-父接口信息"><a href="#取得父类-amp-父接口信息" class="headerlink" title="取得父类&amp;父接口信息"></a>取得父类&amp;父接口信息</h4><ul>
+<li><p>取得类的包名称：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Package <span class="title">getPackage</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>取得父类的Class对象：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">native</span> Class&lt;? <span class="keyword">super</span> T&gt; getSuperclass();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>取得实现的父接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Class&lt;?&gt;[] getInterfaces();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><strong>通过反射可以取得类结构上的所有关键信息</strong></p>
+<p><strong>以上所有父类：只能取得子类直接继承的父类</strong></p>
+</blockquote>
+<h4 id="反射与构造方法-–-Constructor（描述类构造方法信息）只能取得本类中的构造方法，与集成无关"><a href="#反射与构造方法-–-Constructor（描述类构造方法信息）只能取得本类中的构造方法，与集成无关" class="headerlink" title="反射与构造方法  – Constructor（描述类构造方法信息）只能取得本类中的构造方法，与集成无关"></a>反射与构造方法  – Constructor（描述类构造方法信息）只能取得本类中的构造方法，与集成无关</h4><h5 id="取得类中指定参数构造方法"><a href="#取得类中指定参数构造方法" class="headerlink" title="取得类中指定参数构造方法"></a><strong>取得类中指定参数构造方法</strong></h5><ul>
+<li><p>取得类中权限只有public的指定构造方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Constructor&lt;T&gt; <span class="title">getConstructor</span><span class="params">(Class&lt;?&gt;... parameterTypes)</span> <span class="keyword">throws</span> NoSuchMethodException, SecurityException</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>取得类中任意权限的指定构造方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Constructor&lt;T&gt; <span class="title">getDeclaredConstructor</span><span class="params">(Class&lt;?&gt;... parameterTypes)</span> <span class="keyword">throws</span> NoSuchMethodException, SecurityException</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="取的类中所有构造方法-——-重要-——"><a href="#取的类中所有构造方法-——-重要-——" class="headerlink" title="取的类中所有构造方法    ——  重要  ——"></a>取的类中所有构造方法    ——  重要  ——</h5><ul>
+<li><p>取得类中所有权限为public的构造方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Constructor&lt;?&gt;[] getConstructors() <span class="keyword">throws</span> SecurityException</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>取得类中所有权限构造方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Constructor&lt;?&gt;[] getDeclaredConstructors() <span class="keyword">throws</span> SecurityException</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>Class类的newInstance()实际调用的是类中的无参构造。若类中没有无参构造或者权限不是public，则无法使用Class类调用！！！</strong></p>
+<ul>
+<li><p>Constructor类的如下方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">newInstance</span><span class="params">(Object ... initargs)</span> <span class="keyword">throws</span> InstantiationException, IllegalAccessException,               IllegalArgumentException, InvocationTargetException</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果类中没有无参构造，则只能调用Constructor类提供的newInstance方法使用有参构造来实例化对象</li>
+</ul>
+<p><strong>范例：通过Constructor类实例化对象</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Dyson;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationTargetException;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person_p</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name=<span class="string">"Dyson"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age=<span class="number">18</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person_p</span><span class="params">(String name, <span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Person&#123;"</span> +</span><br><span class="line">                <span class="string">"name='"</span> + name + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">", age="</span> + age +</span><br><span class="line">                <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">mytest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException </span>&#123;</span><br><span class="line">        Class&lt;?&gt; cls=Person_p.class;</span><br><span class="line">        Constructor&lt;?&gt; con=cls.getConstructor(String.class,<span class="keyword">int</span>.class);</span><br><span class="line">        System.out.println(con.newInstance(<span class="string">"Dyson"</span>,<span class="number">18</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="反射调用普通方法（核心-–-Method）——-重要-——"><a href="#反射调用普通方法（核心-–-Method）——-重要-——" class="headerlink" title="反射调用普通方法（核心 – Method）——  重要  ——"></a>反射调用普通方法（核心 – Method）——  重要  ——</h4><h5 id="取得类中指定名称与参数的普通方法"><a href="#取得类中指定名称与参数的普通方法" class="headerlink" title="取得类中指定名称与参数的普通方法"></a>取得类中指定名称与参数的普通方法</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Method <span class="title">getMethod</span><span class="params">(String name,Class&lt;?&gt;... parameterTypes)</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Method <span class="title">getDeclaredMethod</span><span class="params">(String name,Class&lt;?&gt;... parmeterTypes)</span></span></span><br></pre></td></tr></table></figure>
+<h5 id="取得类中所有普通方法"><a href="#取得类中所有普通方法" class="headerlink" title="取得类中所有普通方法"></a>取得类中所有普通方法</h5><ul>
+<li><p>取得本类以及父类所有权限为public的普通方法（包含静态方法）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Method[] getmethods() <span class="keyword">throws</span> SecurityException</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>取得本类中所有方法（包含private方法）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Method[] getDeclaredmethods() <span class="keyword">throws</span> SecurityException</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>调用 – 通过<strong>invoke</strong>可以<strong>取得</strong>和<strong>设置</strong>属性信息，不再局限于某一个具体的对象，而是可以通过Object类型进行对所有类的方法调用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  *反射调用普通对象</span></span><br><span class="line"><span class="comment">  *obj类的实例化对象</span></span><br><span class="line"><span class="comment">  *args普通方法参数</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object obj, Object... args)</span><span class="keyword">throws</span>  IllegalAccessException, IllegalArgumentException,InvocationTargetException</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="反射调用类中属性（Field）"><a href="#反射调用类中属性（Field）" class="headerlink" title="反射调用类中属性（Field）"></a>反射调用类中属性（Field）</h4><h5 id="取得类中指定名称属性"><a href="#取得类中指定名称属性" class="headerlink" title="取得类中指定名称属性"></a>取得类中指定名称属性</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Field <span class="title">getField</span><span class="params">(String name)</span>     父类</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Field <span class="title">getDeclaredField</span><span class="params">(String name)</span>     本类</span></span><br></pre></td></tr></table></figure>
+<h5 id="取得类中所有属性-–-同Meyhod一样"><a href="#取得类中所有属性-–-同Meyhod一样" class="headerlink" title="取得类中所有属性  –  同Meyhod一样"></a>取得类中所有属性  –  同Meyhod一样</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Field[] <span class="function">getFields <span class="keyword">throws</span> <span class="title">SecurityException</span><span class="params">()</span>     父类</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Field[] <span class="function">getDeclaredFields <span class="keyword">throws</span> <span class="title">SecurityException</span><span class="params">()</span>     本类</span></span><br></pre></td></tr></table></figure>
+<h5 id="设置与取得值-–-属性值为public"><a href="#设置与取得值-–-属性值为public" class="headerlink" title="设置与取得值  –  属性值为public"></a>设置与取得值  –  属性值为public</h5><ul>
+<li><p>设置属性值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  *obj类的实例化对象</span></span><br><span class="line"><span class="comment">  *value所有设置的值</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(Object obj, Object value)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>取得属性值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  *obj类的实例化对象</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">get</span><span class="params">(Object obj)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 
           
         
