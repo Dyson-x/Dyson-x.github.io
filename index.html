@@ -250,6 +250,162 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/反射/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dyson">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/background.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dyson's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/25/反射/" itemprop="url">反射</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-25T17:00:44+08:00">
+                2018-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><h3 id="反射机制"><a href="#反射机制" class="headerlink" title="反射机制"></a>反射机制</h3><h4 id="初识反射"><a href="#初识反射" class="headerlink" title="初识反射"></a>初识反射</h4><p><strong>反射：</strong>指的是对象的反响处理。根据对象倒退类的组成</p>
+<ul>
+<li><p>在默认情况下，先要导入一个包，而后才能产生类的实例化对象，处理流程根据<strong>包名.类名找到类</strong></p>
+</li>
+<li><p>而这里的<strong>“反”</strong>就是对象来取得对象的来源信息，反射的<strong>核心类Class类</strong>（专门描述其他类的组成）</p>
+<ul>
+<li><p>Objectlei中取得对象的class对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> Class&lt;?&gt; getClass();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Class描述接口与类的组成，Class对象由JVM在第一次加载类的产生，并且全局唯一</li>
+</ul>
+<p><strong>范例：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">mytest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException</span>&#123;</span><br><span class="line">        Class&lt;?&gt; cls=Class.forName(<span class="string">"java.util.Date"</span>);</span><br><span class="line">        System.out.println(cls.getName());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>在反射的世界中，看重的不再时一个对象，而是对象身后的组成(类，构造，普通，成员等)</strong></p>
+<h4 id="取得任意类Class对象的三种方法："><a href="#取得任意类Class对象的三种方法：" class="headerlink" title="取得任意类Class对象的三种方法："></a>取得任意类Class对象的三种方法：</h4><ol>
+<li>调用对象 <strong>.getClass()</strong>取得Class对象，由Object类提供</li>
+<li>类名调用 <strong>.class</strong>取得Class对象</li>
+<li><strong>Class.forName</strong>（类全名称）取得Class对象</li>
+</ol>
+<ul>
+<li><p>在三中方法中只有第一种方法会产生类的实例化对象之外，其他两种均不会产生实例化对象。取得Class对象，<strong>可以通过反射实例化对象</strong>，在Class类中定义如下方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">newInstance</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    <span class="keyword">throws</span> InstantiationException,IllegalAccessException</span></span><br></pre></td></tr></table></figure>
+<p>范例：反射实例化对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">mytest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException, IllegalAccessException, InstantiationException </span>&#123;</span><br><span class="line">        Class&lt;?&gt; cls=Class.forName(<span class="string">"java.util.Date"</span>);</span><br><span class="line">        Object obj=cls.newInstance(); <span class="comment">//实例化对象，等价于new java.util,Date()</span></span><br><span class="line">        System.out.println(obj);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="反射与工厂模式"><a href="#反射与工厂模式" class="headerlink" title="反射与工厂模式"></a>反射与工厂模式</h4><ul>
+<li><p>在传统的工厂模式中，每当我们增加一个接口的子类都需要去修改工厂类，为了解决该类问题，可以通过反射来处理，Class类可以使用newInstance()实例化对象，而Class.for通过Name()能够接收类名称。这样一来就避免了直接实例化(new)带来的问题，而是直接通过接收类名去实例化对象，避免了对工厂类的频繁修改。</p>
+<p><strong>范例：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 反射与工厂模式</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">package</span> www.Dyson;</span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">IFruit</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Orange</span> <span class="keyword">implements</span> <span class="title">IFruit</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"eat an orange"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Apple</span> <span class="keyword">implements</span> <span class="title">IFruit</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"eat an apple"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">fruitFactroy</span></span>&#123;</span><br><span class="line">    <span class="comment">//使用static修饰，当主方法中调用该方法通过反射实例化一个对象时</span></span><br><span class="line">    <span class="comment">//使用过静态方法调用的，所以getInstance方法必须也是静态方法，否则</span></span><br><span class="line">    <span class="comment">//会报无法从静态上下文中引用非静态方法的错误</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> IFruit <span class="title">getInstance</span><span class="params">(String fruitName)</span></span>&#123;</span><br><span class="line">        IFruit iFruit=<span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//通过.forName取得class对象</span></span><br><span class="line">            Class&lt;?&gt; cls=Class.forName(fruitName);</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">//通过反射取得实例化对象</span></span><br><span class="line">                iFruit = (IFruit) cls.newInstance();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InstantiationException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> iFruit;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectAndFactory</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span><span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        IFruit iFruit=fruitFactroy.getInstance(<span class="string">"www.Dyson.Apple"</span>);</span><br><span class="line">        iFruit.eat();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在主方法中调用该方法通过反射实例化一个·对象，而主方法是一个静态方法，所以该方法也必须为静态方法。</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/24/库和表的操作/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1350,132 +1506,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/21/计数排序/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dyson">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/img/background.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Dyson's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/21/计数排序/" itemprop="url">计数排序</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-21T09:10:18+08:00">
-                2018-10-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <hr>
-<h3 id="标题：计数排序"><a href="#标题：计数排序" class="headerlink" title="标题：计数排序"></a>标题：计数排序</h3><hr>
-<h3 id="计数排序基本思想：计数排序（Counting-Sort）又称为鸽巢原理，是对哈希直接定制法变形应用，是一种稳定的算法，它的优势在于在对一定范围内的整数排序时，它的复杂度为Ο-n-k-（其中k是整数的范围），快于任何比较排序算法，当然这是一种牺牲空间换取时间的做法，而且当O-k-gt-O-nlog-n-的时候其效率反而不如基于比较的排序（基于比较的排序的时间复杂度在理论上的下限是O-nlog-n-，如归并排序，堆排序）"><a href="#计数排序基本思想：计数排序（Counting-Sort）又称为鸽巢原理，是对哈希直接定制法变形应用，是一种稳定的算法，它的优势在于在对一定范围内的整数排序时，它的复杂度为Ο-n-k-（其中k是整数的范围），快于任何比较排序算法，当然这是一种牺牲空间换取时间的做法，而且当O-k-gt-O-nlog-n-的时候其效率反而不如基于比较的排序（基于比较的排序的时间复杂度在理论上的下限是O-nlog-n-，如归并排序，堆排序）" class="headerlink" title="计数排序基本思想：计数排序（Counting Sort）又称为鸽巢原理，是对哈希直接定制法变形应用，是一种稳定的算法，它的优势在于在对一定范围内的整数排序时，它的复杂度为Ο(n+k)（其中k是整数的范围），快于任何比较排序算法，当然这是一种牺牲空间换取时间的做法，而且当O(k)&gt;O(nlog(n))的时候其效率反而不如基于比较的排序（基于比较的排序的时间复杂度在理论上的下限是O(nlog(n))，如归并排序，堆排序）"></a>计数排序基本思想：计数排序（Counting Sort）又称为鸽巢原理，是对哈希直接定制法变形应用，是一种稳定的算法，它的优势在于在对一定范围内的整数排序时，它的复杂度为Ο(n+k)（其中k是整数的范围），快于任何比较排序算法，当然这是一种牺牲空间换取时间的做法，而且当O(k)&gt;O(n<em>log(n))的时候其效率反而不如基于比较的排序（基于比较的排序的时间复杂度在理论上的下限是O(n</em>log(n))，如归并排序，堆排序）</h3>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/10/21/计数排序/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1530,7 +1560,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
