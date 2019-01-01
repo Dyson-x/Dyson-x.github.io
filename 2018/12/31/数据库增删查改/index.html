@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Dyson&#39;s blog">
 <meta property="og:description" content="数据库笔记###表的增删改差 1. 插入是否更新 如果主键或者唯一键对应只存在可以选择性的进行同步更新操作 12insert ... on duplicate key update	column = value [,column = value] ...  举例 1insert into students （id,sn,name） values （100,10010，&amp;apos;lalala&amp;ap">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-31T13:21:07.464Z">
+<meta property="og:updated_time" content="2019-01-01T14:35:12.598Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dyson&#39;s blog">
 <meta name="twitter:description" content="数据库笔记###表的增删改差 1. 插入是否更新 如果主键或者唯一键对应只存在可以选择性的进行同步更新操作 12insert ... on duplicate key update	column = value [,column = value] ...  举例 1insert into students （id,sn,name） values （100,10010，&amp;apos;lalala&amp;ap">
@@ -515,6 +515,71 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from &gt; on &gt;join &gt; where &gt; group by &gt; with &gt; having &gt; select &gt; distinct &gt; order by &gt; limit</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+<h3 id="复合查询（重点）"><a href="#复合查询（重点）" class="headerlink" title="复合查询（重点）"></a>复合查询（重点）</h3><h4 id="基本查询回顾"><a href="#基本查询回顾" class="headerlink" title="基本查询回顾"></a>基本查询回顾</h4><ul>
+<li><p>查询工资高于或岗位为manager的雇员，同时满足他们的姓名首字母为大写的J</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from emp where (sal&gt;500 or job=&apos;manager&apos;) and ename like &apos;J%&apos;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>按照部门号升序雇员的工资降序排序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from emp order by deptno,sal desc;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用年薪进行将序排序   <code>isnuff</code>如果为第一个参数不为空就取第一个参数，为空取第二个参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select ename,sal*12+ifnull(comm,0) as &apos;年薪&apos; from emp order by 年薪 desc</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示工资最高的员工名字和岗位</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select ename,job from emp where sal=(select max(sal) from emp);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示工资高于平均工资的员工信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select ename,job from emp where sal&gt;(select avg(sal) from emp);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示每个部门的平均工资和最高工资  <code>fromat(29999,2)</code>含义是小数点后保留两位</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select deptno,max(sal),avg(sal) from emp group by deptno;</span><br><span class="line"></span><br><span class="line">select deptno, format(avg(sal), 2) , max(sal) from EMP group by deptno;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>显示平均工资低于2000的部门和它的平均工资</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select deptno,avg(sal) avg_sal from emp group by deptno having avg_sal&lt;2000;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示每中岗位的雇员总数，平均工资</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select job,count(job),avg(sal) from emp group by job;</span><br><span class="line"></span><br><span class="line">select job,count(*), format(avg(sal),2) from EMP group by job;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h4><ul>
+<li><p>显示雇员名，雇员工资以及所在部门的名字因为上面的数据来自emp和dept表，因此要联合查询</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select emp.ename,emp.sal,dept.dname from emp,dept where emp.deptno=dept.deptno;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示部门号为10的部门名，员工名和工资</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select ename,sal,dname from emp,dept where emp.deptno=dept.deptno and dept.deptno=10;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示各个员工姓名，工资，以及工资级别</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select ename,sal,grade from emp,salgrade where emp.sal between losal and hisal;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="自连接"><a href="#自连接" class="headerlink" title="自连接"></a>自连接</h4><p><strong>自连接是指在同一张表连接查询</strong></p>
+<ul>
+<li><p>显示员工ford的上级领导的编号和姓名（mgr是员工领导的编号–empno）</p>
+<ul>
+<li><p>使用的子查询</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select empno,ename from emp where empno=(select mgr from emp where ename=&apos;ford&apos;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用多表查询 – 使用别名将一张表分成两份分别使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select leader.empno,leader.ename from emp leader,emp worker where leader.empno=worker.mgr and worker.ename=&apos;ford&apos;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h4><h5 id="单行子查询"><a href="#单行子查询" class="headerlink" title="单行子查询"></a>单行子查询</h5><ul>
+<li><p>显示smith同一部门的员工</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select ename from emp where deptno=(select deptno from emp where ename=&apos;smith&apos;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="多行子查询"><a href="#多行子查询" class="headerlink" title="多行子查询"></a>多行子查询</h5><ul>
+<li><p><strong>in关键字</strong>：查询和10号部门的工作相同的雇员的名字，岗位，工资，部门号，但是不包含10自己</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select ename,job,sal,empno from emp where job in(select job from emp where deptno=10) and deptno&lt;&gt;10;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>all关键字</strong>：显示工资比部门30的所有员工的工资高的员工的姓名，工资和部门号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select ename,sal,deptno from emp where sal&gt;all(select sal from emp where deptno=30);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>any关键字</strong>：显示工资比部门30的任意员工的工资高的员工的姓名，工资和部门号</p>
+</li>
+</ul>
 
       
     </div>
@@ -688,7 +753,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库笔记"><span class="nav-number">1.</span> <span class="nav-text">数据库笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-插入是否更新"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. 插入是否更新</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Retrieve"><span class="nav-number">1.1.</span> <span class="nav-text">Retrieve</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-where条件"><span class="nav-number">1.1.1.</span> <span class="nav-text">2.where条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-筛选分页结果"><span class="nav-number">1.1.2.</span> <span class="nav-text">4.筛选分页结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-Delete"><span class="nav-number">1.1.3.</span> <span class="nav-text">6.Delete</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-插入查询结果（将一张表查询结果插入到另外一张表中）"><span class="nav-number">1.1.4.</span> <span class="nav-text">7. 插入查询结果（将一张表查询结果插入到另外一张表中）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-聚合函数"><span class="nav-number">1.1.5.</span> <span class="nav-text">8. 聚合函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-group-by子句的使用"><span class="nav-number">1.1.6.</span> <span class="nav-text">9.group by子句的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#面试题："><span class="nav-number">1.1.7.</span> <span class="nav-text">面试题：</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库笔记"><span class="nav-number">1.</span> <span class="nav-text">数据库笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-插入是否更新"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. 插入是否更新</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Retrieve"><span class="nav-number">1.1.</span> <span class="nav-text">Retrieve</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-where条件"><span class="nav-number">1.1.1.</span> <span class="nav-text">2.where条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-筛选分页结果"><span class="nav-number">1.1.2.</span> <span class="nav-text">4.筛选分页结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-Delete"><span class="nav-number">1.1.3.</span> <span class="nav-text">6.Delete</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-插入查询结果（将一张表查询结果插入到另外一张表中）"><span class="nav-number">1.1.4.</span> <span class="nav-text">7. 插入查询结果（将一张表查询结果插入到另外一张表中）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-聚合函数"><span class="nav-number">1.1.5.</span> <span class="nav-text">8. 聚合函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-group-by子句的使用"><span class="nav-number">1.1.6.</span> <span class="nav-text">9.group by子句的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#面试题："><span class="nav-number">1.1.7.</span> <span class="nav-text">面试题：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复合查询（重点）"><span class="nav-number">1.2.</span> <span class="nav-text">复合查询（重点）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本查询回顾"><span class="nav-number">1.2.1.</span> <span class="nav-text">基本查询回顾</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多表查询"><span class="nav-number">1.2.2.</span> <span class="nav-text">多表查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自连接"><span class="nav-number">1.2.3.</span> <span class="nav-text">自连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#子查询"><span class="nav-number">1.2.4.</span> <span class="nav-text">子查询</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#单行子查询"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">单行子查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#多行子查询"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">多行子查询</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -708,7 +773,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
