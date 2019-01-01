@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Dyson&#39;s blog">
 <meta property="og:description" content="数据库笔记###表的增删改差 1. 插入是否更新 如果主键或者唯一键对应只存在可以选择性的进行同步更新操作 12insert ... on duplicate key update	column = value [,column = value] ...  举例 1insert into students （id,sn,name） values （100,10010，&amp;apos;lalala&amp;ap">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-01T14:35:12.598Z">
+<meta property="og:updated_time" content="2019-01-01T15:43:03.176Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dyson&#39;s blog">
 <meta name="twitter:description" content="数据库笔记###表的增删改差 1. 插入是否更新 如果主键或者唯一键对应只存在可以选择性的进行同步更新操作 12insert ... on duplicate key update	column = value [,column = value] ...  举例 1insert into students （id,sn,name） values （100,10010，&amp;apos;lalala&amp;ap">
@@ -578,6 +578,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select ename,sal,deptno from emp where sal&gt;all(select sal from emp where deptno=30);</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong>any关键字</strong>：显示工资比部门30的任意员工的工资高的员工的姓名，工资和部门号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select ename, sal, deptno from emp where sal &gt; any(select sal from emp where deptno=30);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 
