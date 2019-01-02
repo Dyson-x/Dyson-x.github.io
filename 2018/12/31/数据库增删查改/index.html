@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Dyson&#39;s blog">
 <meta property="og:description" content="数据库笔记###表的增删改差 1. 插入是否更新 如果主键或者唯一键对应只存在可以选择性的进行同步更新操作 12insert ... on duplicate key update	column = value [,column = value] ...  举例 1insert into students （id,sn,name） values （100,10010，&amp;apos;lalala&amp;ap">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-01T15:43:03.176Z">
+<meta property="og:updated_time" content="2019-01-02T12:06:21.025Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dyson&#39;s blog">
 <meta name="twitter:description" content="数据库笔记###表的增删改差 1. 插入是否更新 如果主键或者唯一键对应只存在可以选择性的进行同步更新操作 12insert ... on duplicate key update	column = value [,column = value] ...  举例 1insert into students （id,sn,name） values （100,10010，&amp;apos;lalala&amp;ap">
@@ -581,6 +581,54 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select ename, sal, deptno from emp where sal &gt; any(select sal from emp where deptno=30);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+<h5 id="多列子查询"><a href="#多列子查询" class="headerlink" title="多列子查询"></a>多列子查询</h5><ul>
+<li><p>查询和SMITH的部门和岗位完全相同的所有雇员，不含SMITH本人</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select ename from emp where (deptno, job)=(select deptno, job from emp where ename=&apos;smith&apos;) and ename&lt;&gt;&apos;smith&apos;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="在from子句中使用子查询"><a href="#在from子句中使用子查询" class="headerlink" title="在from子句中使用子查询"></a>在from子句中使用子查询</h4><ul>
+<li><p>显示高于自己部门平均工资的员工的姓名、部门、工资、平均工资</p>
+<ul>
+<li>将子查询当做成一个临时表</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select ename,deptno,sal,avg(sal) from emp,</span><br><span class="line">(select avg(sal) avg_sal,deptno dt from emp group by deptno) tmp</span><br><span class="line">where emp.sal&gt;tmp.avg_sal and emp.deptno=tmp.dt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示每个部门的信息（部门号，编号，地址）和人员数量</p>
+<ul>
+<li>使用多表查询</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select dept.dname,dept.deptno,dept.loc,count(*) from emp,dept where emp.deptno=dept.deptno group by dept.deptno;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用子查询 – 将emp表当做成临时表去使用</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select dept.dname,dept.deptno,dept.loc,mycount from dept,(select count(*) mycount,deptno from emp group by deptno) tmp where dept.deptno=tmp.deptno;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="合并查询"><a href="#合并查询" class="headerlink" title="合并查询"></a>合并查询</h4><ul>
+<li><p><strong>union</strong> 该操作符用于取得两结果集的并集。当使用该操作符时，会自动去掉结果集中的重复行。</p>
+<ul>
+<li><p>将工资大于2500或职位为manager的人找出来</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select ename,sal,job from emp where sal&gt;2500 union</span><br><span class="line">select ename,sal,job from emp where job=&apos;manager&apos;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>union all</strong> 该操作符取得两个结果的并集。当使用该操作符时，不会去掉集中的重复行</p>
+<ul>
+<li><p>将工资大于2500或职位为manager的人找出来</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select ename,sal,job from emp where sal&gt;2500 union all</span><br><span class="line">select ename,sal,job from emp where job=&apos;manager&apos;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>在SQL语句中 || 用于连接两个字符串</p>
+<h3 id="表的内连和外连"><a href="#表的内连和外连" class="headerlink" title="表的内连和外连"></a>表的内连和外连</h3><h4 id="内连接"><a href="#内连接" class="headerlink" title="内连接"></a>内连接</h4><ul>
+<li><p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 字段 from 表1 inner join 表2 on 连接条件 and 其他条件</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示smith的名字和部门名称</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select ename,dname from emp inner join dept on emp.deptno=dept.deptno and ename=&apos;smith&apos;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 
       
     </div>
@@ -754,7 +802,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库笔记"><span class="nav-number">1.</span> <span class="nav-text">数据库笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-插入是否更新"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. 插入是否更新</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Retrieve"><span class="nav-number">1.1.</span> <span class="nav-text">Retrieve</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-where条件"><span class="nav-number">1.1.1.</span> <span class="nav-text">2.where条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-筛选分页结果"><span class="nav-number">1.1.2.</span> <span class="nav-text">4.筛选分页结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-Delete"><span class="nav-number">1.1.3.</span> <span class="nav-text">6.Delete</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-插入查询结果（将一张表查询结果插入到另外一张表中）"><span class="nav-number">1.1.4.</span> <span class="nav-text">7. 插入查询结果（将一张表查询结果插入到另外一张表中）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-聚合函数"><span class="nav-number">1.1.5.</span> <span class="nav-text">8. 聚合函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-group-by子句的使用"><span class="nav-number">1.1.6.</span> <span class="nav-text">9.group by子句的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#面试题："><span class="nav-number">1.1.7.</span> <span class="nav-text">面试题：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复合查询（重点）"><span class="nav-number">1.2.</span> <span class="nav-text">复合查询（重点）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本查询回顾"><span class="nav-number">1.2.1.</span> <span class="nav-text">基本查询回顾</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多表查询"><span class="nav-number">1.2.2.</span> <span class="nav-text">多表查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自连接"><span class="nav-number">1.2.3.</span> <span class="nav-text">自连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#子查询"><span class="nav-number">1.2.4.</span> <span class="nav-text">子查询</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#单行子查询"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">单行子查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#多行子查询"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">多行子查询</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库笔记"><span class="nav-number">1.</span> <span class="nav-text">数据库笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-插入是否更新"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. 插入是否更新</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Retrieve"><span class="nav-number">1.1.</span> <span class="nav-text">Retrieve</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-where条件"><span class="nav-number">1.1.1.</span> <span class="nav-text">2.where条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-筛选分页结果"><span class="nav-number">1.1.2.</span> <span class="nav-text">4.筛选分页结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-Delete"><span class="nav-number">1.1.3.</span> <span class="nav-text">6.Delete</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-插入查询结果（将一张表查询结果插入到另外一张表中）"><span class="nav-number">1.1.4.</span> <span class="nav-text">7. 插入查询结果（将一张表查询结果插入到另外一张表中）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-聚合函数"><span class="nav-number">1.1.5.</span> <span class="nav-text">8. 聚合函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-group-by子句的使用"><span class="nav-number">1.1.6.</span> <span class="nav-text">9.group by子句的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#面试题："><span class="nav-number">1.1.7.</span> <span class="nav-text">面试题：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复合查询（重点）"><span class="nav-number">1.2.</span> <span class="nav-text">复合查询（重点）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本查询回顾"><span class="nav-number">1.2.1.</span> <span class="nav-text">基本查询回顾</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多表查询"><span class="nav-number">1.2.2.</span> <span class="nav-text">多表查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自连接"><span class="nav-number">1.2.3.</span> <span class="nav-text">自连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#子查询"><span class="nav-number">1.2.4.</span> <span class="nav-text">子查询</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#单行子查询"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">单行子查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#多行子查询"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">多行子查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#多列子查询"><span class="nav-number">1.2.4.3.</span> <span class="nav-text">多列子查询</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在from子句中使用子查询"><span class="nav-number">1.2.5.</span> <span class="nav-text">在from子句中使用子查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#合并查询"><span class="nav-number">1.2.6.</span> <span class="nav-text">合并查询</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表的内连和外连"><span class="nav-number">1.3.</span> <span class="nav-text">表的内连和外连</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内连接"><span class="nav-number">1.3.1.</span> <span class="nav-text">内连接</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

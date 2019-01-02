@@ -585,6 +585,54 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select ename, sal, deptno from emp where sal &gt; any(select sal from emp where deptno=30);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+<h5 id="多列子查询"><a href="#多列子查询" class="headerlink" title="多列子查询"></a>多列子查询</h5><ul>
+<li><p>查询和SMITH的部门和岗位完全相同的所有雇员，不含SMITH本人</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select ename from emp where (deptno, job)=(select deptno, job from emp where ename=&apos;smith&apos;) and ename&lt;&gt;&apos;smith&apos;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="在from子句中使用子查询"><a href="#在from子句中使用子查询" class="headerlink" title="在from子句中使用子查询"></a>在from子句中使用子查询</h4><ul>
+<li><p>显示高于自己部门平均工资的员工的姓名、部门、工资、平均工资</p>
+<ul>
+<li>将子查询当做成一个临时表</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select ename,deptno,sal,avg(sal) from emp,</span><br><span class="line">(select avg(sal) avg_sal,deptno dt from emp group by deptno) tmp</span><br><span class="line">where emp.sal&gt;tmp.avg_sal and emp.deptno=tmp.dt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示每个部门的信息（部门号，编号，地址）和人员数量</p>
+<ul>
+<li>使用多表查询</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select dept.dname,dept.deptno,dept.loc,count(*) from emp,dept where emp.deptno=dept.deptno group by dept.deptno;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用子查询 – 将emp表当做成临时表去使用</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select dept.dname,dept.deptno,dept.loc,mycount from dept,(select count(*) mycount,deptno from emp group by deptno) tmp where dept.deptno=tmp.deptno;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="合并查询"><a href="#合并查询" class="headerlink" title="合并查询"></a>合并查询</h4><ul>
+<li><p><strong>union</strong> 该操作符用于取得两结果集的并集。当使用该操作符时，会自动去掉结果集中的重复行。</p>
+<ul>
+<li><p>将工资大于2500或职位为manager的人找出来</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select ename,sal,job from emp where sal&gt;2500 union</span><br><span class="line">select ename,sal,job from emp where job=&apos;manager&apos;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>union all</strong> 该操作符取得两个结果的并集。当使用该操作符时，不会去掉集中的重复行</p>
+<ul>
+<li><p>将工资大于2500或职位为manager的人找出来</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select ename,sal,job from emp where sal&gt;2500 union all</span><br><span class="line">select ename,sal,job from emp where job=&apos;manager&apos;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>在SQL语句中 || 用于连接两个字符串</p>
+<h3 id="表的内连和外连"><a href="#表的内连和外连" class="headerlink" title="表的内连和外连"></a>表的内连和外连</h3><h4 id="内连接"><a href="#内连接" class="headerlink" title="内连接"></a>内连接</h4><ul>
+<li><p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 字段 from 表1 inner join 表2 on 连接条件 and 其他条件</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示smith的名字和部门名称</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select ename,dname from emp inner join dept on emp.deptno=dept.deptno and ename=&apos;smith&apos;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 
           
         
