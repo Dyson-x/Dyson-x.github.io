@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Dyson&#39;s blog">
 <meta property="og:description" content="JVMJVM简介 JVM（Java Virtual Machine） 虚拟机：通过软件模拟的具有完整硬件功能，运行在完全隔离环境中的计算机系统 常见虚拟机：VMWare/Box   JVM是通过软件模拟Java字节码指令集，JVM中只保留了PC寄存器，而普通的虚拟机有很多寄存器 从JDK1.3至今，HotSpot为默认JVM  Java内存区域划分  – 共六块内存区线程私有内存：每个线程都有，彼">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-07T15:58:49.740Z">
+<meta property="og:updated_time" content="2019-01-08T15:43:55.771Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM">
 <meta name="twitter:description" content="JVMJVM简介 JVM（Java Virtual Machine） 虚拟机：通过软件模拟的具有完整硬件功能，运行在完全隔离环境中的计算机系统 常见虚拟机：VMWare/Box   JVM是通过软件模拟Java字节码指令集，JVM中只保留了PC寄存器，而普通的虚拟机有很多寄存器 从JDK1.3至今，HotSpot为默认JVM  Java内存区域划分  – 共六块内存区线程私有内存：每个线程都有，彼">
@@ -394,7 +394,7 @@
 <h4 id="可达性分析算法（Reachability-Analysis）"><a href="#可达性分析算法（Reachability-Analysis）" class="headerlink" title="可达性分析算法（Reachability Analysis）"></a>可达性分析算法（Reachability Analysis）</h4><p>Java采用可达性分析算法来判断对象是否存活（C#，Lisp）</p>
 <p><strong>算法思想：</strong>通过一系列“GC Roots”的对象作为起点，从这些节点开始向下搜索对象，搜索走过的路径，称为“引用链”，当一个对象到任意一个GC</p>
 <p>Root对象没有任何的引用链相连时（从GC Roots到对象不可达），证明对象已死。</p>
-<p><strong>Java中能够作为GC Roots的对象包含一下四种：</strong></p>
+<p><strong>Java中能够作为GC Roots的对象包含一下四种 ：</strong></p>
 <ol>
 <li>虚拟机栈（栈帧中的本地变量表）中引用对象</li>
 <li>类静态变量引用的对象</li>
