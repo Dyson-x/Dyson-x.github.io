@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Dyson&#39;s blog">
 <meta property="og:description" content="JVMJVM简介 JVM（Java Virtual Machine） 虚拟机：通过软件模拟的具有完整硬件功能，运行在完全隔离环境中的计算机系统 常见虚拟机：VMWare/Box   JVM是通过软件模拟Java字节码指令集，JVM中只保留了PC寄存器，而普通的虚拟机有很多寄存器 从JDK1.3至今，HotSpot为默认JVM  Java内存区域划分  – 共六块内存区线程私有内存：每个线程都有，彼">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-08T15:43:55.771Z">
+<meta property="og:updated_time" content="2019-01-09T15:47:44.588Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM">
 <meta name="twitter:description" content="JVMJVM简介 JVM（Java Virtual Machine） 虚拟机：通过软件模拟的具有完整硬件功能，运行在完全隔离环境中的计算机系统 常见虚拟机：VMWare/Box   JVM是通过软件模拟Java字节码指令集，JVM中只保留了PC寄存器，而普通的虚拟机有很多寄存器 从JDK1.3至今，HotSpot为默认JVM  Java内存区域划分  – 共六块内存区线程私有内存：每个线程都有，彼">
@@ -330,8 +330,8 @@
 <li><p>程序计数器（Program Counter Register）   –   记录上一次执行到的地址</p>
 <p><strong>程序计数器是比较小的内存空间，当前线程所执行的字节码的行号指示器</strong></p>
 <ul>
-<li>若当前线程执行的是Java方法，计数器记录的是正在执行的JVM字节码指令地址</li>
-<li>若当前线程执行当是 <strong>Native本地方法</strong>时，计数器为空</li>
+<li>若当前线程执行的是Java方法，计数器记录的是正在执行的JVM字节码指令地址 </li>
+<li>若当前线程执行当是 <strong>Native本地方法</strong>时， 计数器为空</li>
 </ul>
 <p><strong>程序计数器是唯一一块不会产生OOM（OutOfMemoryError）异常的区域</strong></p>
 </li>
