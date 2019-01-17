@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Dyson&#39;s blog">
 <meta property="og:description" content="复杂度分析如何分析，统计算法的执行效率和资源消耗 测试结果非常依赖测试环境 测试结果受数据规模的影响很大  大O复杂度表示法所有代码的执行时间T(n)与每行代码的执行次数n成正比 大O公式：T(n) = (f(n))  大O时间复杂度实际上并不是具体表示代码真正的执行时间，而是表示代码执行时间随数据规模增长的变化趋势，所以也叫作渐进时间复杂度（asymptotic space complexity">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-14T14:31:04.185Z">
+<meta property="og:updated_time" content="2019-01-15T16:19:15.710Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="复杂度分析">
 <meta name="twitter:description" content="复杂度分析如何分析，统计算法的执行效率和资源消耗 测试结果非常依赖测试环境 测试结果受数据规模的影响很大  大O复杂度表示法所有代码的执行时间T(n)与每行代码的执行次数n成正比 大O公式：T(n) = (f(n))  大O时间复杂度实际上并不是具体表示代码真正的执行时间，而是表示代码执行时间随数据规模增长的变化趋势，所以也叫作渐进时间复杂度（asymptotic space complexity">
@@ -343,6 +343,11 @@
 <h4 id="O-m-n-，O-m-n"><a href="#O-m-n-，O-m-n" class="headerlink" title="O(m+n)，O(m*n)"></a>O(m+n)，O(m*n)</h4><ul>
 <li>m和n是表示两个数据规模。当无法事先评估m和n谁的量级大，所以我们在表示复杂度的时候，就不能简单利用加法法则而省略其中一个。所以，时间复杂就为O(m+n)。</li>
 </ul>
+<hr>
+<hr>
+<h3 id="时间复杂度最好，最坏，平均，均摊分析"><a href="#时间复杂度最好，最坏，平均，均摊分析" class="headerlink" title="时间复杂度最好，最坏，平均，均摊分析"></a>时间复杂度最好，最坏，平均，均摊分析</h3><h4 id="最好，最坏情况时间复杂度"><a href="#最好，最坏情况时间复杂度" class="headerlink" title="最好，最坏情况时间复杂度"></a>最好，最坏情况时间复杂度</h4><h4 id="平均情况复杂度"><a href="#平均情况复杂度" class="headerlink" title="平均情况复杂度"></a>平均情况复杂度</h4><h4 id="均摊时间复杂度"><a href="#均摊时间复杂度" class="headerlink" title="均摊时间复杂度"></a>均摊时间复杂度</h4><ul>
+<li>摊还分析法</li>
+</ul>
 
       
     </div>
@@ -376,6 +381,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/17/数据库基本语法/" rel="prev" title="数据库基本语法">
+                数据库基本语法 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -456,7 +465,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -516,7 +525,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#复杂度分析"><span class="nav-number">1.</span> <span class="nav-text">复杂度分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何分析，统计算法的执行效率和资源消耗"><span class="nav-number">1.1.</span> <span class="nav-text">如何分析，统计算法的执行效率和资源消耗</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#大O复杂度表示法"><span class="nav-number">1.1.1.</span> <span class="nav-text">大O复杂度表示法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#O-1"><span class="nav-number">1.1.2.</span> <span class="nav-text">O(1)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#O-logn-O-nlogn"><span class="nav-number">1.1.3.</span> <span class="nav-text">O(logn),O(nlogn)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#O-m-n-，O-m-n"><span class="nav-number">1.1.4.</span> <span class="nav-text">O(m+n)，O(m*n)</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#复杂度分析"><span class="nav-number">1.</span> <span class="nav-text">复杂度分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何分析，统计算法的执行效率和资源消耗"><span class="nav-number">1.1.</span> <span class="nav-text">如何分析，统计算法的执行效率和资源消耗</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#大O复杂度表示法"><span class="nav-number">1.1.1.</span> <span class="nav-text">大O复杂度表示法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#O-1"><span class="nav-number">1.1.2.</span> <span class="nav-text">O(1)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#O-logn-O-nlogn"><span class="nav-number">1.1.3.</span> <span class="nav-text">O(logn),O(nlogn)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#O-m-n-，O-m-n"><span class="nav-number">1.1.4.</span> <span class="nav-text">O(m+n)，O(m*n)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间复杂度最好，最坏，平均，均摊分析"><span class="nav-number">1.2.</span> <span class="nav-text">时间复杂度最好，最坏，平均，均摊分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#最好，最坏情况时间复杂度"><span class="nav-number">1.2.1.</span> <span class="nav-text">最好，最坏情况时间复杂度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#平均情况复杂度"><span class="nav-number">1.2.2.</span> <span class="nav-text">平均情况复杂度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#均摊时间复杂度"><span class="nav-number">1.2.3.</span> <span class="nav-text">均摊时间复杂度</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
