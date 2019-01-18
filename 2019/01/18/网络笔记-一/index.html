@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="网络," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="网络笔记(一)">
+<meta name="keywords" content="网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络笔记(一)">
+<meta property="og:url" content="http://yoursite.com/2019/01/18/网络笔记-一/index.html">
+<meta property="og:site_name" content="Dyson&#39;s blog">
+<meta property="og:description" content="网络笔记(一)">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/01/18/网络笔记-一/img/网络/四层协议.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/18/网络笔记-一/img/网络/局域网通信.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/18/网络笔记-一/img/网络/跨局域网通信.png">
+<meta property="og:updated_time" content="2019-01-18T15:20:46.748Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网络笔记(一)">
+<meta name="twitter:description" content="网络笔记(一)">
+<meta name="twitter:image" content="http://yoursite.com/2019/01/18/网络笔记-一/img/网络/四层协议.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/18/网络笔记-一/"/>
+
+
+
+
+
+  <title>网络笔记(一) | Dyson's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dyson's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">永远的爱着你！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/18/网络笔记-一/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dyson">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/background.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dyson's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">网络笔记(一)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-18T23:01:33+08:00">
+                2019-01-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="网络笔记-一"><a href="#网络笔记-一" class="headerlink" title="网络笔记(一)"></a>网络笔记(一)</h2><a id="more"></a>
+<p><strong>在同一个局域网两台主机是可以通讯的</strong></p>
+<p><strong>任何一个在局域网的主机，在不欠运营商费用的情况下是可以直接访问公网上的任何一个主机</strong></p>
+<ul>
+<li>公网：所有人可以直接访问</li>
+</ul>
+<p>协议：就像快递盒子上面的信息一样，包装快递的包裹在网络中就称为封装，当你拆快递的时候就相当于解包，快递员将包裹准确的发到你的手上就相当于分路。</p>
+<ul>
+<li>封装，解包，分用</li>
+<li>协议本质上就是一种约定</li>
+<li>在网络当中我们的网络结构是以层状结构呈现的，分层的目的是为了更好的解耦。层状结构</li>
+<li>在网络的分层结构中，同层可以认为自己在和对方进行通讯<ul>
+<li>就比如：A和B在打电话，A与B之间的通讯就视为为同层的，而A的手机和B的手机间的通讯就是同层的。</li>
+</ul>
+</li>
+<li>网卡(外设)中有一组寄存器用来接收网络中的数据</li>
+<li>网卡是一个硬件，一旦网卡有数据时，网卡就会向CPU发送中断信号，当CPU收到信号之后操作系统也会收到信息<ul>
+<li>举例：外卖送餐，这里的网卡就可以理解成为外卖小哥，而当外卖小哥给你打电话取外卖时就相当于向CPU发送专断请求，而你就相当于CPU或者操作系统。而这时你非常的忙，将外卖取回来之后并没有立刻的去处理，这就叫做中断的上半部，只是将数据从外设拿到内存里。下半部是就是处理数据，在处理数据中就牵扯到网络分层，<strong>解包，分用(软件行为)</strong>。</li>
+</ul>
+</li>
+</ul>
+<h2 id="网络初识"><a href="#网络初识" class="headerlink" title="网络初识"></a>网络初识</h2><p>TCP：解决最严重的丢包问题，可靠性问题</p>
+<p>IP：解决查找问题</p>
+<p><strong>局域网LAN：</strong>计算机数量多，通过交换机和路由器连接在一起</p>
+<ul>
+<li>交换机：属于局域网上边的一个设备，在最底层将数据帧进行交换的不会跨网络传输</li>
+</ul>
+<p><strong>广域网WAN：</strong>将远隔千里的计算机连在一起</p>
+<ul>
+<li>局域网与广局网，一个将数据传输的距离近，一个将数据传输的距离远</li>
+</ul>
+<p><strong>协议：</strong>就是约定，约定一个共同的标准，大家都来遵守，这就是网络协议。</p>
+<h3 id="网络协议初识"><a href="#网络协议初识" class="headerlink" title="网络协议初识"></a>网络协议初识</h3><hr>
+<h4 id="协议分层"><a href="#协议分层" class="headerlink" title="协议分层"></a>协议分层</h4><p><strong>打电话栗子</strong></p>
+<ul>
+<li>在网络当中我们的网络结构是以层状结构呈现的，分层的目的是为了更好的解耦。层状结构</li>
+<li>在网络的分层结构中，同层可以认为自己在和对方进行通讯<ul>
+<li>就比如：A和B在打电话，A与B之间的通讯就视为为同层的，而A的手机和B的手机间的通讯就是同层的。</li>
+</ul>
+</li>
+</ul>
+<p>分层好处就是在于封装与解耦，封装完毕就可以实现层层解耦。</p>
+<h4 id="OSI七层协议"><a href="#OSI七层协议" class="headerlink" title="OSI七层协议"></a>OSI七层协议</h4><hr>
+<p>数据链路层也叫作网络接口层</p>
+<h4 id="TCP-IP五层-或四层-模型"><a href="#TCP-IP五层-或四层-模型" class="headerlink" title="TCP/IP五层(或四层)模型"></a>TCP/IP五层(或四层)模型</h4><p><img src="img\网络\四层协议.png" alt="局域网通信图"></p>
+<p>一般而言</p>
+<ul>
+<li><strong>对于一台主机, 它的操作系统内核实现了从传输层到物理层的内容;</strong></li>
+<li><strong>对于一台路由器, 它实现了从网络层到物理层</strong><ul>
+<li>路由器：连接局域网，对网道网的数据进行转发</li>
+</ul>
+</li>
+<li><strong>对于一台交换机, 它实现了从数据链路层到物理层</strong><ul>
+<li>交换机：划分碰撞域，有效解决数据碰撞</li>
+</ul>
+</li>
+<li><strong>对于集线器, 只实现了物理层</strong><ul>
+<li>集线器：放大信号的作用</li>
+</ul>
+</li>
+</ul>
+<h2 id="网络传输基本流程"><a href="#网络传输基本流程" class="headerlink" title="网络传输基本流程"></a>网络传输基本流程</h2><h4 id="局域网通信"><a href="#局域网通信" class="headerlink" title="局域网通信"></a>局域网通信</h4><p><img src="img\网络\局域网通信.png" alt="局域网通信图"></p>
+<p>局域网（以太网）通信：在一个局域网中，所有的计算都会接收到某个计算机所发送的信息，只不过，在链路层就会去识别发送的对象是否与自己匹配，不匹配会直接将信息屏蔽。在局域网中，任何一个时刻只能有一台主机在往网上发送数据。</p>
+<ul>
+<li>当局域网中有多个用户往网线发送信息时，就会进行冲突检测，然后执行冲突避免算法解决冲突。</li>
+<li>在局域网中通信，每个主机在底层都有一个标识符，这个标识符就叫做MAC地址<ul>
+<li>MAC地址是全球唯一的，可以理解成在网卡中的一个序列号</li>
+</ul>
+</li>
+<li>抓包工具：抓包就是将别人的包文件抓取出来（在局域网中）</li>
+</ul>
+<p>数据在自定向下交付的时候就进行<strong>分装</strong>，而要封装就要添加每一层协议的<strong>包头</strong>，就比如应用层就要添加应用层的包头，那么应用层里边所搭载的数据就叫做应用层的有效<strong>载荷</strong>，任何一层的包头可以分为两部分，该层包头和该层的有效载荷，包头是当前层加的，有效载荷是上层给的。所以在网络传输时只要自定向下交付做封装就可以了，将自定向下交付的过程就成为封装。</p>
+<ul>
+<li><p>封装：快递包装</p>
+</li>
+<li><p>报头：快递上面的包装信息</p>
+</li>
+<li>有效载荷：盒子中的包裹</li>
+</ul>
+<p>将数据链路层的数据叫做数据帧，在IP层叫做数据报，在TCP层叫做数据段</p>
+<p>除了最顶层协议，任何协议的报头当中必定要包含一个字段，这个字段表明要将自己有效载荷交给上一次的哪一种协议。只要有这个字段，就能准确将报办实现向上交付。将自己有效载荷交付个上层特定协议的过程，称为分用的过程。</p>
+<p>▄︻┻┳═一…… ☆(&gt;○&lt;)</p>
+<h4 id="跨局域网通信"><a href="#跨局域网通信" class="headerlink" title="跨局域网通信"></a>跨局域网通信</h4><p><img src="img\网络\跨局域网通信.png" alt="局域网通信图"></p>
+<p>在IP报进行路由时，要先找到目标主机所对应的局域网。</p>
+<p>路由器要至少连接两个局域网，所以至少有两个MAC地址，工作在网络层</p>
+<h3 id="网络中的地址管理"><a href="#网络中的地址管理" class="headerlink" title="网络中的地址管理"></a>网络中的地址管理</h3><h4 id="IP地址：提供了一个大致方向，不会改变"><a href="#IP地址：提供了一个大致方向，不会改变" class="headerlink" title="IP地址：提供了一个大致方向，不会改变"></a>IP地址：提供了一个大致方向，不会改变</h4><p><strong>IP协议分为 IPV4与IPV6，一般情况下默认为IPV4</strong></p>
+<ul>
+<li>IP地址是在IP协议中用来表示网络中不同主机的地址</li>
+<li>对于IPV4来说，IP地址为4字节，32比特位</li>
+<li>对于IPV6来说，IP地址为128字节</li>
+<li>IP地址一般使用“点分十进制”的字符串来表示，例如 192.168.1.1<ul>
+<li>用点分割的每一数字表示一个字节，范围是0-255；</li>
+</ul>
+</li>
+</ul>
+<h4 id="MAC地址：真正意义上进行数据转发的，一直变化"><a href="#MAC地址：真正意义上进行数据转发的，一直变化" class="headerlink" title="MAC地址：真正意义上进行数据转发的，一直变化"></a>MAC地址：真正意义上进行数据转发的，一直变化</h4><ul>
+<li><p>MAC地址是用来识别数据链路层中相连的节点</p>
+</li>
+<li><p>MAC地址是48个比特位，6个字节</p>
+<ul>
+<li>一般用16进制数字加上冒号的形式表示，例如：08:00:27:da:28</li>
+</ul>
+</li>
+<li>在网卡出厂时就确定了, 不能修改mac地址通常是唯一的(虚拟机中的mac地址不是真实的mac地址, 可能会冲突; 也有些网卡支持用户配置mac地址)</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/网络/" rel="tag"># 网络</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/17/多线程同步与互斥/" rel="next" title="多线程同步与互斥">
+                <i class="fa fa-chevron-left"></i> 多线程同步与互斥
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/img/background.jpg"
+                alt="Dyson" />
+            
+              <p class="site-author-name" itemprop="name">Dyson</p>
+              <p class="site-description motion-element" itemprop="description">起风而沐！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Dyson-x" target="_blank" title="GitHub">
+                      GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/ds19980228" target="_blank" title="CSDN">
+                      CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#网络笔记-一"><span class="nav-number">1.</span> <span class="nav-text">网络笔记(一)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络初识"><span class="nav-number">2.</span> <span class="nav-text">网络初识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网络协议初识"><span class="nav-number">2.1.</span> <span class="nav-text">网络协议初识</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#协议分层"><span class="nav-number">2.1.1.</span> <span class="nav-text">协议分层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OSI七层协议"><span class="nav-number">2.1.2.</span> <span class="nav-text">OSI七层协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP-IP五层-或四层-模型"><span class="nav-number">2.1.3.</span> <span class="nav-text">TCP/IP五层(或四层)模型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络传输基本流程"><span class="nav-number">3.</span> <span class="nav-text">网络传输基本流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#局域网通信"><span class="nav-number">3.0.1.</span> <span class="nav-text">局域网通信</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#跨局域网通信"><span class="nav-number">3.0.2.</span> <span class="nav-text">跨局域网通信</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络中的地址管理"><span class="nav-number">3.1.</span> <span class="nav-text">网络中的地址管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IP地址：提供了一个大致方向，不会改变"><span class="nav-number">3.1.1.</span> <span class="nav-text">IP地址：提供了一个大致方向，不会改变</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MAC地址：真正意义上进行数据转发的，一直变化"><span class="nav-number">3.1.2.</span> <span class="nav-text">MAC地址：真正意义上进行数据转发的，一直变化</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dyson</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
