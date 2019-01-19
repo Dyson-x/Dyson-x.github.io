@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="思维导图--继承、封装、多态," />
+  <meta name="keywords" content="网络," />
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="keywords" content="思维导图--继承、封装、多态">
+<meta name="description" content="网络编程套接字">
+<meta name="keywords" content="网络">
 <meta property="og:type" content="article">
-<meta property="og:title" content="继承，封装，多态">
-<meta property="og:url" content="http://yoursite.com/2018/11/15/继承，封装，多态/index.html">
+<meta property="og:title" content="网络笔记(二)-套接字">
+<meta property="og:url" content="http://yoursite.com/2019/01/19/网络笔记-二-套接字/index.html">
 <meta property="og:site_name" content="Dyson&#39;s blog">
+<meta property="og:description" content="网络编程套接字">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/img/继承，封装，多态.bmp">
-<meta property="og:updated_time" content="2018-11-15T06:59:16.979Z">
+<meta property="og:updated_time" content="2019-01-19T13:34:14.979Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="继承，封装，多态">
-<meta name="twitter:image" content="http://yoursite.com/img/继承，封装，多态.bmp">
+<meta name="twitter:title" content="网络笔记(二)-套接字">
+<meta name="twitter:description" content="网络编程套接字">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/11/15/继承，封装，多态/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/01/19/网络笔记-二-套接字/"/>
 
 
 
 
 
-  <title>继承，封装，多态 | Dyson's blog</title>
+  <title>网络笔记(二)-套接字 | Dyson's blog</title>
   
 
 
@@ -250,7 +251,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/15/继承，封装，多态/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/19/网络笔记-二-套接字/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Dyson">
@@ -267,7 +268,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">继承，封装，多态</h1>
+          <h1 class="post-title" itemprop="name headline">网络笔记(二)-套接字</h1>
         
 
         <div class="post-meta">
@@ -279,8 +280,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-15T14:56:39+08:00">
-                2018-11-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-19T10:11:47+08:00">
+                2019-01-19
               </time>
             
 
@@ -317,8 +318,36 @@
       
 
       
-        <p><img src="/img/继承，封装，多态.bmp" alt=""></p>
-<hr>
+        <h2 id="网络编程套接字"><a href="#网络编程套接字" class="headerlink" title="网络编程套接字"></a>网络编程套接字</h2><a id="more"></a>
+<h4 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h4><ul>
+<li>IP地址用来标识接入公网中的唯一一台主机</li>
+<li>源IP地址和目的IP地址（唐僧取经）</li>
+</ul>
+<h4 id="端口号：标识特定主机上唯一网络服务"><a href="#端口号：标识特定主机上唯一网络服务" class="headerlink" title="端口号：标识特定主机上唯一网络服务"></a>端口号：标识特定主机上唯一网络服务</h4><ul>
+<li>端口号是一个2字节16位的整数</li>
+<li>端口号用来表示某一台主机上的进程</li>
+<li><strong>IP地址加端口号就可以标识互联网中唯一一个进程，所以将IP地址加端口号叫做Socket，也就是套接字，套接字编程，套接字通信本质上就说进程间通信，只不过是跨网络进行通信的</strong></li>
+</ul>
+<h4 id="理解“端口号”和“进程ID”"><a href="#理解“端口号”和“进程ID”" class="headerlink" title="理解“端口号”和“进程ID”"></a>理解“端口号”和“进程ID”</h4><ul>
+<li>就比如10086就可以理解为“端口号”，而当你拨打10086后为你提供服务的人的工号就为“进程ID”</li>
+<li>进程一定有pid，但是不一定有端口号，当有端口号时表示为主机上要访问网络的进程</li>
+</ul>
+<h4 id="TCP协议-Transmission-Contro"><a href="#TCP协议-Transmission-Contro" class="headerlink" title="TCP协议 (Transmission Contro"></a>TCP协议 (Transmission Contro</h4><ul>
+<li>保证可靠性</li>
+<li>TCP面向字节流的</li>
+<li>面向连接的</li>
+</ul>
+<h4 id="UDP协议-User-Datagram-Protocol"><a href="#UDP协议-User-Datagram-Protocol" class="headerlink" title="UDP协议(User Datagram Protocol)"></a>UDP协议(User Datagram Protocol)</h4><ul>
+<li>传输层协议</li>
+<li>不可靠传输</li>
+<li>UDP面向数据包</li>
+</ul>
+<h4 id="网络字节序"><a href="#网络字节序" class="headerlink" title="网络字节序"></a>网络字节序</h4><ul>
+<li>网络字节序默认为大端的，在发送数据时将主机序列转成网络序列，在接收数据时将网络序列转成主机序列</li>
+</ul>
+<p>主机序列可以和网络序列相互转换 </p>
+<h3 id="socket编程接口"><a href="#socket编程接口" class="headerlink" title="socket编程接口"></a>socket编程接口</h3><hr>
+<h4 id="socket常见API"><a href="#socket常见API" class="headerlink" title="socket常见API"></a>socket常见API</h4><p><strong>sockaddr结构通用数据结构</strong>：可以接受很多数据类型，可以容纳不同套接字，就类似于void*</p>
 
       
     </div>
@@ -336,7 +365,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/思维导图-继承、封装、多态/" rel="tag"># 思维导图--继承、封装、多态</a>
+            <a href="/tags/网络/" rel="tag"># 网络</a>
           
         </div>
       
@@ -349,8 +378,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/31/类与方法上/" rel="next" title="类与方法">
-                <i class="fa fa-chevron-left"></i> 类与方法
+              <a href="/2019/01/18/网络笔记-一/" rel="next" title="网络笔记(一)">
+                <i class="fa fa-chevron-left"></i> 网络笔记(一)
               </a>
             
           </div>
@@ -358,10 +387,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/06/数据库/" rel="prev" title="数据库">
-                数据库 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -413,8 +438,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -483,6 +517,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#网络编程套接字"><span class="nav-number">1.</span> <span class="nav-text">网络编程套接字</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IP地址"><span class="nav-number">1.0.1.</span> <span class="nav-text">IP地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#端口号：标识特定主机上唯一网络服务"><span class="nav-number">1.0.2.</span> <span class="nav-text">端口号：标识特定主机上唯一网络服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#理解“端口号”和“进程ID”"><span class="nav-number">1.0.3.</span> <span class="nav-text">理解“端口号”和“进程ID”</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP协议-Transmission-Contro"><span class="nav-number">1.0.4.</span> <span class="nav-text">TCP协议 (Transmission Contro</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UDP协议-User-Datagram-Protocol"><span class="nav-number">1.0.5.</span> <span class="nav-text">UDP协议(User Datagram Protocol)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网络字节序"><span class="nav-number">1.0.6.</span> <span class="nav-text">网络字节序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#socket编程接口"><span class="nav-number">1.1.</span> <span class="nav-text">socket编程接口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#socket常见API"><span class="nav-number">1.1.1.</span> <span class="nav-text">socket常见API</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
