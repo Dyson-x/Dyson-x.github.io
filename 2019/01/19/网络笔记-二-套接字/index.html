@@ -87,10 +87,12 @@
 <meta property="og:site_name" content="Dyson&#39;s blog">
 <meta property="og:description" content="网络编程套接字">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-19T13:34:14.979Z">
+<meta property="og:image" content="c:/Users/Dyson/Desktop/TIM图片20190126171350.jpg">
+<meta property="og:updated_time" content="2019-01-26T13:00:42.790Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络笔记(二)-套接字">
 <meta name="twitter:description" content="网络编程套接字">
+<meta name="twitter:image" content="c:/Users/Dyson/Desktop/TIM图片20190126171350.jpg">
 
 
 
@@ -326,13 +328,13 @@
 <h4 id="端口号：标识特定主机上唯一网络服务"><a href="#端口号：标识特定主机上唯一网络服务" class="headerlink" title="端口号：标识特定主机上唯一网络服务"></a>端口号：标识特定主机上唯一网络服务</h4><ul>
 <li>端口号是一个2字节16位的整数</li>
 <li>端口号用来表示某一台主机上的进程</li>
-<li><strong>IP地址加端口号就可以标识互联网中唯一一个进程，所以将IP地址加端口号叫做Socket，也就是套接字，套接字编程，套接字通信本质上就说进程间通信，只不过是跨网络进行通信的</strong></li>
+<li><strong>IP地址加端口号就可以标识互联网中唯一一个进程</strong>，所以将IP地址加端口号叫做Socket，也就是套接字，套接字编程，套接字通信本质上就说进程间通信，只不过是跨网络进行通信的</li>
 </ul>
 <h4 id="理解“端口号”和“进程ID”"><a href="#理解“端口号”和“进程ID”" class="headerlink" title="理解“端口号”和“进程ID”"></a>理解“端口号”和“进程ID”</h4><ul>
-<li>就比如10086就可以理解为“端口号”，而当你拨打10086后为你提供服务的人的工号就为“进程ID”</li>
+<li>就比如10086就可以理解为“端口号”，而当你拨打10086后为你提供服务的人的工号就为“进程ID” </li>
 <li>进程一定有pid，但是不一定有端口号，当有端口号时表示为主机上要访问网络的进程</li>
 </ul>
-<h4 id="TCP协议-Transmission-Contro"><a href="#TCP协议-Transmission-Contro" class="headerlink" title="TCP协议 (Transmission Contro"></a>TCP协议 (Transmission Contro</h4><ul>
+<h4 id="TCP协议-Transmission-Contro-Protocol）"><a href="#TCP协议-Transmission-Contro-Protocol）" class="headerlink" title="TCP协议 (Transmission Contro Protocol）"></a>TCP协议 (Transmission Contro Protocol）</h4><ul>
 <li>保证可靠性</li>
 <li>TCP面向字节流的</li>
 <li>面向连接的</li>
@@ -344,10 +346,31 @@
 </ul>
 <h4 id="网络字节序"><a href="#网络字节序" class="headerlink" title="网络字节序"></a>网络字节序</h4><ul>
 <li>网络字节序默认为大端的，在发送数据时将主机序列转成网络序列，在接收数据时将网络序列转成主机序列</li>
+<li>不需要去确定主机的序列，而是将网络的序列确定好，默认为大端，当一台主机需要发送数据时，只需要将其转化成大端，而当另外一台主机收数据时，只需要将数据清一色在转化为本主机所能识别的字节序即可。</li>
 </ul>
 <p>主机序列可以和网络序列相互转换 </p>
+<p><strong>查看ip地址命令：ifconfig</strong></p>
+<p><img src="C:\Users\Dyson\Desktop\TIM图片20190126171350.jpg" alt="TIM图片20190126171350"></p>
+<ul>
+<li>要找到该主机所在的局域网就是通过IP地址与子网掩码按位与操作</li>
+</ul>
 <h3 id="socket编程接口"><a href="#socket编程接口" class="headerlink" title="socket编程接口"></a>socket编程接口</h3><hr>
-<h4 id="socket常见API"><a href="#socket常见API" class="headerlink" title="socket常见API"></a>socket常见API</h4><p><strong>sockaddr结构通用数据结构</strong>：可以接受很多数据类型，可以容纳不同套接字，就类似于void*</p>
+<h4 id="socket常见API"><a href="#socket常见API" class="headerlink" title="socket常见API"></a>socket常见API</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建 socket ⽂件描述符 (TCP/UDP, 客户端 + 服务器) 返回文件套接字</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">socket</span><span class="params">(<span class="keyword">int</span> domain, <span class="keyword">int</span> type, <span class="keyword">int</span> protocol)</span></span>;</span><br><span class="line"><span class="comment">// 绑定端⼝号 (TCP/UDP, 服务器) </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bind</span><span class="params">(<span class="keyword">int</span> socket, <span class="keyword">const</span> struct sockaddr *address,</span></span></span><br><span class="line"><span class="function"><span class="params"> <span class="keyword">socklen_t</span> address_len)</span></span>;</span><br><span class="line"><span class="comment">// 开始监听socket (TCP, 服务器)</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">listen</span><span class="params">(<span class="keyword">int</span> socket, <span class="keyword">int</span> backlog)</span></span>;</span><br><span class="line"><span class="comment">// 接收请求 (TCP, 服务器)</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">accept</span><span class="params">(<span class="keyword">int</span> socket, struct sockaddr* address,</span></span></span><br><span class="line"><span class="function"><span class="params"> <span class="keyword">socklen_t</span>* address_len)</span></span>;</span><br><span class="line"><span class="comment">// 建⽴连接 (TCP, 客户端)</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">connect</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">const</span> struct sockaddr *addr,</span></span></span><br><span class="line"><span class="function"><span class="params"> <span class="keyword">socklen_t</span> addrlen)</span></span>;</span><br></pre></td></tr></table></figure>
+<p><strong>sockaddr结构</strong></p>
+<ul>
+<li><strong>sockaddr结构通用数据结构</strong>：可以接受很多数据类型，可以容纳不同套接字，就类似于<strong>void</strong><ul>
+<li>sockaddr <em> 通用数据类型，相当于void </em>（sockaddr出现在void之前）</li>
+</ul>
+</li>
+</ul>
+<p><strong>流程：创建套接字，绑定，收发数据，关闭套接字</strong></p>
+<p>文件描述符，使用完需要关闭</p>
+<p><strong>read()</strong> 返回为0，表示对端关闭了连接</p>
+<p>netstat -nltp  查看TCP连接</p>
+<p>TCP在正式通讯之前要先建立连接，在建立连接时而采用三次握手</p>
+<p>维护连接是有成本的</p>
+<p>两次握手可能会造成大量的闲置连接而造成资源浪费 </p>
+<p>listen的第二个参数：连接队列长度，不能过长（新连接不用等待过长时间），不能没有（如果服务器端连接满载，新连接可以通过等待来建立连接 ），这样才能要保持服务器端一直处于满载工作状态。</p>
 
       
     </div>
@@ -527,7 +550,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#网络编程套接字"><span class="nav-number">1.</span> <span class="nav-text">网络编程套接字</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IP地址"><span class="nav-number">1.0.1.</span> <span class="nav-text">IP地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#端口号：标识特定主机上唯一网络服务"><span class="nav-number">1.0.2.</span> <span class="nav-text">端口号：标识特定主机上唯一网络服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#理解“端口号”和“进程ID”"><span class="nav-number">1.0.3.</span> <span class="nav-text">理解“端口号”和“进程ID”</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP协议-Transmission-Contro"><span class="nav-number">1.0.4.</span> <span class="nav-text">TCP协议 (Transmission Contro</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UDP协议-User-Datagram-Protocol"><span class="nav-number">1.0.5.</span> <span class="nav-text">UDP协议(User Datagram Protocol)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网络字节序"><span class="nav-number">1.0.6.</span> <span class="nav-text">网络字节序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#socket编程接口"><span class="nav-number">1.1.</span> <span class="nav-text">socket编程接口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#socket常见API"><span class="nav-number">1.1.1.</span> <span class="nav-text">socket常见API</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#网络编程套接字"><span class="nav-number">1.</span> <span class="nav-text">网络编程套接字</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IP地址"><span class="nav-number">1.0.1.</span> <span class="nav-text">IP地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#端口号：标识特定主机上唯一网络服务"><span class="nav-number">1.0.2.</span> <span class="nav-text">端口号：标识特定主机上唯一网络服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#理解“端口号”和“进程ID”"><span class="nav-number">1.0.3.</span> <span class="nav-text">理解“端口号”和“进程ID”</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP协议-Transmission-Contro-Protocol）"><span class="nav-number">1.0.4.</span> <span class="nav-text">TCP协议 (Transmission Contro Protocol）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UDP协议-User-Datagram-Protocol"><span class="nav-number">1.0.5.</span> <span class="nav-text">UDP协议(User Datagram Protocol)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网络字节序"><span class="nav-number">1.0.6.</span> <span class="nav-text">网络字节序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#socket编程接口"><span class="nav-number">1.1.</span> <span class="nav-text">socket编程接口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#socket常见API"><span class="nav-number">1.1.1.</span> <span class="nav-text">socket常见API</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
