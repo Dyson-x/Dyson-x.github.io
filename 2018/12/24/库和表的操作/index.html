@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Dyson&#39;s blog">
 <meta property="og:description" content="库和表的操作">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-26T08:27:44.541Z">
+<meta property="og:updated_time" content="2019-02-12T09:24:06.744Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="库和表的操作">
 <meta name="twitter:description" content="库和表的操作">
@@ -416,7 +416,7 @@
 <p>向表中插入数据：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into 表名 values(1,&apos;a&apos;,&apos;b&apos;);</span><br></pre></td></tr></table></figure>
 <h4 id="修改表"><a href="#修改表" class="headerlink" title="修改表"></a>修改表</h4><p>语法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE  tablename ADD (column datatype [DEFAULT expr][,column datatype]...);</span><br><span class="line">添加字段</span><br><span class="line">ALTER TABLE  tablename MODIfy (column datatype [DEFAULT expr][,column datatype]...);</span><br><span class="line">修改字段</span><br><span class="line">ALTER TABLE  tablename DROP (column)</span><br><span class="line">删除字段</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">添加字段</span><br><span class="line">ALTER TABLE tablename ADD (column datatype [DEFAULT expr][,column datatype]...);</span><br><span class="line">修改字段</span><br><span class="line">ALTER TABLE tablename MODIfy (column datatype [DEFAULT expr][,column datatype]...);</span><br><span class="line">删除字段</span><br><span class="line">ALTER TABLE tablename DROP (column)</span><br><span class="line">修改表明</span><br><span class="line">ALTER TABLE 表明 rename to 新表明；</span><br><span class="line">修改字段名</span><br><span class="line">ALTER TAbLE 表明 change 字段名 新字段名 varchar(10);  --新字段需要完整定义</span><br></pre></td></tr></table></figure>
 <p>插入新字段后，对原来表中数据没有影响：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; alter table student add age int(3);</span><br><span class="line">Query OK, 0 rows affected (1.17 sec)</span><br><span class="line">Records: 0  Duplicates: 0  Warnings: 0</span><br><span class="line"></span><br><span class="line">mysql&gt; desc student;</span><br><span class="line">+--------+------------+------+-----+---------+-------+</span><br><span class="line">| Field  | Type       | Null | Key | Default | Extra |</span><br><span class="line">+--------+------------+------+-----+---------+-------+</span><br><span class="line">| id     | int(11)    | YES  |     | NULL    |       |</span><br><span class="line">| name   | varchar(8) | YES  |     | NULL    |       |</span><br><span class="line">| gender | varchar(6) | YES  |     | NULL    |       |</span><br><span class="line">| age    | int(3)     | YES  |     | NULL    |       |</span><br><span class="line">+--------+------------+------+-----+---------+-------+</span><br></pre></td></tr></table></figure>
 <p><strong>注意</strong>：删除字段是要小心，删除字段会将其对应的列数据全部删除</p>
@@ -424,13 +424,9 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP [TEMPORARY] TABLE [IF EXISTS] tbl_name [, tbl_name] ...</span><br></pre></td></tr></table></figure>
 <p>实例：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop table 表名;</span><br></pre></td></tr></table></figure>
-<hr>
 <p><strong>清空表的内容</strong></p>
-<ul>
-<li><p>语法：</p>
+<p>语法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">truncate table 表名称;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
 
       
     </div>
@@ -554,7 +550,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
