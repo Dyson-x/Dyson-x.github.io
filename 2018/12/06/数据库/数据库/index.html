@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据库,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="数据库基础笔记">
+<meta name="keywords" content="数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库">
+<meta property="og:url" content="http://yoursite.com/2018/12/06/数据库/数据库/index.html">
+<meta property="og:site_name" content="Dyson&#39;s blog">
+<meta property="og:description" content="数据库基础笔记">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/img/database/数据库的基本结构.png">
+<meta property="og:image" content="http://yoursite.com/img/数据库/20181224-1.png">
+<meta property="og:updated_time" content="2019-02-12T08:38:29.698Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据库">
+<meta name="twitter:description" content="数据库基础笔记">
+<meta name="twitter:image" content="http://yoursite.com/img/database/数据库的基本结构.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/12/06/数据库/数据库/">
+
+
+
+
+
+  <title>数据库 | Dyson's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dyson's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">起风而益</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/06/数据库/数据库/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dyson">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/background.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dyson's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据库</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-06T19:39:31+08:00">
+                2018-12-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="数据库基础笔记"><a href="#数据库基础笔记" class="headerlink" title="数据库基础笔记"></a>数据库基础笔记</h2><a id="more"></a>
+<h4 id="关于数据库"><a href="#关于数据库" class="headerlink" title="关于数据库"></a>关于数据库</h4><ul>
+<li><p>为了解决数据存储的安全性，方便数据的管理和查询，可以存储海量数据，从而设计出数据库。</p>
+</li>
+<li><p>数据库的引出就是为了更方便的对数据进行管理，它能更有效的管理数据</p>
+<h5 id="数据库存储的介质"><a href="#数据库存储的介质" class="headerlink" title="数据库存储的介质"></a>数据库存储的介质</h5><ul>
+<li>磁盘</li>
+<li>内存</li>
+</ul>
+</li>
+</ul>
+<h4 id="主流数据库"><a href="#主流数据库" class="headerlink" title="主流数据库"></a>主流数据库</h4><ul>
+<li>SQL Sever：微软产品，.Net程序员的最爱，适合中大型项目</li>
+<li>Oracle：甲骨文产品，安全性好，适合大型项目，复杂的业务逻辑</li>
+<li>MySQL：并发性好，但不适合做复杂的业务，关系型数据库</li>
+<li>PostgreSQL：加州大学伯克利分校计算机系开发的关系型数据库</li>
+<li>SQLite：一种轻型数据库，适合嵌入式，它的占用资源非常低，在嵌入式设备中，可能就只需要几百K的内存</li>
+<li>H2：一个用于Java开发的嵌入式数据库，其本身就是一个类库</li>
+</ul>
+<h4 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h4><h5 id="连接服务器："><a href="#连接服务器：" class="headerlink" title="连接服务器："></a>连接服务器：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在window下以管理员身份运行cmd然后执行如下命令：</span><br><span class="line">mysql -h 127.0.0.1 -P 3306 -u root -p；</span><br><span class="line"></span><br><span class="line">一般情况下可以简写成：mysql -u root -p；</span><br></pre></td></tr></table></figure>
+<p><strong>缺少  -h 127.0.0.1  默认连接的是本地</strong></p>
+<p><strong>缺少  -P 3306  默认是连接3306端口号</strong></p>
+<h5 id="服务器，数据库，表之间的关系"><a href="#服务器，数据库，表之间的关系" class="headerlink" title="服务器，数据库，表之间的关系"></a>服务器，数据库，表之间的关系</h5><p><img src="/img/database/数据库的基本结构.png" alt=""></p>
+<h4 id="数据库基本使用语法"><a href="#数据库基本使用语法" class="headerlink" title="数据库基本使用语法"></a>数据库基本使用语法</h4><ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show databases;     //查看数据库</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create databases 库名;     //创建数据库</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use 库名;     //使用数据库</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show tables;     //查看所有表</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create table student(表名称)(</span><br><span class="line">	id int;     //id为int类型，可以作为索引</span><br><span class="line">	name varchar,</span><br><span class="line">	gender varchar(6)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from 表名称;     //查询表中数据，* 代表所有字段</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into student(表名称) (id,name,gender) values (1,&apos;Dyson&apos;,&apos;男&apos;);      //插入数据</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h4 id="SQL分类"><a href="#SQL分类" class="headerlink" title="SQL分类"></a>SQL分类</h4><p><strong>DDL（Data Ddefinition Language）数据定义语言，用来维护数据的结构</strong></p>
+<ul>
+<li>代表指令：creat，drop（删除），alter（修改）</li>
+</ul>
+<p><strong>DML（Data Manipulation Language）数据操纵语言，用来对数据进行操作</strong></p>
+<ul>
+<li>代表指令：insert，delete，updata</li>
+<li>DML中又单独分了一个DQL（Data Query Language）数据查询语言，代表指令：select</li>
+</ul>
+<p><strong>DCL（Data Control Language）数据控制语言，主要负责权限管理的事物</strong></p>
+<ul>
+<li>代表指令：grant（同意），revoke（取消），commit（提交）</li>
+</ul>
+<h4 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h4><h5 id="关于存储引擎（MySQL在V5-1之前默认存储引擎是MyISAM；在此之后的默认存储引擎是InnoDB）"><a href="#关于存储引擎（MySQL在V5-1之前默认存储引擎是MyISAM；在此之后的默认存储引擎是InnoDB）" class="headerlink" title="关于存储引擎（MySQL在V5.1之前默认存储引擎是MyISAM；在此之后的默认存储引擎是InnoDB）"></a>关于存储引擎（MySQL在V5.1之前默认存储引擎是MyISAM；在此之后的默认存储引擎是InnoDB）</h5><ul>
+<li>数据库管理系统如何存储数据，如何为存储的数据建立索引和如何更新，查询数据等技术的实现方法。</li>
+<li><strong>MySQl的核心就是插件式存储引擎，支持多种存储引擎</strong></li>
+</ul>
+<h5 id="查看存储引擎"><a href="#查看存储引擎" class="headerlink" title="查看存储引擎"></a>查看存储引擎</h5><ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show engines</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="/img/数据库/20181224-1.png" alt=""></p>
+<h5 id="常用的存储引擎介绍"><a href="#常用的存储引擎介绍" class="headerlink" title="常用的存储引擎介绍"></a>常用的存储引擎介绍</h5><ol>
+<li><strong>MyISAM</strong>是MySQLV5.1之前默认存储引擎。全表锁，拥有较高的执行速度一个写请求会阻塞另外相同表格的所有读写请求，并发性能差，占用空间相对较小，不支持事务，不支持外键</li>
+</ol>
+<p>小Tips：什么是事务？</p>
+<ul>
+<li>在计算机术语中是指访问可能更新数据库中各种数据项的一个程序执行单元(unit)。在关系型数据库中，一个事务可以是一条SQL语句，一组SQL语句或整个程序。举例来讲：A汇100块钱给B，A减少100，B增加100，这就相当于一个事务，在这个过程当中只有有任何的错误，该事务的所有操作都要被撤销。MyISAM不支持事物就意味着当有错误出现时，不能自动的撤销事物而是需要通过程序来进行撤销操作。InnoDB是支持事物的。</li>
+</ul>
+<p>小Tips：主键，外键，引索之间的关系及其作用定义</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th>主键</th>
+<th>外键</th>
+<th>引索</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">定义：</td>
+<td>唯一标识一条记录，不能有重复的，不允许为空</td>
+<td>表的外键是另一表的主键, 外键可以有重复的, 可以是空值</td>
+<td>该字段没有重复值，但可以有一个空值</td>
+</tr>
+<tr>
+<td style="text-align:left">作用：</td>
+<td>用来保证数据完整性</td>
+<td>用来和其他表建立联系用的</td>
+<td>是提高查询排序的速度</td>
+</tr>
+<tr>
+<td style="text-align:left">个数：</td>
+<td>主键只能有一个</td>
+<td>一个表可以有多个外键</td>
+<td>一个表可以有多个惟一索引</td>
+</tr>
+</tbody>
+</table>
+<ol start="2">
+<li><strong>InnoDB</strong>是MySQL默认存引擎。行级锁 ，并发能力强，占用空间是MyISAM的2.5倍，不支持全局索引（5.6开始支持），支持事务。相比MyISAM存储引擎，InnoDB写的处理效率差一些并且会占用更多的磁盘空间以保留数据和索引。</li>
+<li><strong>MEMORY(HEAP)</strong>：全表锁，使用存在内存中的内容来创建表。每个MEMORY表实际对应一个磁盘文件。MEMORY类型的表访问非常快，因为它的数据是存放在内存中的，并且默认使用HASH引索。但是一单服务器关闭，表中的数据就会丢失。</li>
+<li><strong>MERGE</strong>是一组MyISAM表的组合，这些MyISAM表必须结构完全相同。MERGE表本身没有数据，对MERGE类型的表进行查询，更新，删除等操作，就是在内部对MyISAM表进行的。</li>
+<li><strong>BDB</strong>提供数据安全。BDB被包含在为支持它的操作系统发布的MySQL-Max二进制分发版里。MySQL AB与Sleepycat紧密合作工作以保持MySQL/BDB接口的质量在高水平。即使Berkeley DB其本身是非常能经受考验和非常可靠的。MySQL接口仍然被认为是第三等质量的。 </li>
+<li><strong>ARCHIVE</strong>存储引擎被用来无索引地，非常小地覆盖存储的大量数据。</li>
+<li><strong>CSV</strong>存储引擎把数据以逗号分隔的格式存储在文本文件中。</li>
+</ol>
+<p><a href="http://www.cnblogs.com/duanxz/p/3709113.html" target="_blank" rel="noopener">搜索引擎详解</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据库/" rel="tag"># 数据库</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/15/继承，封装，多态/" rel="next" title="继承，封装，多态">
+                <i class="fa fa-chevron-left"></i> 继承，封装，多态
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/24/数据库/库和表的操作/" rel="prev" title="库和表的操作">
+                库和表的操作 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/img/background.jpg" alt="Dyson">
+            
+              <p class="site-author-name" itemprop="name">Dyson</p>
+              <p class="site-description motion-element" itemprop="description">起风而沐！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Dyson-x" target="_blank" title="GitHub">
+                      GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/ds19980228" target="_blank" title="CSDN">
+                      CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库基础笔记"><span class="nav-number">1.</span> <span class="nav-text">数据库基础笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于数据库"><span class="nav-number">1.0.1.</span> <span class="nav-text">关于数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数据库存储的介质"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">数据库存储的介质</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主流数据库"><span class="nav-number">1.0.2.</span> <span class="nav-text">主流数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基本使用"><span class="nav-number">1.0.3.</span> <span class="nav-text">基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#连接服务器："><span class="nav-number">1.0.3.1.</span> <span class="nav-text">连接服务器：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#服务器，数据库，表之间的关系"><span class="nav-number">1.0.3.2.</span> <span class="nav-text">服务器，数据库，表之间的关系</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库基本使用语法"><span class="nav-number">1.0.4.</span> <span class="nav-text">数据库基本使用语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL分类"><span class="nav-number">1.0.5.</span> <span class="nav-text">SQL分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#存储引擎"><span class="nav-number">1.0.6.</span> <span class="nav-text">存储引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#关于存储引擎（MySQL在V5-1之前默认存储引擎是MyISAM；在此之后的默认存储引擎是InnoDB）"><span class="nav-number">1.0.6.1.</span> <span class="nav-text">关于存储引擎（MySQL在V5.1之前默认存储引擎是MyISAM；在此之后的默认存储引擎是InnoDB）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看存储引擎"><span class="nav-number">1.0.6.2.</span> <span class="nav-text">查看存储引擎</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#常用的存储引擎介绍"><span class="nav-number">1.0.6.3.</span> <span class="nav-text">常用的存储引擎介绍</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dyson</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Dyson&#39;s blog">
 <meta property="og:description" content="Maven：项目管理项目管理：  关于类库的管理（Jar包导入） 管理各种第三方jar 项目构建（打包发布）  mvn package 项目标准结构  pom.xml  –  Maven配置文件 src   –  放置所有源代码与测试代码 ​    – main  -源文件 ​        – java文件 ​    – test文件 1.Maven项目构建  通过命令行构建  123mvn -">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-13T03:38:18.448Z">
+<meta property="og:updated_time" content="2019-02-13T04:02:01.434Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dyson&#39;s blog">
 <meta name="twitter:description" content="Maven：项目管理项目管理：  关于类库的管理（Jar包导入） 管理各种第三方jar 项目构建（打包发布）  mvn package 项目标准结构  pom.xml  –  Maven配置文件 src   –  放置所有源代码与测试代码 ​    – main  -源文件 ​        – java文件 ​    – test文件 1.Maven项目构建  通过命令行构建  123mvn -">
@@ -368,7 +368,7 @@
 <p>   <code>mvn -DskippTests package</code></p>
 <p>   打包过程中不再执行测试用例直接将项目打包</p>
 <ol start="5">
-<li><p><strong>***</strong>   构建可执行jar  <strong>***</strong></p>
+<li><p><strong>构建可执行jar</strong>   重要</p>
 <ol>
 <li>在pom.xml中添加打包插件并指明主类来使得打包生成额jar具备可执行能力</li>
 <li>使用mvn package将项目打包</li>
@@ -378,11 +378,35 @@
 </ol>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">   <span class="comment">&lt;!-- 所有maven生命周期中需要的插件在此配置，插件是一个特殊的maven构件 --&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">plugins</span>&gt;</span> </span><br><span class="line">     <span class="comment">&lt;!-- 在此添加插件 --&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-jar-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!--设置版本号，版本号要和Plugins中jar版本号一致--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">archive</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">manifest</span>&gt;</span></span><br><span class="line">             <span class="comment">&lt;!--依赖的jar包添加到classpath--&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">addClasspath</span>&gt;</span>true<span class="tag">&lt;/<span class="name">addClasspath</span>&gt;</span></span><br><span class="line">             <span class="comment">&lt;!--设置可执行jar的主类--&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">mainClass</span>&gt;</span>com.bittech.hello.App<span class="tag">&lt;/<span class="name">mainClass</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">addExtensions</span>&gt;</span>true<span class="tag">&lt;/<span class="name">addExtensions</span>&gt;</span></span><br><span class="line">             <span class="comment">&lt;!--指定可执行jar依赖包归档的目录前缀--&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">classpathPrefix</span>&gt;</span>lib<span class="tag">&lt;/<span class="name">classpathPrefix</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">manifestEntries</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">Implementation-Title</span>&gt;</span>$&#123;project.name&#125;<span class="tag">&lt;/<span class="name">Implementation-Title</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">Implementation-Version</span>&gt;</span>$&#123;project.version&#125;<span class="tag">&lt;/<span class="name">Implementation-Version</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">Implementation-Vendor-Id</span>&gt;</span>$&#123;project.groupId&#125;<span class="tag">&lt;/<span class="name">Implementation-Vendor-Id</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">manifestEntries</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">archive</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <ol start="6">
-<li><p>install —— 安装构建到本地仓库</p>
+<li><p>install —— 安装构件到本地仓库</p>
 <p><code>mvn install</code></p>
 <p>将项目打包放置在本地仓库，本机中的其他项目可以使用dependency来引入此项目。</p>
+<ul>
+<li><p>maven寻找jar包顺序</p>
+<ul>
+<li><p>先从本地仓库查询是否存在，如不存在去中央仓库寻找，如中央仓库都没有找到报错。</p>
+</li>
+<li><p>匹配jar包的规则：根据pom文件中指定的dopendency中三个关键配置</p>
+<p>groupID -&gt; artifactID -&gt; version</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>deploy —— 安装构件到中央仓库</p>
+</li>
+<li><p>site —— 生成网站</p>
+<p><code>mvn site</code></p>
+<p>将项目信息，依赖等生成网站</p>
 </li>
 </ol>
+<p>maven：</p>
+<ol>
+<li>重点掌握IDEA创建Maven项目</li>
+<li>使用pom文件添加依赖</li>
+<li>会使用插件构建可执行jar包</li>
+</ol>
+<p>邮箱选择  gmail/outlook/foxmail</p>
 
       
     </div>
@@ -417,7 +441,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/12/数组/" rel="prev" title="数组">
+              <a href="/2019/02/12/数据结构/数组/" rel="prev" title="数组">
                 数组 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -498,7 +522,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

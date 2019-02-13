@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据库,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="数据库基本语法">
+<meta name="keywords" content="数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库基本语法">
+<meta property="og:url" content="http://yoursite.com/2019/01/17/数据库/数据库基本语法/index.html">
+<meta property="og:site_name" content="Dyson&#39;s blog">
+<meta property="og:description" content="数据库基本语法">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-12T08:21:23.207Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据库基本语法">
+<meta name="twitter:description" content="数据库基本语法">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/17/数据库/数据库基本语法/">
+
+
+
+
+
+  <title>数据库基本语法 | Dyson's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dyson's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">起风而益</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/17/数据库/数据库基本语法/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dyson">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/background.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dyson's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据库基本语法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-17T16:41:07+08:00">
+                2019-01-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<h2 id="数据库基本语法"><a href="#数据库基本语法" class="headerlink" title="数据库基本语法"></a>数据库基本语法</h2><a id="more"></a>
+<h4 id="SELECT语句"><a href="#SELECT语句" class="headerlink" title="SELECT语句"></a>SELECT语句</h4><ul>
+<li><code>SELECT 列名 FROM 表明;</code>    单行检索，多行检索</li>
+<li><code>SELECT DATABASE();</code>     显示当前使用数据库</li>
+<li>检索不同的行：<code>SELECT DISTINCT 列名 FROM 表明；</code>    只返回不同的值</li>
+<li>限制结果：<code>SELECT 列名 FROM 表明 LIMIT 限制的行数；</code><ul>
+<li>指定开始行数和行数：<code>SELECT 列名 FROM 表明 LIMIT 5,5；</code><ul>
+<li><code>LIMIT 5 OFFSET 5；</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>使用完全限定的表明：<code>SELECT products.pro_name FROM 表明；</code></li>
+</ul>
+<hr>
+<h4 id="排序检索数据：使用ORDER-BY语句"><a href="#排序检索数据：使用ORDER-BY语句" class="headerlink" title="排序检索数据：使用ORDER BY语句"></a>排序检索数据：使用ORDER BY语句</h4><ul>
+<li>排序数据：<code>SELECT prod_name FROM products ORDER BY prod_name；</code></li>
+<li>按多个列排序：<code>SELECT prod_id，prod_price，prod_name FROM products ORDER BY prod_price，prod_name；</code><ul>
+<li>注意：在多行排序中，是按照指定的行书顺序进行排序的，如上，先是以价格排序，然后在价格相同的数据中再以姓名排序。如果价格都不相同则就不会以姓名排序。</li>
+</ul>
+</li>
+<li>指定排序方向（DESC关键字）：<code>SELECT prod_id，prod_price，prod_name FROM products ORDER BY prod_price DESC；</code>   按照价格以降序的方式排序产品</li>
+<li>ASC是默认升序的关键字</li>
+<li><strong>ORDER BY子句位置</strong>：要保证ORDER BY位于FROM子句之后。如果使用LIMIT，它必须位于ORDER BY之后。</li>
+</ul>
+<hr>
+<h4 id="过滤数据：使用WHERE语句"><a href="#过滤数据：使用WHERE语句" class="headerlink" title="过滤数据：使用WHERE语句"></a>过滤数据：使用WHERE语句</h4><ul>
+<li>数据根据WHERE子句中指定搜索条件进行过滤，WHERE子句在表明（FROM子句）之后给出：<code>SELECT prod_name，prod_price FROM products WHERE prod_price=2.50；</code></li>
+<li>WHERE子句操作符：=，&lt;&gt;，!=，&lt;，&lt;=，&gt;，&gt;=，BETWEEN<ul>
+<li>BETWEEN匹配范围中所有的值，包括指定开始值和结束值<ul>
+<li><code>SELECT prod_name，prod_price FROM products WHERE prod_price BETWEEN 5 AND 10；</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>空值检查：<ul>
+<li>NULL  无值(no value)：<code>SELECT prod_name FROM products WHERE prod_price IS NULL；</code> </li>
+</ul>
+</li>
+<li><strong>WHERE子句的位置</strong>：在同时只用ORDER BY和WHERE子句时，应该让ORDER BY位于WHERE之后，否则就会产生错误</li>
+</ul>
+<hr>
+<h4 id="数据过滤"><a href="#数据过滤" class="headerlink" title="数据过滤"></a>数据过滤</h4><p><strong>组合WHERE语句</strong></p>
+<ul>
+<li>AND操作符</li>
+<li>OR操作符<ul>
+<li>注意：当使用AND和OR的联合查询时，要考虑到操作符优先级问题，使用圆括号明确的分组相应操作符</li>
+</ul>
+</li>
+<li>IN操作符：IN在WHERE子句中用来指定要匹配值的清单的关键字，功能与OR相当</li>
+<li>NOT操作符：一般情况下与IN，BETWEEN，EXISTS子句配合使用，相当于否定跟在它后面的条件。<ul>
+<li><code>SELECT prod_name，prod_price FROM products WHERE vend_id NOT IN (1002,1003) ORDER BY prod_name;</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="通配符进行过滤"><a href="#通配符进行过滤" class="headerlink" title="通配符进行过滤"></a>通配符进行过滤</h4><ul>
+<li>LIKE操作符：模糊查询<ul>
+<li>百分号（%）通配符：搜索模式中给定位置的0个，1个或多个字符<ul>
+<li>注意：‘%’不能匹配用值NULL作为产品名的行，在匹配时是默认不区分大小写的</li>
+</ul>
+</li>
+<li>下划线（_）通配符：只匹配单个字符</li>
+</ul>
+</li>
+<li>注意：不要过度的使用通配符，在确定要使用通配符的时候，除非绝对必要，否则不要将它们用在搜索模式的开始处，将通配符置于搜索模式的开始处，搜索的效率是很慢的</li>
+</ul>
+<hr>
+<h4 id="使用正则表达式进行搜索"><a href="#使用正则表达式进行搜索" class="headerlink" title="使用正则表达式进行搜索"></a>使用正则表达式进行搜索</h4><ul>
+<li><p>REGEXP ：regesxp</p>
+<ul>
+<li><p>进行OR匹配：搜索两个串之一，使用 ‘ | ’</p>
+<ul>
+<li><code>SELECT  prod_name FROM products WHERE prod_name REGEXP &#39;1000|2000&#39; ORDER BY prod_name；</code></li>
+</ul>
+</li>
+<li><p>匹配几个字符之一：可以指定一组用<strong>[ 和 ]</strong>括起来的字符来完成。</p>
+<ul>
+<li><code>SELECT prod_name FROM products WHERE prod_name REGEXP &#39;[123] Ton&#39; ORDER BY prod_name</code><ul>
+<li>正则表达式<strong>[123] Ton</strong>。<strong>[123]</strong>定义一组字符，其含义是匹配1或2或3。可以理解成<strong>[1|2|3] Ton</strong></li>
+<li>字腹肌和也可以被否定，即，它们将匹配除指定字符外的任何东西。否定一个字符集只需哟在集合开始的地方放置一个 <strong>^</strong> 即可。就比如：<strong>[^123]</strong> 匹配出这些字符外的任何东西</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>范围匹配：<strong>[0-9]，[a-z]</strong> 匹配任意数字和字符串，定义一个范围</p>
+<ul>
+<li><code>SELECT  prod_name FROM products WHERE prod_name REGEXP &#39;[1-5] Ton&#39; ORDER BY prod_name;</code></li>
+</ul>
+</li>
+<li><p>匹配特殊字符：要匹配特殊字符，必须使用<code>\\转义字符</code>作为前导。<code>\\-</code>  表示查找 <strong>-</strong>，<code>\\.</code>表示查找 <strong>.</strong> </p>
+<ul>
+<li><code>SELECT prod_name FROM products WHERE prod_name REGEXP &#39;\\.&#39; ORDER BY prod_name;</code></li>
+</ul>
+</li>
+<li><p>匹配字符类</p>
+<p>​                                           字符类</p>
+<p>|      类      |                        说明                         |<br>| :———-: | :————————————————-: |<br>| <code>[:alnum:]</code>  |          任意字母和数字（同<code>[a-zA-Z0-9]</code>）          |<br>| <code>[:alpha:]</code>  |              任意字母（同<code>[a-zA-Z]</code>）               |<br>| <code>[:blank:]</code>  |               空格和制表（同<code>[\\t]</code>）               |<br>| <code>[:cntrl:]</code>  |            ASCⅡ控制符（ASCⅡ 0到31和127）            |<br>| <code>[:digit:]</code>  |                任意数字（同<code>[0-9]</code>）                |<br>| <code>[:graph:]</code>  |           与<code>[:print:]</code>相同，但不包括空格           |<br>| <code>[:lower:]</code>  |              任意小写字母（同<code>[a-z]</code>）              |<br>| <code>[:print:]</code>  |                   任意可打印字符                    |<br>| <code>[:punct:]</code>  |   既不在<code>[:alnum:]</code>又不在<code>[:cntrl:]</code>中的任意字符    |<br>| <code>[:space:]</code>  | 包括空格在内的任意空白字符（同<code>[\\f\\n\\r\\t\\v]</code>） |<br>| <code>[:upper:]</code>  |              任意大写字母（同<code>[A-Z]</code>）              |<br>| <code>[:xdigit:]</code> |         任意十六进制数字（同<code>[a-fA-F0-9]</code>）         |</p>
+</li>
+<li><p>匹配多个实例</p>
+<p>​                                        重复元字符</p>
+<p>| 元字符 |             说明             |<br>| :—-: | :————————–: |<br>|   *    |        0个或多个匹配         |<br>|   +    |  1个或多个匹配（等于{1，}）  |<br>|   ？   |  0个或1个匹配（等于{0,1}）   |<br>|  {n}   |         指定数目匹配         |<br>|  {n,}  |      不少于指定数目匹配      |<br>| {n,m}  | 匹配数目的范围（m不超过255） |</p>
+<p><strong>范例：</strong></p>
+<ul>
+<li><code>SELECT prod_name FROM products WHERE prod_name REGEXP &#39;\\([0-9] sticks?\\)&#39; ORDER BY prod_name</code><ul>
+<li>注意：sticks？ 会匹配到stick与sticks（s后的？使s可选，因为？匹配它前面的任何字符的0次或1次出现）。</li>
+</ul>
+</li>
+<li><code>SELECT prod_name FROM products WHERE prod_name REGEXP &#39;[[:digit:]]{4}&#39; ORDER BY prod_name;</code><ul>
+<li>[:digit:] 匹配任意数字，所以会查找到一个数字的集合。{4}表示要求它前面的字符（任意数字）出现4次，所以就会查找到存在4个数字字符的集合，如1000，8563，7354。也可以用<code>[0-9][0-9][0-9][0-9]</code>来替代上边的查询语句，其效果是一样的。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>#### </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据库/" rel="tag"># 数据库</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/14/数据结构/复杂度分析/" rel="next" title="复杂度分析">
+                <i class="fa fa-chevron-left"></i> 复杂度分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/17/多线程同步与互斥/" rel="prev" title="多线程同步与互斥">
+                多线程同步与互斥 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/img/background.jpg" alt="Dyson">
+            
+              <p class="site-author-name" itemprop="name">Dyson</p>
+              <p class="site-description motion-element" itemprop="description">起风而沐！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Dyson-x" target="_blank" title="GitHub">
+                      GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/ds19980228" target="_blank" title="CSDN">
+                      CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库基本语法"><span class="nav-number">1.</span> <span class="nav-text">数据库基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SELECT语句"><span class="nav-number">1.0.1.</span> <span class="nav-text">SELECT语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#排序检索数据：使用ORDER-BY语句"><span class="nav-number">1.0.2.</span> <span class="nav-text">排序检索数据：使用ORDER BY语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#过滤数据：使用WHERE语句"><span class="nav-number">1.0.3.</span> <span class="nav-text">过滤数据：使用WHERE语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据过滤"><span class="nav-number">1.0.4.</span> <span class="nav-text">数据过滤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通配符进行过滤"><span class="nav-number">1.0.5.</span> <span class="nav-text">通配符进行过滤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用正则表达式进行搜索"><span class="nav-number">1.0.6.</span> <span class="nav-text">使用正则表达式进行搜索</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dyson</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
