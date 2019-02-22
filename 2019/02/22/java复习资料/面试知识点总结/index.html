@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="JavaSE知识考点 JAVA中的几种基本数据类型是什么，各自占用多少字节？  4种整形 （int 4   short 2  long 8  byte 1） 2种浮点型（float 4  double 8） char型（char  2） boolean型（boolean 1）   String 类能被继承吗，为什么？  String类是被fianl修饰的，而被final修饰的属性不可变，类不可被继">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dyson&#39;s blog">
+<meta property="og:url" content="http://yoursite.com/2019/02/22/java复习资料/面试知识点总结/index.html">
+<meta property="og:site_name" content="Dyson&#39;s blog">
+<meta property="og:description" content="JavaSE知识考点 JAVA中的几种基本数据类型是什么，各自占用多少字节？  4种整形 （int 4   short 2  long 8  byte 1） 2种浮点型（float 4  double 8） char型（char  2） boolean型（boolean 1）   String 类能被继承吗，为什么？  String类是被fianl修饰的，而被final修饰的属性不可变，类不可被继">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-22T14:26:31.885Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Dyson&#39;s blog">
+<meta name="twitter:description" content="JavaSE知识考点 JAVA中的几种基本数据类型是什么，各自占用多少字节？  4种整形 （int 4   short 2  long 8  byte 1） 2种浮点型（float 4  double 8） char型（char  2） boolean型（boolean 1）   String 类能被继承吗，为什么？  String类是被fianl修饰的，而被final修饰的属性不可变，类不可被继">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/22/java复习资料/面试知识点总结/">
+
+
+
+
+
+  <title> | Dyson's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dyson's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">起风而益</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/22/java复习资料/面试知识点总结/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dyson">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/background.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dyson's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-22T23:43:49+08:00">
+                2019-02-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="JavaSE知识考点"><a href="#JavaSE知识考点" class="headerlink" title="JavaSE知识考点"></a>JavaSE知识考点</h3><ol>
+<li><p>JAVA中的几种基本数据类型是什么，各自占用多少字节？</p>
+<ul>
+<li>4种整形 （int 4   short 2  long 8  byte 1）</li>
+<li>2种浮点型（float 4  double 8）</li>
+<li>char型（char  2）</li>
+<li>boolean型（boolean 1）</li>
+</ul>
+</li>
+<li><p>String 类能被继承吗，为什么？</p>
+<ul>
+<li>String类是被fianl修饰的，而被final修饰的属性不可变，类不可被继承，方法不可以被复写</li>
+</ul>
+</li>
+<li><p>String，StringBuffer，StringBuilder 的区别</p>
+<ul>
+<li><p>String是字符串常亮</p>
+</li>
+<li><p>StringBuffer是字符串变量，同步处理线程安全的，效率低</p>
+</li>
+<li>StringBuilder是字符串变量，异步处理线程不安全的，效率高</li>
+</ul>
+</li>
+<li><p>.ArrayList （扩容策略1.5倍）和 LinkedList 有什么区别</p>
+<ul>
+<li><p>都是实现了List接口的容器类，都支持增删查改的操作</p>
+</li>
+<li><p>底层实现：基于动态数组的数据结构与基于链表结构</p>
+</li>
+<li>随机访问的get与set方法，ArrayList效率高</li>
+<li>对于删除与插入，LinkedList效率高</li>
+</ul>
+</li>
+<li><p>讲讲类的实例化顺序，比如父类静态数据，构造函数，字段，子类静态数据，构造函数，字段，当 new 的时候，他们的执行顺序</p>
+<ul>
+<li>父类静态变量&gt;父类静态代码块&gt;子类静态变量&gt;子类静态代码块&gt;父类构造块&gt;父类构造方法&gt;父类字段&gt;子类构造块&gt;子类构造方法&gt;子类字段</li>
+</ul>
+</li>
+<li><p>用过哪些 Map 类，都有什么区别，HashMap 是线程安全的吗,并发下使用Map 是什么，他们内部原理分别是什么，比如存储方式，hashcode，扩容，默认容量等。</p>
+</li>
+</ol>
+<ul>
+<li>HashMap <ul>
+<li>线程不安全，</li>
+<li>存储方式：链表+数组（JDK8增添了红黑树）<ul>
+<li>树化逻辑：当桶中链表个数&gt;=8，并且所有元素个数加起来超过64，结构转化为红黑树（解决问题：链表太长导致查找太慢问题，O(n)-&gt;O(logn)，减少哈希碰撞）</li>
+</ul>
+</li>
+<li>默认容量（桶的数量）：16</li>
+<li>扩容策略：当超过容量最大值，不在扩充，没超过最大值扩充为原来的2倍，扩容后对元素进行rehash，要么保留在原桶中，要么在新桶中，<a href="https://zhuanlan.zhihu.com/p/21673805" target="_blank" rel="noopener">HashMap</a></li>
+</ul>
+</li>
+<li>ConcurrentHashMap  <ul>
+<li>线程安全</li>
+<li>存储方式：链表+数组+红黑树</li>
+</ul>
+</li>
+</ul>
+<ol start="7">
+<li><p>JAVA8 的 ConcurrentHashMap 为什么放弃了分段锁，有什么问题吗？</p>
+<ul>
+<li>锁力度更细</li>
+<li>内存占有更小</li>
+</ul>
+<p><a href="https://www.cnblogs.com/lfs2640666960/p/9621461.html" target="_blank" rel="noopener">深入理解HsahMap与ConcurrentHashMap扩容策略</a></p>
+</li>
+<li><p>有没有有顺序的 Map 实现类，如果有，他们是怎么保证有序</p>
+<p>LinkedHashMap（记录插入的顺序）：保留插入的顺序，输出顺序与输入顺序一致</p>
+<p>TreeHashMap：默认升序的，按照key的内容排序，处理排序是按照Comparable接口完成，依靠从，comparaTo()方法完成，当然也可以自己复写Comparable接口中的comparaTo()方法，去自己规定排序方式</p>
+</li>
+<li><p>抽象类和接口的区别，类可以继承多个类么，接口可以继承多个接口么，类可以实现多个接口么</p>
+</li>
+<li><p>反射的原理，反射创建类实例的三种方式是什么？</p>
+<p>三种实例化对象方式</p>
+<ol>
+<li>任何类的实例化对象可以通过Object类中的getClass()方法取得Class类对象</li>
+<li>“类.class”:直接根据某个具体的类来取得Class类的实例化对象。</li>
+<li>使用Class类提供的方法:public static Class&lt;?&gt; forName(String className) throws ClassNotFoundException</li>
+</ol>
+</li>
+<li><p>反射中，Class.forName 和 ClassLoader 区别</p>
+</li>
+</ol>
+<ol start="12">
+<li><p>final 的用途</p>
+<ul>
+<li>final变量是只读的，final变量一般与static关键字使用，作为常量使用</li>
+<li>final方法不可重写</li>
+<li>final类不能被继承</li>
+</ul>
+<p>final好处：</p>
+<ul>
+<li>final关键字可以提高性能。JVM和Java应用都会缓存final变量</li>
+<li>final变量可以安全的在多线程环境下进行共享，而不需要额外的同步开销</li>
+<li>使用final关键字，JVM会对方法，变量及类进行优化，更好地实现封装。</li>
+</ul>
+<p><a href="http://www.importnew.com/7553.html" target="_blank" rel="noopener">final详解</a></p>
+</li>
+<li><p>juc包下提供的四大工具类，</p>
+</li>
+</ol>
+<h3 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h3><ol>
+<li><p>什么情况下会发生栈内存溢出</p>
+<ul>
+<li>如果线程请求的栈深度大于虚拟机所允许的最大深度，会抛出StackOverFlow异常</li>
+<li>如果虚拟机在拓展栈时无法申请到足够的内存空间，则会抛出OOM异常</li>
+</ul>
+</li>
+<li><p>JVM 的内存结构，Eden 和 Survivor 比例</p>
+<ul>
+<li>Eden和Survivor（一个称为From，另外称为To区域）的比例是按照8 : 1分配的</li>
+</ul>
+</li>
+<li><p>JVM 内存为什么要分成新生代，老年代，永久代。新生代中为什么要分为 Eden和 Survivor。</p>
+<p>都是属于堆</p>
+<p>“标记-清除”算法是最基础的收集算法，分为“标记”和”清除”两个阶段：在标记后在完成统一回收所有被标记的对象。（效率问题：标记与清除效率不高   空间问题会：产生大量不连续的内存碎片）</p>
+<ul>
+<li><p>MinorGC 新生代（复制算法）：当对象进入初次进入Survivor区时就会将对象的年龄+1，当对象每熬过一次GC年龄就会+1，当到达默认值15时，就会将其移到老年代中。</p>
+<ul>
+<li>为啥有两个Survivor区：通过两个Survivor区可以达到新生代无碎片的目的</li>
+</ul>
+</li>
+<li><p>MajorGC 老年代（标记-整理算法）：存活时间比较久，或者需要占用大量连续内存空间的对象</p>
+<ul>
+<li>针对老年代的特点，提出了一种称之为”标记-整理算法”。标记过程仍与”标记-清除”过程一致，但后续步骤不是直接对可回收对象进行清理，而是让所有存活对象都向一端移动，然后直接清理掉端边界以外的内存。</li>
+</ul>
+</li>
+<li><p>FullGC  持久代</p>
+</li>
+<li>当前JVM垃圾回收机制采用“分代收集算法”，就是将Java堆分为新生代和老年代。</li>
+</ul>
+</li>
+<li><p>关于深浅拷贝</p>
+<ul>
+<li><p>浅拷贝：拷贝出来的对象仍然保留原有对象的所有引用</p>
+<ul>
+<li>问题：牵一发而动全身，只要任意一个原对象（或拷贝对象）中的引用发生改变，所有对象均会收到影响 </li>
+</ul>
+</li>
+<li><p>深拷贝：拷贝出来的对象产生了所有引用新的对象</p>
+<ul>
+<li><p>特点：修改任意一个对象，不会对其他对象产生影响</p>
+<p><a href="http://note.youdao.com/noteshare?id=4bb58069913d17f6e5fa0facb5081c4a&amp;sub=265D5D079CA245F5A805E9341430C7E3" target="_blank" rel="noopener">深浅拷贝</a></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>强引用，软引用，弱引用，虚引用</p>
+</li>
+<li><p>JVM 中一次完整的 GC 流程是怎样的，对象如何晋升到老年代，说说你知道的几种主要的 JVM参数</p>
+<p>过程：</p>
+<ol>
+<li>向Eden申请空间<ul>
+<li>空间足够</li>
+<li>空间不足够<ul>
+<li>触发第一次Minor GC将所有存活对象放入Survivor from区，将对象年龄置位1，然后一次清理Eden区</li>
+<li>再次发生Minor GC，扫描Eden和From区，将存活对象拷贝到To区，然后一次清理掉Eden区和From区</li>
+<li>再次发生Minor GC时，会对Eden区域To区进行回收，存活对象移动到From区。每次移动都会将存活对象年龄+1</li>
+<li>当存活对象年龄到达默认15时，存入老年代</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>当对象的大小过大时，直接进入老年代</li>
+<li>当老年代空间不足时，会进行标记-整理算法 Full GC（老年代 GC或者Major GC）</li>
+<li>当完全垃圾收集后，若Survivor和old区仍然无法存放Eden复制过来的部分对象时会导致JVM无法在Eden区为新对象创建内存区域，则出现”Out of memory错误”；</li>
+</ol>
+<p><a href="http://www.cnblogs.com/redcreen/archive/2011/05/04/2037056.html" target="_blank" rel="noopener">GC</a></p>
+<p>JVM主要参数：</p>
+<ul>
+<li><p><strong>-Xms:最小堆大小</strong>  </p>
+</li>
+<li><p><strong>-Xmx:最大堆大小</strong> </p>
+</li>
+<li><p><strong>-Xss:设置每个线程的堆栈大小</strong> </p>
+</li>
+<li><p>-XX:NewSize=n:设置年轻代最小空间大小   MaxNewSize最大空间大小</p>
+</li>
+<li><p>-<strong>XX:PermSize=n:设置持久代最小空间大小  MaxPermSize最大空间大小</strong></p>
+</li>
+<li><p>-XX:PretenureSizeThreshold：大于设定值的对象直接在老年代分配</p>
+</li>
+<li><p><strong>-XX:MaxTenurngThreshold：设置垃圾最大年龄</strong> </p>
+</li>
+<li><p>-XX:NewRatio=n:设置年轻代和年老代的比值。如:为3，表示年轻代与年老代比值为1：3，年轻代占整个年轻代年老代和的1/4</p>
+</li>
+<li><p>-XX:SurvivorRatio=n:年轻代中Eden区与两个Survivor区的比值。注意Survivor区有两个。如：3，表示Eden：Survivor=3：2，一个Survivor区占整个年轻代的1/5 </p>
+</li>
+</ul>
+</li>
+</ol>
+<ol start="7">
+<li><p>你知道哪几种垃圾收集器，各自的优缺</p>
+<ul>
+<li>串行收集器：暂停所有应用的线程来工作；单线程</li>
+<li>并行收集器：默认的垃圾收集器。暂停所有应用；多线程</li>
+<li>G1收集器：用于大堆区域。堆内存分隔，并发回收</li>
+<li>CMS收集器：多线程扫描，标记需要回收的实例，清除</li>
+</ul>
+</li>
+<li><p>垃圾回收算法的实现原理</p>
+<ul>
+<li>标记-清除算法</li>
+<li>复制算法</li>
+<li>标记-整理算法</li>
+</ul>
+<p>如何判断对象已死？</p>
+<ul>
+<li>引用计数法</li>
+<li>可达性分析算法</li>
+</ul>
+</li>
+<li><p>JVM 内存模型的相关知识了解多少，比如重排序，内存屏障，happens-before，主内存，工作内存等。</p>
+<ul>
+<li><p>工作内存与主内存</p>
+<p>:black_flag:</p>
+</li>
+<li><p>Happens-before原则（指令重排序）</p>
+<p>:black_flag:</p>
+</li>
+<li><p>JMM内存三大特性（AVO）</p>
+<ul>
+<li><p>原子性：基本数据类型的访问读写是具备原子性的，如若需要更大范围</p>
+<p>的原子性，需要内建锁或lock体系的支持（i++，i– 等操作） </p>
+</li>
+<li><p>可见性：当一个线程修改了共享线程的值，其他线程立即得知值的修改。volatile，final，synchronized可以实现可见性。 </p>
+</li>
+<li><p>有序性：若在本线程内观察，所有操作都是有序的；若在线程之外观察另外一个线程，所有操作都是无序的。 </p>
+</li>
+</ul>
+</li>
+<li><p>Volatile关键字（可见性，禁止指令重排（懒汉式单例的double-check））</p>
+<ul>
+<li><p>保证此变量对所有线程的可见性（一个线程将修改变量值，其余线程可得知值的修改）</p>
+<ol>
+<li>线程对变量进行修改之后，要立刻回写到主内存。</li>
+<li>线程对变量读取的时候，要从主内存中读，而不是缓存。</li>
+</ol>
+</li>
+<li><p>禁止指令重排：为了尽可能减少内存操作速度远慢于CPU运行速度所带来的CPU空置的影响，虚拟机会按照自己的一些规则将程序编写顺序打乱。如果变量没有volatile修饰，程序执行的顺序可能会进行重排序。</p>
+</li>
+<li><p>不能保证原子性（举例：i++操作）</p>
+<p>假如说线程A在做了i+1，但未赋值的时候，线程B就开始读取i，那么当</p>
+<p>线程A赋值i=1，并回写到主内存，而此时线程B已经不再需要i的值了，</p>
+<p>而是直接交给处理器去做+1的操作，于是当线程B执行完并回写到主</p>
+<p>内存，i的值仍然是1，而不是预期的2。也就是说，volatile缩短了普通</p>
+<p>变量在不同线程之间执行的时间差，但仍然存有漏洞，依然不能保证原</p>
+<p>子性。</p>
+<ul>
+<li>处理方法：加锁，使用原子类</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<pre><code>关于double-check
+
+:black_flag:
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">null</span>;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(instance==<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">synchronized</span>(Singleton.class)&#123;</span><br><span class="line">                <span class="keyword">if</span>(instance==<span class="keyword">null</span>)</span><br><span class="line">                    instance=<span class="keyword">new</span> Singleton();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        retuen instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><ol start="10">
+<li><p>怎么打出线程堆栈信息</p>
+<ul>
+<li>JDK：jps</li>
+<li>Linux：ps -ef | grep | java</li>
+</ul>
+</li>
+<li><p>请解释如下 jvm 参数的含义</p>
+<ul>
+<li><strong>-Xms:最小堆大小</strong>  </li>
+<li><strong>-Xmx:最大堆大小</strong> </li>
+<li><strong>-Xss:设置每个线程的堆栈大小</strong> </li>
+<li>-<strong>XX:PermSize=n:设置持久代最小空间大小  MaxPermSize最大空间大小</strong></li>
+<li><strong>-XX:MaxTenurngThreshold：设置垃圾最大年龄</strong> </li>
+</ul>
+</li>
+</ol>
+<h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><ol>
+<li><p>数据库隔离级别有哪些，各自的含义是什么，MYSQL 默认的隔离级别是什么</p>
+<ol>
+<li>未提交读</li>
+<li>已提交读（不可重复读）</li>
+<li>可重复读</li>
+<li>可串行读</li>
+</ol>
+<p>Mysql默认是可重复读</p>
+</li>
+<li><p>什么是幻读与不可重读</p>
+<ul>
+<li>脏读：当一个事务正在访问数据，并且对数据进行了修改，而这种修改还没有提交到数据库中，这时，另外一个事务也访问这个数据，然后使用了这个数据。</li>
+<li>幻读：</li>
+<li>不可重复读：指在一个事务内，多次读同一数据。在这个事务还没有结束时，另外一个事务也访问该同一数据。那么，在第一个事务中的两次读数据之间，由于第二个事务的修改，那么第一个事务两次读到的的数据可能是不一样的。这样就发生了在一个事务内两次读到的数据是不一样的，因此称为是不可重复读。（即不能读到相同的数据内容）</li>
+</ul>
+</li>
+<li><p>MSQL 的索引原理，索引的类型有哪些，如何创建合理的索引，索引如何优化</p>
+</li>
+<li><p>聚集索引和非聚集索引的区别</p>
+<p>聚簇索引：</p>
+<ul>
+<li>表排列顺序：表记录的排列顺序与索引的排列顺序一致。 </li>
+</ul>
+<p>非聚簇索引：</p>
+<ul>
+<li><p>表排列顺序：物理顺序和索引的顺序不一致 </p>
+</li>
+<li><p>索引文件和数据文件分开，索引文件的叶子页只保存了主键值，要定位记录还要去查找相应的数据块 </p>
+</li>
+</ul>
+<p><a href="https://blog.csdn.net/y5457/article/details/7856148" target="_blank" rel="noopener">聚集索引与非聚集索引的区别</a></p>
+</li>
+<li><p>某个表有近千万数据，CRUD 比较慢，如何优化。</p>
+</li>
+<li><p>数据库中的ACID是什么？</p>
+<ul>
+<li><p>A：atomic，原子性</p>
+</li>
+<li><p>C：consistent，一致性</p>
+<blockquote>
+<p><strong>事务开始及结束后，处于一致状态，是通过原子性来保证的</strong></p>
+</blockquote>
+</li>
+<li><p>I：Isolation，隔离性</p>
+<blockquote>
+<p><strong>各个事物之间互不干扰</strong></p>
+</blockquote>
+</li>
+<li><p>D：Durability，持久性</p>
+<blockquote>
+<p><strong>一个事物一旦提交，对数据库所做的改变都要记录到永久存储中去（例如：磁盘）</strong></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<ol start="7">
+<li>如何写 sql 能够有效的使用到复合索引。</li>
+</ol>
+<ol start="8">
+<li>mysql 中 in 和 exists 区别</li>
+</ol>
+<h3 id="算法与数据结构"><a href="#算法与数据结构" class="headerlink" title="算法与数据结构"></a>算法与数据结构</h3><ol>
+<li><p>常用的排序算法，快排，归并、冒泡。 快排的最优时间复杂度，最差复杂度。<br>冒泡排序的优化方案。</p>
+</li>
+<li><p>10 亿个数字里里面找最小的 10个</p>
+<p>topk问题：建立一个数量为10的大堆，然后遍历数字，当有数字小于对顶元素时，替换堆顶元素，然后调整大堆</p>
+<p>优化：可以把所有10亿个数据分组存放，比如分别放在1000个文件中。这样处理就可以分别在每个文件的10^6个数据中找出最大的10个数，合并到一起在再找出最终的结果</p>
+</li>
+<li><p>有 1 亿个数字，其中有 2 个是重复的，快速找到它，时间和空间要最优</p>
+</li>
+<li><p>2 亿个随机生成的无序整数,找出中间大小的值</p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/14/爬虫/" rel="next" title="爬虫">
+                <i class="fa fa-chevron-left"></i> 爬虫
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/img/background.jpg" alt="Dyson">
+            
+              <p class="site-author-name" itemprop="name">Dyson</p>
+              <p class="site-description motion-element" itemprop="description">起风而沐！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Dyson-x" target="_blank" title="GitHub">
+                      GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/ds19980228" target="_blank" title="CSDN">
+                      CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaSE知识考点"><span class="nav-number">1.</span> <span class="nav-text">JavaSE知识考点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM"><span class="nav-number">2.</span> <span class="nav-text">JVM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库"><span class="nav-number">3.</span> <span class="nav-text">数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法与数据结构"><span class="nav-number">4.</span> <span class="nav-text">算法与数据结构</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dyson</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

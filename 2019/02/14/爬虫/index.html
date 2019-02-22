@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="数据结构,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -79,18 +79,17 @@
 
 
 
-<meta name="description" content="复杂度分析如何分析，统计算法的执行效率和资源消耗 测试结果非常依赖测试环境 测试结果受数据规模的影响很大  大O复杂度表示法所有代码的执行时间T(n)与每行代码的执行次数n成正比 大O公式：T(n) = (f(n))  大O时间复杂度实际上并不是具体表示代码真正的执行时间，而是表示代码执行时间随数据规模增长的变化趋势，所以也叫作渐进时间复杂度（asymptotic space complexity">
-<meta name="keywords" content="数据结构">
+<meta name="description" content="JDBC  JDBC驱动  接口：是一种能力，是一种标准，是 Everything 文件搜索简介背景意义 解决Windows命令行下文件搜索问题 基于Java开发的工具可以在Windows和Linux平台无差异使用  实现流程 交互式 文件遍历，并存入到数据库 文件检索  技术 java（文件操作）  Database（插入式H2数据库或者MySQL数据库） 关于H2优势：  非常快，开源，JDB">
 <meta property="og:type" content="article">
-<meta property="og:title" content="复杂度分析">
-<meta property="og:url" content="http://yoursite.com/2019/01/14/数据结构/复杂度分析/index.html">
+<meta property="og:title" content="爬虫">
+<meta property="og:url" content="http://yoursite.com/2019/02/14/爬虫/index.html">
 <meta property="og:site_name" content="Dyson&#39;s blog">
-<meta property="og:description" content="复杂度分析如何分析，统计算法的执行效率和资源消耗 测试结果非常依赖测试环境 测试结果受数据规模的影响很大  大O复杂度表示法所有代码的执行时间T(n)与每行代码的执行次数n成正比 大O公式：T(n) = (f(n))  大O时间复杂度实际上并不是具体表示代码真正的执行时间，而是表示代码执行时间随数据规模增长的变化趋势，所以也叫作渐进时间复杂度（asymptotic space complexity">
+<meta property="og:description" content="JDBC  JDBC驱动  接口：是一种能力，是一种标准，是 Everything 文件搜索简介背景意义 解决Windows命令行下文件搜索问题 基于Java开发的工具可以在Windows和Linux平台无差异使用  实现流程 交互式 文件遍历，并存入到数据库 文件检索  技术 java（文件操作）  Database（插入式H2数据库或者MySQL数据库） 关于H2优势：  非常快，开源，JDB">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-12T16:09:47.831Z">
+<meta property="og:updated_time" content="2019-02-21T05:22:08.894Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="复杂度分析">
-<meta name="twitter:description" content="复杂度分析如何分析，统计算法的执行效率和资源消耗 测试结果非常依赖测试环境 测试结果受数据规模的影响很大  大O复杂度表示法所有代码的执行时间T(n)与每行代码的执行次数n成正比 大O公式：T(n) = (f(n))  大O时间复杂度实际上并不是具体表示代码真正的执行时间，而是表示代码执行时间随数据规模增长的变化趋势，所以也叫作渐进时间复杂度（asymptotic space complexity">
+<meta name="twitter:title" content="爬虫">
+<meta name="twitter:description" content="JDBC  JDBC驱动  接口：是一种能力，是一种标准，是 Everything 文件搜索简介背景意义 解决Windows命令行下文件搜索问题 基于Java开发的工具可以在Windows和Linux平台无差异使用  实现流程 交互式 文件遍历，并存入到数据库 文件检索  技术 java（文件操作）  Database（插入式H2数据库或者MySQL数据库） 关于H2优势：  非常快，开源，JDB">
 
 
 
@@ -120,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/01/14/数据结构/复杂度分析/">
+  <link rel="canonical" href="http://yoursite.com/2019/02/14/爬虫/">
 
 
 
 
 
-  <title>复杂度分析 | Dyson's blog</title>
+  <title>爬虫 | Dyson's blog</title>
   
 
 
@@ -251,7 +250,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/14/数据结构/复杂度分析/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/14/爬虫/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Dyson">
@@ -268,7 +267,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">复杂度分析</h1>
+          <h1 class="post-title" itemprop="name headline">爬虫</h1>
         
 
         <div class="post-meta">
@@ -280,8 +279,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-14T21:03:39+08:00">
-                2019-01-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-14T09:11:09+08:00">
+                2019-02-14
               </time>
             
 
@@ -318,37 +317,237 @@
       
 
       
-        <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="如何分析，统计算法的执行效率和资源消耗"><a href="#如何分析，统计算法的执行效率和资源消耗" class="headerlink" title="如何分析，统计算法的执行效率和资源消耗"></a>如何分析，统计算法的执行效率和资源消耗</h3><ol>
-<li>测试结果非常依赖测试环境</li>
-<li>测试结果受数据规模的影响很大</li>
-</ol>
-<h4 id="大O复杂度表示法"><a href="#大O复杂度表示法" class="headerlink" title="大O复杂度表示法"></a>大O复杂度表示法</h4><p>所有代码的执行时间T(n)与每行代码的执行次数n成正比</p>
-<p><strong>大O公式：T(n) = (f(n))</strong></p>
+        <p><strong>JDBC</strong></p>
 <ul>
-<li><strong>大O时间复杂度实际上并不是具体表示代码真正的执行时间，而是表示代码执行时间随数据规模增长的变化趋势，所以也叫作渐进时间复杂度（</strong>asymptotic space complexity<strong>），简称为时间复杂度</strong>。 </li>
+<li>JDBC驱动</li>
 </ul>
-<p><strong>时间复杂度分析</strong></p>
+<p><strong>接口</strong>：是一种能力，是一种标准，是</p>
+<h2 id="Everything-文件搜索"><a href="#Everything-文件搜索" class="headerlink" title="Everything 文件搜索"></a><strong>Everything</strong> 文件搜索</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><h3 id="意义"><a href="#意义" class="headerlink" title="意义"></a>意义</h3><ul>
+<li>解决Windows命令行下文件搜索问题</li>
+<li>基于Java开发的工具可以在Windows和Linux平台无差异使用</li>
+</ul>
+<h3 id="实现流程"><a href="#实现流程" class="headerlink" title="实现流程"></a>实现流程</h3><ol>
+<li>交互式</li>
+<li>文件遍历，并存入到数据库</li>
+<li>文件检索</li>
+</ol>
+<h3 id="技术"><a href="#技术" class="headerlink" title="技术"></a>技术</h3><ul>
+<li><p>java（文件操作）</p>
+</li>
+<li><p>Database（插入式H2数据库或者MySQL数据库）</p>
+<p>关于H2优势：</p>
+<ul>
+<li>非常快，开源，JDBC API</li>
+<li>内存数据库，支持嵌入式和服务器模式</li>
+<li>基于浏览器的Console应用</li>
+<li>占地面积小：大小约1.5MB的jar文件大小</li>
+</ul>
+</li>
+<li><p>JDBC</p>
+</li>
+<li><p>Lombok（IDEA安装Lombok插件）</p>
+</li>
+<li><p>java多线程</p>
+</li>
+<li><p>文件系统监控（Apache Commons IO）</p>
+</li>
+</ul>
+<p><strong>目标：搭建项目</strong></p>
 <ol>
-<li>只关注循环执行次数最多的一段代码</li>
-<li>加法法则：总复杂度等于量级最大的那段代码的复杂度</li>
-<li>乘法法则：嵌套代码的复杂度等于嵌套内外代码复杂度的乘积</li>
-</ol>
-<h4 id="O-1"><a href="#O-1" class="headerlink" title="O(1)"></a>O(1)</h4><ul>
-<li>一般情况下，只要不存在循环语句，递归语句，即使有成千上万行的代码，其时间复杂度也是O(1)</li>
-</ul>
-<h4 id="O-logn-O-nlogn"><a href="#O-logn-O-nlogn" class="headerlink" title="O(logn),O(nlogn)"></a>O(logn),O(nlogn)</h4><p>$$<br>对数之间可以相互转化的\log3_n 就等于\log3_2<em>\log2_n,所以O(\log3_n)=O(C</em>\log2_n),其中 C=\log3_2 是一个常量。<br>$$</p>
-<p>在采用大O标记复杂度的时候，可以忽略系数，即O(Cf(n))=O(f(n))。<br>$$<br>因此，O(\log2_n)就等于O(\log3_n)。因此，在对数阶时间复杂度的表达方法里，我们忽略对数的“底”，统一表示为O(logn)<br>$$</p>
+<li><p>创建Maven项目</p>
+</li>
+<li><p>配置pom</p>
+</li>
+<li><p>创建包（按照功能分类）</p>
 <ul>
-<li>当一段代码的时间复杂度为O(logn)，将循环执行n遍，时间复杂度就是O(nlogn)，比如，归并排序，快速排序的时间都是O(nlogn)。</li>
+<li><p><strong>cmd</strong>：Everything应用程序的命令行交互程序</p>
+</li>
+<li><p><strong>config</strong>：Everything应用程序的配置相关类</p>
+</li>
+<li><p><strong>core</strong>：Everything应用程序的具体业务实现</p>
+<ul>
+<li><p><strong>common</strong></p>
+<p>将file对象转化为thing对象</p>
+</li>
+<li><p><strong>dao</strong></p>
+<p>数据源的获取与连接，以及业务的CRUD（增删改查）</p>
+</li>
+<li><p><strong>index</strong></p>
+<p>索引加拦截，文件路径遍历</p>
+</li>
+<li><p><strong>interceptor</strong></p>
+<p>拦截器的具体实现</p>
+</li>
+<li><p><strong>model</strong></p>
+<p>基本的模型类抽象</p>
+</li>
+<li><p><strong>search</strong></p>
+<p>检索的实现，实现统一调度器</p>
+</li>
 </ul>
-<h4 id="O-m-n-，O-m-n"><a href="#O-m-n-，O-m-n" class="headerlink" title="O(m+n)，O(m*n)"></a>O(m+n)，O(m*n)</h4><ul>
-<li>m和n是表示两个数据规模。当无法事先评估m和n谁的量级大，所以我们在表示复杂度的时候，就不能简单利用加法法则而省略其中一个。所以，时间复杂就为O(m+n)。</li>
+</li>
 </ul>
-<hr>
-<hr>
-<h3 id="时间复杂度最好，最坏，平均，均摊分析"><a href="#时间复杂度最好，最坏，平均，均摊分析" class="headerlink" title="时间复杂度最好，最坏，平均，均摊分析"></a>时间复杂度最好，最坏，平均，均摊分析</h3><h4 id="最好，最坏情况时间复杂度"><a href="#最好，最坏情况时间复杂度" class="headerlink" title="最好，最坏情况时间复杂度"></a>最好，最坏情况时间复杂度</h4><h4 id="平均情况复杂度"><a href="#平均情况复杂度" class="headerlink" title="平均情况复杂度"></a>平均情况复杂度</h4><h4 id="均摊时间复杂度"><a href="#均摊时间复杂度" class="headerlink" title="均摊时间复杂度"></a>均摊时间复杂度</h4><ul>
-<li>摊还分析法</li>
+</li>
+<li><p>创建入口程序</p>
+</li>
+<li><p>简单的公共代码开发</p>
+</li>
+<li><p>git管理</p>
+<ol>
+<li>Github创建仓库</li>
+<li>本地仓库中git init</li>
+<li>本地项目中创建 .gitignore添加不加入版本管理的目录和文件</li>
+<li>git add .  -&gt;  git commit -m message</li>
+<li>git remote add origin <a href="http://xxx" target="_blank" rel="noopener">http://xxx</a></li>
+<li>git push origin master</li>
+</ol>
+<p>代码更新之后，只需要4，6</p>
+</li>
+</ol>
+<p>ctrl+shift+alt+l</p>
+<p>README.md</p>
+<p><strong>基本的模型类抽象</strong></p>
+<ul>
+<li>文件类型（png jpeg doc exe msi jar zip rar ppt txt sh）</li>
+<li>索引File的属性之后的信息 Thing</li>
+<li>检索的参数（条件） Condition</li>
 </ul>
+<p><strong>设计数据库的表</strong></p>
+<ul>
+<li>创建数据库（my_everything）</li>
+<li>设计数据库的表（Thing类创建的对象的属性）</li>
+</ul>
+<p><strong>数据库编程：</strong>（DAO）数据访问对象</p>
+<ul>
+<li>创建数据源（DataSource）</li>
+<li>执行数据库脚本（初始化数据库）<ul>
+<li>Druid数据源，为监控而生的数据库连接池</li>
+</ul>
+</li>
+</ul>
+<p><strong>检索</strong>：</p>
+<ul>
+<li><p>数据库的初始化工作</p>
+</li>
+<li><p>数据库的访问工作（使用DataSource）</p>
+</li>
+<li><p>实现检索业务（查询）</p>
+<p>final的初始化：直接赋值，构造方初始化法，构造块三种方法</p>
+</li>
+</ul>
+<p><strong>索引</strong></p>
+<ul>
+<li><p>数据库的初始化工作</p>
+</li>
+<li><p>数据库的访问工作（使用DataSource）</p>
+</li>
+<li><p>实现检索业务（插入）</p>
+<p>预编译命令设置参数</p>
+</li>
+<li><p>①如何遍历文件系统中所有文件，②需要对一些特点的文件或目录进行排除，③并且将文件对象转化为Thing对象，调用数据库访问的插入操作</p>
+<p>索引</p>
+<ul>
+<li><p>通过配置类来处理那些文件需要扫描，那些不需要扫描</p>
+<pre><code>C:\（路径） -&gt;[做排除工作]
+
+File（Collection） -&gt;
+
+Thing（Collection） -&gt;
+
+FileIndexDao
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<p>  shift f6   修改文件名称 </p>
+<p>  1.检索  2.索引的遍历  3.重构</p>
+<p><strong>统一调度器</strong>（创建线程，分发任务）</p>
+<ol>
+<li>构建索引（依赖index功能，业务FileScan）</li>
+<li>检索数据（依赖search功能，业务FileSearch）</li>
+<li>扩展</li>
+</ol>
+<p><strong>命令行客户端</strong></p>
+<ol>
+<li>欢迎</li>
+<li>帮助</li>
+<li>退出</li>
+<li>索引</li>
+<li>检索</li>
+</ol>
+<p><strong>发现问题</strong></p>
+<ol>
+<li><p>代码问题（资源未关闭，异常处理，输出信息不完整）</p>
+</li>
+<li><p>用户不友好</p>
+</li>
+<li><p>索引之后的问题，如果被删除，但是仍然可以被检索（功能缺陷）</p>
+</li>
+</ol>
+<ol start="4">
+<li><p>检索的结果数量限制，排序策略，给用户提供可配置的机会</p>
+</li>
+<li><p>索引的目录和文件以及排除的目录和文件，给用户提供可配置的机会</p>
+</li>
+<li><p>文件系统的监控，文件系统中文件的新增，删除</p>
+</li>
+</ol>
+<p><strong>解决问题</strong></p>
+<ol>
+<li><p>Review（检查代码）</p>
+</li>
+<li><p>大家根据情况完善</p>
+</li>
+<li><p><strong>删除文件的清理工作</strong></p>
+</li>
+<li><p>5 问题 java -jar my-everything-1.0.0jar</p>
+<ul>
+<li>目的：通过执行程序的时候，传入参数，让配置信息可以变换</li>
+<li>解析</li>
+</ul>
+<p>java -jar my-everything-1.0.0.jar </p>
+<p>–maxReturn=40 </p>
+<p>–deptOrderByAsc=false</p>
+<p>–includePath=D:\;E:\workspace</p>
+<p>–excludePath=E:\workspace\java4code</p>
+</li>
+</ol>
+<p><strong>6. 文件系统监控</strong></p>
+<ol>
+<li><p>文件（目录）新增，删除</p>
+</li>
+<li><p>监控操作系统的文件系统中文件的变化</p>
+<p>解决方案：</p>
+<ul>
+<li>JDK提供的文件监控（WatchService）</li>
+</ul>
+<p>FileSystem WatchService（只能监听一级目录，无法监听更深层次目录）</p>
+<ul>
+<li><p>Apache Commons IO 开源库</p>
+<ul>
+<li>IO工具</li>
+<li>Input  Output</li>
+<li>Filter</li>
+<li>Comparator</li>
+<li><strong>File mointer</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FileAlterationListener //接受文件系统通知，处理业务，是自己要						  实现的一个接口	</span><br><span class="line">FileAlterationMoniter  //负责调度，启动，停止监听器，添加通知						  者，依赖Observe</span><br><span class="line">FileAlterationObserve  //如果文件发生变化，发送一个通知告诉						   listener去执行处理，需要依赖需						   listener对象</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<p>如何判断文件发生改变？</p>
+<ul>
+<li>重新执行index</li>
+<li>遍历文件系统（自己规定间隔时间）</li>
+<li></li>
+</ul>
+<p>StringBuilder与StringBuffer</p>
+<ul>
+<li>方法在栈区储存，独立</li>
+<li>放在属性上使用时牵扯到线程安全，StringBufffer</li>
+</ul>
+<p>broncho</p>
 
       
     </div>
@@ -364,12 +563,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
-          
-        </div>
-      
 
       
       
@@ -379,8 +572,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/06/JVM/" rel="next" title="JVM">
-                <i class="fa fa-chevron-left"></i> JVM
+              <a href="/2019/02/13/链表/" rel="next" title="链表">
+                <i class="fa fa-chevron-left"></i> 链表
               </a>
             
           </div>
@@ -389,8 +582,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/01/17/数据库/数据库基本语法/" rel="prev" title="数据库基本语法">
-                数据库基本语法 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/02/22/java复习资料/面试知识点总结/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -530,7 +723,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#复杂度分析"><span class="nav-number">1.</span> <span class="nav-text">复杂度分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何分析，统计算法的执行效率和资源消耗"><span class="nav-number">1.1.</span> <span class="nav-text">如何分析，统计算法的执行效率和资源消耗</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#大O复杂度表示法"><span class="nav-number">1.1.1.</span> <span class="nav-text">大O复杂度表示法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#O-1"><span class="nav-number">1.1.2.</span> <span class="nav-text">O(1)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#O-logn-O-nlogn"><span class="nav-number">1.1.3.</span> <span class="nav-text">O(logn),O(nlogn)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#O-m-n-，O-m-n"><span class="nav-number">1.1.4.</span> <span class="nav-text">O(m+n)，O(m*n)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间复杂度最好，最坏，平均，均摊分析"><span class="nav-number">1.2.</span> <span class="nav-text">时间复杂度最好，最坏，平均，均摊分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#最好，最坏情况时间复杂度"><span class="nav-number">1.2.1.</span> <span class="nav-text">最好，最坏情况时间复杂度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#平均情况复杂度"><span class="nav-number">1.2.2.</span> <span class="nav-text">平均情况复杂度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#均摊时间复杂度"><span class="nav-number">1.2.3.</span> <span class="nav-text">均摊时间复杂度</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Everything-文件搜索"><span class="nav-number">1.</span> <span class="nav-text">Everything 文件搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">1.2.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#意义"><span class="nav-number">1.3.</span> <span class="nav-text">意义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现流程"><span class="nav-number">1.4.</span> <span class="nav-text">实现流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#技术"><span class="nav-number">1.5.</span> <span class="nav-text">技术</span></a></li></ol></li></ol></div>
             
 
           </div>
