@@ -324,7 +324,7 @@
             <h3 id="JavaSE知识考点"><a href="#JavaSE知识考点" class="headerlink" title="JavaSE知识考点"></a>JavaSE知识考点</h3><ol>
 <li><p>JAVA中的几种基本数据类型是什么，各自占用多少字节？</p>
 <ul>
-<li>4种整形 （int 4   short 2  long 8  byte 1）</li>
+<li>4种整形 （ byte 1  short 2  int 4   long 8 ）</li>
 <li>2种浮点型（float 4  double 8）</li>
 <li>char型（char  2）</li>
 <li>boolean型（boolean 1）</li>
@@ -337,7 +337,7 @@
 </li>
 <li><p>String，StringBuffer，StringBuilder 的区别</p>
 <ul>
-<li><p>String是字符串常亮</p>
+<li><p>String是字符串常量</p>
 </li>
 <li><p>StringBuffer是字符串变量，同步处理线程安全的，效率低</p>
 </li>
@@ -346,17 +346,44 @@
 </li>
 <li><p>.ArrayList （扩容策略1.5倍）和 LinkedList 有什么区别</p>
 <ul>
-<li><p>都是实现了List接口的容器类，都支持增删查改的操作</p>
-</li>
-<li><p>底层实现：基于动态数组的数据结构与基于链表结构</p>
-</li>
+<li>共同点：都是实现了List接口的容器类，都支持增删查改的操作，都是采用异步处理放式</li>
+<li>底层实现：基于动态数组的数据结构与基于链表结构</li>
 <li>随机访问的get与set方法，ArrayList效率高</li>
 <li>对于删除与插入，LinkedList效率高</li>
 </ul>
 </li>
+<li><p>ArrayList与Vector的区别</p>
+<ul>
+<li><p>出现版本：1.2    1.0</p>
+</li>
+<li><p>初始化策略：</p>
+<ul>
+<li>ArrayList：采用懒加载方式，在构造方法时并不初始化对象数组，只有在添加元素时才数组对象初始化为10</li>
+<li>Vector：在无参构造时就将对象数组初始化为10</li>
+</ul>
+</li>
+<li><p>扩容策略</p>
+<ul>
+<li>ArrayList：新数组扩容为原数组的1.5倍</li>
+<li>Vector：新数组寇蓉为原数组的2倍</li>
+</ul>
+</li>
+<li><p>遍历方式</p>
+<ul>
+<li><p>ArrayList则则不支持</p>
+</li>
+<li><p>Vector支持较老的Enumeration</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<ol start="6">
 <li><p>讲讲类的实例化顺序，比如父类静态数据，构造函数，字段，子类静态数据，构造函数，字段，当 new 的时候，他们的执行顺序</p>
 <ul>
 <li>父类静态变量&gt;父类静态代码块&gt;子类静态变量&gt;子类静态代码块&gt;父类构造块&gt;父类构造方法&gt;父类字段&gt;子类构造块&gt;子类构造方法&gt;子类字段</li>
+<li>父类静态数据 ，子类静态数据，父类构造函数 ，父类字段，子类构造函数，子类字段</li>
 </ul>
 </li>
 <li><p>用过哪些 Map 类，都有什么区别，HashMap 是线程安全的吗,并发下使用Map 是什么，他们内部原理分别是什么，比如存储方式，hashcode，扩容，默认容量等。</p>
@@ -364,7 +391,7 @@
 </ol>
 <ul>
 <li>HashMap <ul>
-<li>线程不安全，</li>
+<li>线程不安全，并且采用懒加载策略</li>
 <li>存储方式：链表+数组（JDK8增添了红黑树）<ul>
 <li>树化逻辑：当桶中链表个数&gt;=8，并且所有元素个数加起来超过64，结构转化为红黑树（解决问题：链表太长导致查找太慢问题，O(n)-&gt;O(logn)，减少哈希碰撞）</li>
 </ul>
@@ -373,9 +400,22 @@
 <li>扩容策略：当超过容量最大值，不在扩充，没超过最大值扩充为原来的2倍，扩容后对元素进行rehash，要么保留在原桶中，要么在新桶中，<a href="https://zhuanlan.zhihu.com/p/21673805" target="_blank" rel="noopener">HashMap</a></li>
 </ul>
 </li>
-<li>ConcurrentHashMap  <ul>
-<li>线程安全</li>
-<li>存储方式：链表+数组+红黑树</li>
+<li><p>ConcurrentHashMap  </p>
+<ul>
+<li><p>线程安全：</p>
+<ul>
+<li><p>JDK7中采用ReentrantLock保证Segment的线程安全</p>
+</li>
+<li><p>JDK8之后使用内建锁+CAS锁每个桶的头结点，使得锁进一步细粒度化</p>
+</li>
+</ul>
+</li>
+<li><p>存储方式：</p>
+<ul>
+<li>JDK7中将16个桶设计改为16个Segment，每个Segment都有独立的一把锁，拆分后每个Segment相当于一个HashMap，</li>
+<li>JDK8使用与HashMap相同的存储结构：链表+数组+红黑树，并且引入懒加载模式（锁的力度更细：原来取得锁Segment一片区域到锁桶的头结点，内存占用更小）</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -389,7 +429,7 @@
 </li>
 <li><p>有没有有顺序的 Map 实现类，如果有，他们是怎么保证有序</p>
 <p>LinkedHashMap（记录插入的顺序）：保留插入的顺序，输出顺序与输入顺序一致</p>
-<p>TreeHashMap：默认升序的，按照key的内容排序，处理排序是按照Comparable接口完成，依靠从，comparaTo()方法完成，当然也可以自己复写Comparable接口中的comparaTo()方法，去自己规定排序方式</p>
+<p>TreeHashMap：默认升序的，按照key的内容排序，处理排序是按照Comparable接口完成，依靠comparaTo()方法完成，当然也可以自己复写Comparable接口中的comparaTo()方法，去自己规定排序方式</p>
 </li>
 <li><p>抽象类和接口的区别，类可以继承多个类么，接口可以继承多个接口么，类可以实现多个接口么</p>
 </li>
@@ -666,7 +706,7 @@
 </ol>
 <h3 id="算法与数据结构"><a href="#算法与数据结构" class="headerlink" title="算法与数据结构"></a>算法与数据结构</h3><ol>
 <li><p>常用的排序算法，快排，归并、冒泡。 快排的最优时间复杂度，最差复杂度。<br>冒泡排序的优化方案。</p>
-<p>| 排序方式 | 最优情况 | 平均情况 | 最坏情况 | 空间复杂度 | 稳定性 |<br>| ——– | ——– | ——– | ——– | ———- | —— |<br>| 插入排序 | O(n)     | O(n^2)   | O(n^2)   | O(1)       | 稳定   |<br>| 希尔排序 | O(n)     | O(n^1.3) | O(n^2)   | O(1)       | 不稳定 |<br>| 选择排序 | O()      | O()      | O()      | O(1)       | 不稳定 |<br>| 堆排序   | O()      | O()      | O()      | O(1)       | 不稳定 |<br>| 冒泡排序 | O()      | O()      | O()      | O(1)       | 稳定   |<br>| 快速排序 | O()      | O()      | O()      | O(logn)    | 不稳定 |<br>| 归并排序 | O()      | O()      | O()      | O(n)       | 稳定   |</p>
+<p>| 排序方式 | 最优情况 | 平均情况 | 最坏情况 | 空间复杂度 | 稳定性 |<br>| ——– | ——– | ——– | ——– | ———- | —— |<br>| 插入排序 | O(n)     | O(n^2)   | O(n^2)   | O(1)       | 稳定   |<br>| 希尔排序 | O(n)     | O(n^1.3) | O(n^2)   | O(1)       | 不稳定 |<br>| 选择排序 | O(n^2)   | O(m^2)   | O(n^2)   | O(1)       | 不稳定 |<br>| 堆排序   | O()      | O()      | O()      | O(1)       | 不稳定 |<br>| 冒泡排序 | O(n)     | O(n^2)   | O(n^2)   | O(1)       | 稳定   |<br>| 快速排序 | O()      | O()      | O()      | O(logn)    | 不稳定 |<br>| 归并排序 | O(nlogn) | O(nlogn) | O(nlogn) | O(n)       | 稳定   |</p>
 </li>
 </ol>
 <ol start="2">
