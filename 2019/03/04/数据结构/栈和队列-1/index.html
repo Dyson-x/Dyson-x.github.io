@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Dyson&#39;s blog">
 <meta property="og:description" content="栈">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-04T13:15:08.227Z">
+<meta property="og:updated_time" content="2019-03-04T15:13:38.506Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="栈和队列">
 <meta name="twitter:description" content="栈">
@@ -355,13 +355,16 @@
 <li>从左向右依次遍历表达式，当遍历到左括号时，将其压入栈中，当遇到右括号时，从栈顶取出一个左括号。如果能够匹配，则继续扫描剩余字符串。如果在扫描过程中遇到不能匹配的右括号，或者栈中没有数据则说明格式不合法。</li>
 </ul>
 <hr>
-<h4 id="开篇解答：关于浏览器的前进，后退功能"><a href="#开篇解答：关于浏览器的前进，后退功能" class="headerlink" title="开篇解答：关于浏览器的前进，后退功能"></a>开篇解答：关于浏览器的前进，后退功能</h4><ul>
-<li><p>这里使用两个栈，X与Y，我们分别浏览网页a，b，c；当第一次浏览a时，将a压入X栈，当点击后退键时，将a出栈，并将出栈的数据依次放入Y中，当我们依次点击a，b，c后，全部压入X中，当我们点击后退键时，会将X栈顶数据弹出，并压入到Y中，这样就实现了浏览器的前进后退功能。</p>
-<p>但是注意，如果你通过b网页跳转到d网页时，存在Y中的页面c就无法再通过前进，后退键重复查看了，这时就需要清空Y。</p>
-</li>
-</ul>
+<h4 id="开篇解答：关于浏览器的前进，后退功能"><a href="#开篇解答：关于浏览器的前进，后退功能" class="headerlink" title="开篇解答：关于浏览器的前进，后退功能"></a>开篇解答：关于浏览器的前进，后退功能</h4><p>​    :artificial_satellite: 这里使用两个栈，X与Y，我们分别浏览网页a，b，c；当第一次浏览a时，将a压入X栈，当点击后退键时，将a出栈，并将出栈的数据依次放入Y中，当我们依次点击a，b，c后，全部压入X中，当我们点击后退键时，会将X栈顶数据弹出，并压入到Y中，这样就实现了浏览器的前进后退功能。</p>
+<p>​    :jack_o_lantern: 注意，如果你通过b网页跳转到d网页时，存在Y中的页面c就无法再通过前进，后退键重复查看了，这时就需要清空Y。</p>
 <hr>
-<h4 id="thinking-为什么函数调用要用“栈”来保存临时变量呢？其他数据结构不可以吗？"><a href="#thinking-为什么函数调用要用“栈”来保存临时变量呢？其他数据结构不可以吗？" class="headerlink" title=":thinking:为什么函数调用要用“栈”来保存临时变量呢？其他数据结构不可以吗？"></a>:thinking:为什么函数调用要用“栈”来保存临时变量呢？其他数据结构不可以吗？</h4><h4 id="thinking-JVM内存管理中有个“堆栈”概念。栈内存用来村春局部变量和方法调用，堆内存用来存储Java中的对象。那JVM里边的“栈”和这里的“栈”是一个概念吗，如果不是，那它为什么叫做“栈”呢？"><a href="#thinking-JVM内存管理中有个“堆栈”概念。栈内存用来村春局部变量和方法调用，堆内存用来存储Java中的对象。那JVM里边的“栈”和这里的“栈”是一个概念吗，如果不是，那它为什么叫做“栈”呢？" class="headerlink" title=":thinking:JVM内存管理中有个“堆栈”概念。栈内存用来村春局部变量和方法调用，堆内存用来存储Java中的对象。那JVM里边的“栈”和这里的“栈”是一个概念吗，如果不是，那它为什么叫做“栈”呢？"></a>:thinking:JVM内存管理中有个“堆栈”概念。栈内存用来村春局部变量和方法调用，堆内存用来存储Java中的对象。那JVM里边的“栈”和这里的“栈”是一个概念吗，如果不是，那它为什么叫做“栈”呢？</h4>
+<h3 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h3><h4 id="thinking-为什么函数调用要用“栈”来保存临时变量呢？其他数据结构不可以吗？"><a href="#thinking-为什么函数调用要用“栈”来保存临时变量呢？其他数据结构不可以吗？" class="headerlink" title=":thinking: 为什么函数调用要用“栈”来保存临时变量呢？其他数据结构不可以吗？"></a>:thinking: 为什么函数调用要用“栈”来保存临时变量呢？其他数据结构不可以吗？</h4><h4 id="thinking-JVM内存管理中有个“堆栈”概念。栈内存用来村春局部变量和方法调用，堆内存用来存储Java中的对象。那JVM里边的“栈”和这里的“栈”是一个概念吗，如果不是，那它为什么叫做“栈”呢？"><a href="#thinking-JVM内存管理中有个“堆栈”概念。栈内存用来村春局部变量和方法调用，堆内存用来存储Java中的对象。那JVM里边的“栈”和这里的“栈”是一个概念吗，如果不是，那它为什么叫做“栈”呢？" class="headerlink" title=":thinking: JVM内存管理中有个“堆栈”概念。栈内存用来村春局部变量和方法调用，堆内存用来存储Java中的对象。那JVM里边的“栈”和这里的“栈”是一个概念吗，如果不是，那它为什么叫做“栈”呢？"></a>:thinking: JVM内存管理中有个“堆栈”概念。栈内存用来村春局部变量和方法调用，堆内存用来存储Java中的对象。那JVM里边的“栈”和这里的“栈”是一个概念吗，如果不是，那它为什么叫做“栈”呢？</h4><hr>
+<h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><p>:thinking: 当我们向一个固定大小的线程池中请求一个线程时，如果线程中没有空闲资源了，这个时候线程池如何处理这个请求？是拒绝还是排队请求？各种策略又是怎么实现的？</p>
+<h3 id="关于队列"><a href="#关于队列" class="headerlink" title="关于队列"></a>关于队列</h3><h4 id="队列结构"><a href="#队列结构" class="headerlink" title="队列结构"></a>队列结构</h4><ul>
+<li>先进先出，后进后出</li>
+<li>与栈一样，是一种操作受限的线性表数据结构</li>
+</ul>
+
       
     </div>
     
@@ -482,7 +485,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -542,7 +545,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#栈"><span class="nav-number">1.</span> <span class="nav-text">栈</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于”栈”"><span class="nav-number">1.1.</span> <span class="nav-text">关于”栈”</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#栈结构"><span class="nav-number">1.1.1.</span> <span class="nav-text">栈结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于”栈”的实现"><span class="nav-number">1.1.2.</span> <span class="nav-text">关于”栈”的实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于栈操作的时间与空间复杂度"><span class="nav-number">1.1.3.</span> <span class="nav-text">关于栈操作的时间与空间复杂度</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#时间复杂度：O-1"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">时间复杂度：O(1)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#空间复杂度：O-1"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">空间复杂度：O(1)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#支持动态扩容的顺序栈"><span class="nav-number">1.1.4.</span> <span class="nav-text">支持动态扩容的顺序栈</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#栈的应用"><span class="nav-number">1.2.</span> <span class="nav-text">栈的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#栈在函数调用中的应用"><span class="nav-number">1.2.1.</span> <span class="nav-text">栈在函数调用中的应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#栈在表达式求值中的应用"><span class="nav-number">1.2.2.</span> <span class="nav-text">栈在表达式求值中的应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#栈在括号匹配中应用"><span class="nav-number">1.2.3.</span> <span class="nav-text">栈在括号匹配中应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开篇解答：关于浏览器的前进，后退功能"><span class="nav-number">1.2.4.</span> <span class="nav-text">开篇解答：关于浏览器的前进，后退功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#thinking-为什么函数调用要用“栈”来保存临时变量呢？其他数据结构不可以吗？"><span class="nav-number">1.2.5.</span> <span class="nav-text">:thinking:为什么函数调用要用“栈”来保存临时变量呢？其他数据结构不可以吗？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#thinking-JVM内存管理中有个“堆栈”概念。栈内存用来村春局部变量和方法调用，堆内存用来存储Java中的对象。那JVM里边的“栈”和这里的“栈”是一个概念吗，如果不是，那它为什么叫做“栈”呢？"><span class="nav-number">1.2.6.</span> <span class="nav-text">:thinking:JVM内存管理中有个“堆栈”概念。栈内存用来村春局部变量和方法调用，堆内存用来存储Java中的对象。那JVM里边的“栈”和这里的“栈”是一个概念吗，如果不是，那它为什么叫做“栈”呢？</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#栈"><span class="nav-number">1.</span> <span class="nav-text">栈</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于”栈”"><span class="nav-number">1.1.</span> <span class="nav-text">关于”栈”</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#栈结构"><span class="nav-number">1.1.1.</span> <span class="nav-text">栈结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于”栈”的实现"><span class="nav-number">1.1.2.</span> <span class="nav-text">关于”栈”的实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于栈操作的时间与空间复杂度"><span class="nav-number">1.1.3.</span> <span class="nav-text">关于栈操作的时间与空间复杂度</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#时间复杂度：O-1"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">时间复杂度：O(1)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#空间复杂度：O-1"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">空间复杂度：O(1)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#支持动态扩容的顺序栈"><span class="nav-number">1.1.4.</span> <span class="nav-text">支持动态扩容的顺序栈</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#栈的应用"><span class="nav-number">1.2.</span> <span class="nav-text">栈的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#栈在函数调用中的应用"><span class="nav-number">1.2.1.</span> <span class="nav-text">栈在函数调用中的应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#栈在表达式求值中的应用"><span class="nav-number">1.2.2.</span> <span class="nav-text">栈在表达式求值中的应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#栈在括号匹配中应用"><span class="nav-number">1.2.3.</span> <span class="nav-text">栈在括号匹配中应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开篇解答：关于浏览器的前进，后退功能"><span class="nav-number">1.2.4.</span> <span class="nav-text">开篇解答：关于浏览器的前进，后退功能</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思考题"><span class="nav-number">1.3.</span> <span class="nav-text">思考题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#thinking-为什么函数调用要用“栈”来保存临时变量呢？其他数据结构不可以吗？"><span class="nav-number">1.3.1.</span> <span class="nav-text">:thinking: 为什么函数调用要用“栈”来保存临时变量呢？其他数据结构不可以吗？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#thinking-JVM内存管理中有个“堆栈”概念。栈内存用来村春局部变量和方法调用，堆内存用来存储Java中的对象。那JVM里边的“栈”和这里的“栈”是一个概念吗，如果不是，那它为什么叫做“栈”呢？"><span class="nav-number">1.3.2.</span> <span class="nav-text">:thinking: JVM内存管理中有个“堆栈”概念。栈内存用来村春局部变量和方法调用，堆内存用来存储Java中的对象。那JVM里边的“栈”和这里的“栈”是一个概念吗，如果不是，那它为什么叫做“栈”呢？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#队列"><span class="nav-number">2.</span> <span class="nav-text">队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于队列"><span class="nav-number">2.1.</span> <span class="nav-text">关于队列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#队列结构"><span class="nav-number">2.1.1.</span> <span class="nav-text">队列结构</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
