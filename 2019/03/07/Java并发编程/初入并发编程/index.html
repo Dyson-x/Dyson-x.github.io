@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="如何学习并发编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初入并发编程">
+<meta property="og:url" content="http://yoursite.com/2019/03/07/Java并发编程/初入并发编程/index.html">
+<meta property="og:site_name" content="Dyson&#39;s blog">
+<meta property="og:description" content="如何学习并发编程">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="g:/hexo/source/img/并发编程/并发编程全景思维导图.png">
+<meta property="og:image" content="g:/hexo/source/img/并发编程/原子性问题.png">
+<meta property="og:image" content="g:/hexo/source/img/并发编程/可见性导致的问题.png">
+<meta property="og:updated_time" content="2019-03-07T02:58:38.477Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初入并发编程">
+<meta name="twitter:description" content="如何学习并发编程">
+<meta name="twitter:image" content="g:/hexo/source/img/并发编程/并发编程全景思维导图.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/07/Java并发编程/初入并发编程/">
+
+
+
+
+
+  <title>初入并发编程 | Dyson's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dyson's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">起风而益</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/07/Java并发编程/初入并发编程/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dyson">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/background.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dyson's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">初入并发编程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-07T09:31:13+08:00">
+                2019-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="如何学习并发编程"><a href="#如何学习并发编程" class="headerlink" title="如何学习并发编程"></a>如何学习并发编程</h3><a id="more"></a>
+<hr>
+<h4 id="抽象为三个部分：分工，同步，互斥"><a href="#抽象为三个部分：分工，同步，互斥" class="headerlink" title="抽象为三个部分：分工，同步，互斥"></a>抽象为三个部分：分工，同步，互斥</h4><h5 id="分工：例如生产-消费者模型，Future本质上都是一种分工方法"><a href="#分工：例如生产-消费者模型，Future本质上都是一种分工方法" class="headerlink" title="分工：例如生产-消费者模型，Future本质上都是一种分工方法"></a>分工：例如生产-消费者模型，Future本质上都是一种分工方法</h5><h5 id="同步：分工完之后，就是如何去具体的执行，这里就需要处理多线程之间的协同"><a href="#同步：分工完之后，就是如何去具体的执行，这里就需要处理多线程之间的协同" class="headerlink" title="同步：分工完之后，就是如何去具体的执行，这里就需要处理多线程之间的协同"></a>同步：分工完之后，就是如何去具体的执行，这里就需要处理多线程之间的协同</h5><ul>
+<li>当某个条件不满足时，线程需要等待，当某个条件满足时，线程需要被唤醒执行。</li>
+<li><strong>管程</strong>：管程时解决并发问题的万能钥匙</li>
+</ul>
+<h5 id="互斥：强调的是”线程安全“"><a href="#互斥：强调的是”线程安全“" class="headerlink" title="互斥：强调的是”线程安全“"></a>互斥：强调的是”线程安全“</h5><ul>
+<li>所谓互斥就是同意时刻，只允许一个线程访问共享变量</li>
+</ul>
+<p><img src="G:\hexo\source\img\并发编程\并发编程全景思维导图.png" alt="并发编程全景思维导图"></p>
+<hr>
+<h3 id="可见性、原子性和有序性问题：并发编程Bug的源头"><a href="#可见性、原子性和有序性问题：并发编程Bug的源头" class="headerlink" title="可见性、原子性和有序性问题：并发编程Bug的源头"></a>可见性、原子性和有序性问题：并发编程Bug的源头</h3><h4 id="并发程序的幕后故事"><a href="#并发程序的幕后故事" class="headerlink" title="并发程序的幕后故事"></a>并发程序的幕后故事</h4><ul>
+<li>由于CPU，内存，I/O设备的不断更新，三者之间的的<strong>速度</strong>差异愈发的明显，由于CPU和内存速度过快，I/O太慢。而根据木桶理论，程序整体的性能取决于最慢的操作——读写I/O设备，所以单方面提高CPU性能是无效的。</li>
+</ul>
+<p><strong>因此为了合理利用CPU的高性能，平衡三者的速度差异，分别从计算机体系结构，操作系统，编译程序作出如下的改善</strong></p>
+<ol>
+<li>CPU增加缓存，一均衡与内存的速度差异</li>
+<li>操作系统增加了进程，线程，以分时复用CPU，进而均衡CPU与I/O设备的速度差异</li>
+<li>编译程序优化指令执行次序，使得缓存能够得到更加合理地利用</li>
+</ol>
+<h4 id="源头之一：缓存导致的可见性问题"><a href="#源头之一：缓存导致的可见性问题" class="headerlink" title="源头之一：缓存导致的可见性问题"></a>源头之一：缓存导致的可见性问题</h4><p><strong>可见性：</strong>一个线程对共享变量的修改，另外一个线程可以立即看到</p>
+<ul>
+<li>在多核时代，每个CPU都有自己的缓存，这时CPU缓存与内存的数据一致性就没有那么容易解决，当多个线程在不同的CPU上执行，这些线程操作的是不同CPU</li>
+</ul>
+<h4 id="源头之二：线程切换带来的原子性问题"><a href="#源头之二：线程切换带来的原子性问题" class="headerlink" title="源头之二：线程切换带来的原子性问题"></a>源头之二：线程切换带来的原子性问题</h4><p>例如：count+=1，需要三条CPU指令</p>
+<ul>
+<li>一：将count加载到CPU的寄存器中</li>
+<li>二：在寄存器中执行+1操作</li>
+<li>三：将结果写会内存（缓存机制导致可能写入的是CPU缓存而不是内存）</li>
+</ul>
+<p>如果A与B线程执行如下操作，会发现count最终为1，而不是2</p>
+<p><img src="G:\hexo\source\img\并发编程\原子性问题.png" alt="非原子操作的执行示意图"></p>
+<p><strong>原子性：</strong>一个或多个操作在CPU执行过程中不会被中断的特性</p>
+<h4 id="源头之三：编译器优化带来的有序性问题"><a href="#源头之三：编译器优化带来的有序性问题" class="headerlink" title="源头之三：编译器优化带来的有序性问题"></a>源头之三：编译器优化带来的有序性问题</h4><ul>
+<li>有序性就是程序按照代码的先后执行顺序，而编译器优化，可能会改变程序中语句的先后顺序</li>
+</ul>
+<p><strong>例如：单例模式中Double-Checked</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singlaton</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singlaton instance;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singlaton</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singlaton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(instance==<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">synchronized</span>(Singlaton.class)&#123;</span><br><span class="line">                <span class="keyword">if</span>(instance==<span class="keyword">null</span>)&#123;</span><br><span class="line">                    instance=<span class="keyword">new</span> Singlaton();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>假设有两个线程 A、B 同时调用 getInstance() 方法，他们会同时发现 instance == null ，于是同时对 Singleton.class 加锁，此时 JVM 保证只有一个线程能够加锁成功（假设是线程 A），另外一个线程则会处于等待状态（假设是线程 B）；线程 A 会创建一个 Singleton 实例，之后释放锁，锁释放后，线程 B 被唤醒，线程 B 再次尝试加锁，此时是可以加锁成功的，加锁成功后，线程 B 检查 instance == null 时会发现，已经创建过 Singleton 实例了，所以线程 B 不会再创建一个 Singleton 实例。</p>
+<p>在上述例子中，看似完美无缺，但是问题就出在<strong>new</strong>操作上，new 操作执行流程如下：</p>
+<ul>
+<li>分配内存</li>
+<li>在内存中初始化Singlaton对象</li>
+<li>将内存地址赋值给instance变量</li>
+</ul>
+<p>经过编译器的优化后，执行顺序如下：</p>
+<ul>
+<li>分配内存</li>
+<li>将内存地址赋值给instance变量</li>
+<li>在内存中初始化Singlaton对象</li>
+</ul>
+</li>
+<li><p>优化之后，线程A先执行getInstance()方法，当线程在执行第二步时恰好发生了线程切换，切换到线程B，这样B执行getInstance()方法，结果instance!=null，直接返回instance，但是此时的instance并没有初始化，如果访问instance的成员变量就会触发空指针异常</p>
+</li>
+</ul>
+<p><img src="G:\hexo\source\img\并发编程\可见性导致的问题.png" alt="双重检查创建单例的异常执行顺序"></p>
+<p><strong>volatile</strong>：禁止指令重排，放置编译器优化而导致的问题</p>
+<h4 id="thinking-在-32-位的机器上对-long-型变量进行加减操作存在并发隐患，到底是不是这样呢？"><a href="#thinking-在-32-位的机器上对-long-型变量进行加减操作存在并发隐患，到底是不是这样呢？" class="headerlink" title=":thinking:在 32 位的机器上对 long 型变量进行加减操作存在并发隐患，到底是不是这样呢？"></a>:thinking:在 32 位的机器上对 long 型变量进行加减操作存在并发隐患，到底是不是这样呢？</h4><ul>
+<li><strong>原子性问题：</strong>long型变量是64位，当在32位机器上进行加减操作时，需要将long型变量分为两个32位操作，这样就可能会导致，一个线程读取了某个值的高32位，而低32位已经被另一个线程所修改。因此官方推荐最好把long\double 变量声明为volatile或是同步加锁synchronize以避免并发问题。 </li>
+</ul>
+<p>学习资源来源–<a href="https://time.geekbang.org/column/159" target="_blank" rel="noopener">极客时间</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/04/数据结构/栈和队列-1/" rel="next" title="栈和队列">
+                <i class="fa fa-chevron-left"></i> 栈和队列
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/img/background.jpg" alt="Dyson">
+            
+              <p class="site-author-name" itemprop="name">Dyson</p>
+              <p class="site-description motion-element" itemprop="description">起风而沐！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Dyson-x" target="_blank" title="GitHub">
+                      GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/ds19980228" target="_blank" title="CSDN">
+                      CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何学习并发编程"><span class="nav-number">1.</span> <span class="nav-text">如何学习并发编程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#抽象为三个部分：分工，同步，互斥"><span class="nav-number">1.1.</span> <span class="nav-text">抽象为三个部分：分工，同步，互斥</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#分工：例如生产-消费者模型，Future本质上都是一种分工方法"><span class="nav-number">1.1.1.</span> <span class="nav-text">分工：例如生产-消费者模型，Future本质上都是一种分工方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#同步：分工完之后，就是如何去具体的执行，这里就需要处理多线程之间的协同"><span class="nav-number">1.1.2.</span> <span class="nav-text">同步：分工完之后，就是如何去具体的执行，这里就需要处理多线程之间的协同</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#互斥：强调的是”线程安全“"><span class="nav-number">1.1.3.</span> <span class="nav-text">互斥：强调的是”线程安全“</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可见性、原子性和有序性问题：并发编程Bug的源头"><span class="nav-number">2.</span> <span class="nav-text">可见性、原子性和有序性问题：并发编程Bug的源头</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#并发程序的幕后故事"><span class="nav-number">2.1.</span> <span class="nav-text">并发程序的幕后故事</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#源头之一：缓存导致的可见性问题"><span class="nav-number">2.2.</span> <span class="nav-text">源头之一：缓存导致的可见性问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#源头之二：线程切换带来的原子性问题"><span class="nav-number">2.3.</span> <span class="nav-text">源头之二：线程切换带来的原子性问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#源头之三：编译器优化带来的有序性问题"><span class="nav-number">2.4.</span> <span class="nav-text">源头之三：编译器优化带来的有序性问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#thinking-在-32-位的机器上对-long-型变量进行加减操作存在并发隐患，到底是不是这样呢？"><span class="nav-number">2.5.</span> <span class="nav-text">:thinking:在 32 位的机器上对 long 型变量进行加减操作存在并发隐患，到底是不是这样呢？</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dyson</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
