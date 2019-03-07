@@ -83,14 +83,16 @@
 <meta name="keywords" content="数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="栈和队列">
-<meta property="og:url" content="http://yoursite.com/2019/03/04/数据结构/栈和队列-1/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/03/04/数据结构/栈和队列/index.html">
 <meta property="og:site_name" content="Dyson&#39;s blog">
 <meta property="og:description" content="栈">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-04T15:13:38.506Z">
+<meta property="og:image" content="g:/hexo/source/img/数据结构与算法/循环队列.png">
+<meta property="og:updated_time" content="2019-03-07T12:20:05.097Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="栈和队列">
 <meta name="twitter:description" content="栈">
+<meta name="twitter:image" content="g:/hexo/source/img/数据结构与算法/循环队列.png">
 
 
 
@@ -120,7 +122,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/03/04/数据结构/栈和队列-1/">
+  <link rel="canonical" href="http://yoursite.com/2019/03/04/数据结构/栈和队列/">
 
 
 
@@ -251,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/04/数据结构/栈和队列-1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/04/数据结构/栈和队列/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Dyson">
@@ -358,11 +360,41 @@
 <h4 id="开篇解答：关于浏览器的前进，后退功能"><a href="#开篇解答：关于浏览器的前进，后退功能" class="headerlink" title="开篇解答：关于浏览器的前进，后退功能"></a>开篇解答：关于浏览器的前进，后退功能</h4><p>​    :artificial_satellite: 这里使用两个栈，X与Y，我们分别浏览网页a，b，c；当第一次浏览a时，将a压入X栈，当点击后退键时，将a出栈，并将出栈的数据依次放入Y中，当我们依次点击a，b，c后，全部压入X中，当我们点击后退键时，会将X栈顶数据弹出，并压入到Y中，这样就实现了浏览器的前进后退功能。</p>
 <p>​    :jack_o_lantern: 注意，如果你通过b网页跳转到d网页时，存在Y中的页面c就无法再通过前进，后退键重复查看了，这时就需要清空Y。</p>
 <hr>
-<h3 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h3><h4 id="thinking-为什么函数调用要用“栈”来保存临时变量呢？其他数据结构不可以吗？"><a href="#thinking-为什么函数调用要用“栈”来保存临时变量呢？其他数据结构不可以吗？" class="headerlink" title=":thinking: 为什么函数调用要用“栈”来保存临时变量呢？其他数据结构不可以吗？"></a>:thinking: 为什么函数调用要用“栈”来保存临时变量呢？其他数据结构不可以吗？</h4><h4 id="thinking-JVM内存管理中有个“堆栈”概念。栈内存用来村春局部变量和方法调用，堆内存用来存储Java中的对象。那JVM里边的“栈”和这里的“栈”是一个概念吗，如果不是，那它为什么叫做“栈”呢？"><a href="#thinking-JVM内存管理中有个“堆栈”概念。栈内存用来村春局部变量和方法调用，堆内存用来存储Java中的对象。那JVM里边的“栈”和这里的“栈”是一个概念吗，如果不是，那它为什么叫做“栈”呢？" class="headerlink" title=":thinking: JVM内存管理中有个“堆栈”概念。栈内存用来村春局部变量和方法调用，堆内存用来存储Java中的对象。那JVM里边的“栈”和这里的“栈”是一个概念吗，如果不是，那它为什么叫做“栈”呢？"></a>:thinking: JVM内存管理中有个“堆栈”概念。栈内存用来村春局部变量和方法调用，堆内存用来存储Java中的对象。那JVM里边的“栈”和这里的“栈”是一个概念吗，如果不是，那它为什么叫做“栈”呢？</h4><hr>
+<h4 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h4><h5 id="thinking-为什么函数调用要用“栈”来保存临时变量呢？其他数据结构不可以吗？"><a href="#thinking-为什么函数调用要用“栈”来保存临时变量呢？其他数据结构不可以吗？" class="headerlink" title=":thinking: 为什么函数调用要用“栈”来保存临时变量呢？其他数据结构不可以吗？"></a>:thinking: 为什么函数调用要用“栈”来保存临时变量呢？其他数据结构不可以吗？</h5><h5 id="thinking-JVM内存管理中有个“堆栈”概念。栈内存用来村春局部变量和方法调用，堆内存用来存储Java中的对象。那JVM里边的“栈”和这里的“栈”是一个概念吗，如果不是，那它为什么叫做“栈”呢？"><a href="#thinking-JVM内存管理中有个“堆栈”概念。栈内存用来村春局部变量和方法调用，堆内存用来存储Java中的对象。那JVM里边的“栈”和这里的“栈”是一个概念吗，如果不是，那它为什么叫做“栈”呢？" class="headerlink" title=":thinking: JVM内存管理中有个“堆栈”概念。栈内存用来村春局部变量和方法调用，堆内存用来存储Java中的对象。那JVM里边的“栈”和这里的“栈”是一个概念吗，如果不是，那它为什么叫做“栈”呢？"></a>:thinking: JVM内存管理中有个“堆栈”概念。栈内存用来村春局部变量和方法调用，堆内存用来存储Java中的对象。那JVM里边的“栈”和这里的“栈”是一个概念吗，如果不是，那它为什么叫做“栈”呢？</h5><hr>
 <h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><p>:thinking: 当我们向一个固定大小的线程池中请求一个线程时，如果线程中没有空闲资源了，这个时候线程池如何处理这个请求？是拒绝还是排队请求？各种策略又是怎么实现的？</p>
 <h3 id="关于队列"><a href="#关于队列" class="headerlink" title="关于队列"></a>关于队列</h3><h4 id="队列结构"><a href="#队列结构" class="headerlink" title="队列结构"></a>队列结构</h4><ul>
 <li>先进先出，后进后出</li>
 <li>与栈一样，是一种操作受限的线性表数据结构</li>
+</ul>
+<p><strong>顺序队列</strong></p>
+<p><strong>链式队列</strong></p>
+<p><strong>循环队列</strong>：可以解绝顺序队列中的数据搬移问题</p>
+<ul>
+<li><strong>如何判断循环队列为null和队满的情况？</strong></li>
+</ul>
+<p><img src="G:\hexo\source\img\数据结构与算法\循环队列.png" alt=""></p>
+<ul>
+<li><p>如上图所示，tail=3，head=4，n=8，就有公式（3+1）%8=4。总结下来，当循环队列满时，就有（tail+1）/n=head，当队列满时，就会浪费一个数组的存储空间</p>
+<p><strong>实现如下</strong></p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CircularQueue</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 数组：items，数组大小：n</span></span><br><span class="line">  <span class="keyword">private</span> String[] items;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> n = <span class="number">0</span>;</span><br><span class="line">  <span class="comment">// head 表示队头下标，tail 表示队尾下标</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> head = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> tail = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 申请一个大小为 capacity 的数组</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">CircularQueue</span><span class="params">(<span class="keyword">int</span> capacity)</span> </span>&#123;</span><br><span class="line">    items = <span class="keyword">new</span> String[capacity];</span><br><span class="line">    n = capacity;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 入队</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">enqueue</span><span class="params">(String item)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 队列满了</span></span><br><span class="line">    <span class="keyword">if</span> ((tail + <span class="number">1</span>) % n == head) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    items[tail] = item;</span><br><span class="line">    <span class="comment">// 更新tail</span></span><br><span class="line">    tail = (tail + <span class="number">1</span>) % n;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 出队</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">dequeue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 如果 head == tail 表示队列为空</span></span><br><span class="line">    <span class="keyword">if</span> (head == tail) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    String ret = items[head];</span><br><span class="line">    <span class="comment">// 更新head</span></span><br><span class="line">    head = (head + <span class="number">1</span>) % n;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>阻塞队列与并发队列</strong></p>
+<p><strong>阻塞队列：</strong>在队列为空的时候，从队头取数据会被阻塞，直到队列中有了数据才能返回；如果队列已经满了，那么插入数据的操作就会阻塞，直到队列中有空闲的位置后再插入数据，然后再返回。</p>
+<ul>
+<li>可以使用阻塞队列实现“生产者-消费者模型”，在多线程模式下就会存在线程安全问题</li>
+</ul>
+<p><strong>并发队列：</strong>线程安全队列，利用CAS原子操作，实现高效的并发队列。</p>
+<h4 id="开篇解答"><a href="#开篇解答" class="headerlink" title="开篇解答"></a>开篇解答</h4><p><strong>非阻塞式处理：</strong>直接拒绝任务请求</p>
+<p><strong>阻塞式处理：</strong>将请求排队，等到有空闲线程时，取出队列的请求继续处理</p>
+<ul>
+<li>基与链表的实现方式：可以支持无限排队的无界队列（unbounded queue），但是如果有过多请求排队等待时，就会导致响应时间过长。对于针对响应时间比较敏感的系统，基于链表实现的无线等待线程池不合适</li>
+<li>基于数组的实现方式：有界队列（bounded queue），队列的大小有限，当线程池中排队请求超过队列大小时，请求会被拒绝，适合对响应时间敏感的系统。</li>
+</ul>
+<p>实际上对于大部分资源有限的场景，当没有空闲资源时，基本上都可以通过“队列”来实现请求排队</p>
+<hr>
+<h4 id="课后思考"><a href="#课后思考" class="headerlink" title="课后思考"></a>课后思考</h4><h5 id="thinking-除了线程池这种池结构会用到队列排队请求，还有哪些类似的池结构或者场景中会用到队列的排队请求呢？"><a href="#thinking-除了线程池这种池结构会用到队列排队请求，还有哪些类似的池结构或者场景中会用到队列的排队请求呢？" class="headerlink" title=":thinking: 除了线程池这种池结构会用到队列排队请求，还有哪些类似的池结构或者场景中会用到队列的排队请求呢？"></a>:thinking: 除了线程池这种池结构会用到队列排队请求，还有哪些类似的池结构或者场景中会用到队列的排队请求呢？</h5><ul>
+<li>Java concurrent并发包利用ArrayBlockingQueue来实现ReentrantLock</li>
 </ul>
 
       
@@ -394,8 +426,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/04/数据结构/栈和队列~/" rel="next" title="栈和队列">
-                <i class="fa fa-chevron-left"></i> 栈和队列
+              <a href="/2019/02/22/java复习资料/面试知识点总结/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
               </a>
             
           </div>
@@ -485,7 +517,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -498,7 +530,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -545,7 +577,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#栈"><span class="nav-number">1.</span> <span class="nav-text">栈</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于”栈”"><span class="nav-number">1.1.</span> <span class="nav-text">关于”栈”</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#栈结构"><span class="nav-number">1.1.1.</span> <span class="nav-text">栈结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于”栈”的实现"><span class="nav-number">1.1.2.</span> <span class="nav-text">关于”栈”的实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于栈操作的时间与空间复杂度"><span class="nav-number">1.1.3.</span> <span class="nav-text">关于栈操作的时间与空间复杂度</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#时间复杂度：O-1"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">时间复杂度：O(1)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#空间复杂度：O-1"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">空间复杂度：O(1)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#支持动态扩容的顺序栈"><span class="nav-number">1.1.4.</span> <span class="nav-text">支持动态扩容的顺序栈</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#栈的应用"><span class="nav-number">1.2.</span> <span class="nav-text">栈的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#栈在函数调用中的应用"><span class="nav-number">1.2.1.</span> <span class="nav-text">栈在函数调用中的应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#栈在表达式求值中的应用"><span class="nav-number">1.2.2.</span> <span class="nav-text">栈在表达式求值中的应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#栈在括号匹配中应用"><span class="nav-number">1.2.3.</span> <span class="nav-text">栈在括号匹配中应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开篇解答：关于浏览器的前进，后退功能"><span class="nav-number">1.2.4.</span> <span class="nav-text">开篇解答：关于浏览器的前进，后退功能</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思考题"><span class="nav-number">1.3.</span> <span class="nav-text">思考题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#thinking-为什么函数调用要用“栈”来保存临时变量呢？其他数据结构不可以吗？"><span class="nav-number">1.3.1.</span> <span class="nav-text">:thinking: 为什么函数调用要用“栈”来保存临时变量呢？其他数据结构不可以吗？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#thinking-JVM内存管理中有个“堆栈”概念。栈内存用来村春局部变量和方法调用，堆内存用来存储Java中的对象。那JVM里边的“栈”和这里的“栈”是一个概念吗，如果不是，那它为什么叫做“栈”呢？"><span class="nav-number">1.3.2.</span> <span class="nav-text">:thinking: JVM内存管理中有个“堆栈”概念。栈内存用来村春局部变量和方法调用，堆内存用来存储Java中的对象。那JVM里边的“栈”和这里的“栈”是一个概念吗，如果不是，那它为什么叫做“栈”呢？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#队列"><span class="nav-number">2.</span> <span class="nav-text">队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于队列"><span class="nav-number">2.1.</span> <span class="nav-text">关于队列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#队列结构"><span class="nav-number">2.1.1.</span> <span class="nav-text">队列结构</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#栈"><span class="nav-number">1.</span> <span class="nav-text">栈</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于”栈”"><span class="nav-number">1.1.</span> <span class="nav-text">关于”栈”</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#栈结构"><span class="nav-number">1.1.1.</span> <span class="nav-text">栈结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于”栈”的实现"><span class="nav-number">1.1.2.</span> <span class="nav-text">关于”栈”的实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于栈操作的时间与空间复杂度"><span class="nav-number">1.1.3.</span> <span class="nav-text">关于栈操作的时间与空间复杂度</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#时间复杂度：O-1"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">时间复杂度：O(1)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#空间复杂度：O-1"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">空间复杂度：O(1)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#支持动态扩容的顺序栈"><span class="nav-number">1.1.4.</span> <span class="nav-text">支持动态扩容的顺序栈</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#栈的应用"><span class="nav-number">1.2.</span> <span class="nav-text">栈的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#栈在函数调用中的应用"><span class="nav-number">1.2.1.</span> <span class="nav-text">栈在函数调用中的应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#栈在表达式求值中的应用"><span class="nav-number">1.2.2.</span> <span class="nav-text">栈在表达式求值中的应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#栈在括号匹配中应用"><span class="nav-number">1.2.3.</span> <span class="nav-text">栈在括号匹配中应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开篇解答：关于浏览器的前进，后退功能"><span class="nav-number">1.2.4.</span> <span class="nav-text">开篇解答：关于浏览器的前进，后退功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#思考题"><span class="nav-number">1.2.5.</span> <span class="nav-text">思考题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#thinking-为什么函数调用要用“栈”来保存临时变量呢？其他数据结构不可以吗？"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">:thinking: 为什么函数调用要用“栈”来保存临时变量呢？其他数据结构不可以吗？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#thinking-JVM内存管理中有个“堆栈”概念。栈内存用来村春局部变量和方法调用，堆内存用来存储Java中的对象。那JVM里边的“栈”和这里的“栈”是一个概念吗，如果不是，那它为什么叫做“栈”呢？"><span class="nav-number">1.2.5.2.</span> <span class="nav-text">:thinking: JVM内存管理中有个“堆栈”概念。栈内存用来村春局部变量和方法调用，堆内存用来存储Java中的对象。那JVM里边的“栈”和这里的“栈”是一个概念吗，如果不是，那它为什么叫做“栈”呢？</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#队列"><span class="nav-number">2.</span> <span class="nav-text">队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于队列"><span class="nav-number">2.1.</span> <span class="nav-text">关于队列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#队列结构"><span class="nav-number">2.1.1.</span> <span class="nav-text">队列结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开篇解答"><span class="nav-number">2.1.2.</span> <span class="nav-text">开篇解答</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#课后思考"><span class="nav-number">2.1.3.</span> <span class="nav-text">课后思考</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#thinking-除了线程池这种池结构会用到队列排队请求，还有哪些类似的池结构或者场景中会用到队列的排队请求呢？"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">:thinking: 除了线程池这种池结构会用到队列排队请求，还有哪些类似的池结构或者场景中会用到队列的排队请求呢？</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
