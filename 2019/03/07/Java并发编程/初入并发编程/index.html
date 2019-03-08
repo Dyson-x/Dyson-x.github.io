@@ -90,7 +90,7 @@
 <meta property="og:image" content="g:/hexo/source/img/并发编程/并发编程全景思维导图.png">
 <meta property="og:image" content="g:/hexo/source/img/并发编程/原子性问题.png">
 <meta property="og:image" content="g:/hexo/source/img/并发编程/可见性导致的问题.png">
-<meta property="og:updated_time" content="2019-03-07T03:02:36.256Z">
+<meta property="og:updated_time" content="2019-03-07T12:26:16.052Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初入并发编程">
 <meta name="twitter:description" content="如何学习并发编程">
@@ -383,6 +383,43 @@
 <h4 id="thinking-在-32-位的机器上对-long-型变量进行加减操作存在并发隐患，到底是不是这样呢？"><a href="#thinking-在-32-位的机器上对-long-型变量进行加减操作存在并发隐患，到底是不是这样呢？" class="headerlink" title=":thinking:在 32 位的机器上对 long 型变量进行加减操作存在并发隐患，到底是不是这样呢？"></a>:thinking:在 32 位的机器上对 long 型变量进行加减操作存在并发隐患，到底是不是这样呢？</h4><ul>
 <li><strong>原子性问题：</strong>long型变量是64位，当在32位机器上进行加减操作时，需要将long型变量分为两个32位操作，这样就可能会导致，一个线程读取了某个值的高32位，而低32位已经被另一个线程所修改。因此官方推荐最好把long\double 变量声明为volatile或是同步加锁synchronize以避免并发问题。 </li>
 </ul>
+<hr>
+<h3 id="Java内存模型：Java如何解决可见性和有序性问题"><a href="#Java内存模型：Java如何解决可见性和有序性问题" class="headerlink" title="Java内存模型：Java如何解决可见性和有序性问题"></a>Java内存模型：Java如何解决可见性和有序性问题</h3><p><strong>解决可见性，有序性最直接的方法就是禁止缓存和编译器优化</strong>，但是这样会性能就会降低很多，合理的方案是<strong>按需禁用缓存以及编译器优化</strong></p>
+<ul>
+<li>volatile，synchronized和final关键字，以及六项Happens-Before规则</li>
+</ul>
+<h4 id="Happens-Before规则"><a href="#Happens-Before规则" class="headerlink" title="Happens-Before规则"></a>Happens-Before规则</h4><ul>
+<li>前面一个操作的结果对后续操作是可见的</li>
+<li>Happens-Before约束了编译器的优化行为，虽允许便器器优化，但是要求编译器优化后一定遵守Happens-Before规则。</li>
+</ul>
+<ol>
+<li>程序的顺序性规则：在一个线程中，前面的操作Happens-Before与后续的任意操作</li>
+<li>volatile变量规则：指对一个volatile变量的写操作，Happens-Before于后续对这个volatile变量的读操作。<ul>
+<li>不保证原子性，但保证可见性</li>
+</ul>
+</li>
+<li>管程（syc）中锁的规则：对一个锁的解锁Happens-Before于后续对这个锁的加锁<ul>
+<li>在解锁的时候，JVM需要强制刷新缓存，是的当前字段所修改的内存对其他线程可见</li>
+</ul>
+</li>
+<li>线程start()规则：Thread对象的start()方法Happens-Before于此线程的每一个动作</li>
+<li>线程中断规则：对线程interrupt()方法Happens-Before于被中断线程的代码检测到中断事件的发生</li>
+<li>线程终结规则：线程中的所有操作都Happens-Before线程的终止检测，可以通过Thread.join()方法结束，Thread.isAlive()的返回值手段检测到线程已经终止执行</li>
+<li>对象终结规则：一个对象的初始化完成Happens-Before于它的finalize()方法的开始</li>
+<li>传递性规则：如果操作A先行发生于操作B，而操作B又先行发生于操作C，则可以得出操作A先行发生于操作C</li>
+</ol>
+<ul>
+<li>如果两个操作的执行顺序无法从Happens-Before原则中推导出来，那么编译器就可以对其进行随意的优化</li>
+</ul>
+<p><strong>Happens-Before因果关系 现实语义：</strong>如果A事件时导致B事件的起因，那么A事件一定先于B事件发生。</p>
+<p>在Java中，Happens-Before语义本质上是一种可见性：A Happens-Before B意味着A事件对于B事件来说是可见的，无论A事件和B事件是否发生在同一个线程里。</p>
+<h4 id="容易被忽视的fianl"><a href="#容易被忽视的fianl" class="headerlink" title="容易被忽视的fianl"></a>容易被忽视的fianl</h4><p>final修饰变量时，表示该变量生而不变，可以随意优化</p>
+<h4 id="thinking-有一个共享变量-abc，在一个线程里设置了-abc-的值-abc-3，思考一下，有哪些办法可以让其他线程能够看到abc-3？"><a href="#thinking-有一个共享变量-abc，在一个线程里设置了-abc-的值-abc-3，思考一下，有哪些办法可以让其他线程能够看到abc-3？" class="headerlink" title=":thinking:有一个共享变量 abc，在一个线程里设置了 abc 的值 abc=3，思考一下，有哪些办法可以让其他线程能够看到abc==3？"></a>:thinking:有一个共享变量 abc，在一个线程里设置了 abc 的值 abc=3，思考一下，有哪些办法可以让其他线程能够看到abc==3？</h4><ul>
+<li>volatile变量规则：可以用volatile关键字修饰</li>
+<li>管程锁规则：使用Synchronized关键字对abc的赋值代码块加锁</li>
+<li>线程终结规则：可以使用join()结束线程运行，后续线程再启动，则可以看到abc==3</li>
+</ul>
+<hr>
 <p>学习资源来源–<a href="https://time.geekbang.org/column/159" target="_blank" rel="noopener">极客时间</a></p>
 
       
@@ -423,6 +460,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/07/java核心技术/对Java平台的理解/" rel="prev" title="对Java平台的理解">
+                对Java平台的理解 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -501,7 +542,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -514,7 +555,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -561,7 +602,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何学习并发编程"><span class="nav-number">1.</span> <span class="nav-text">如何学习并发编程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#抽象为三个部分：分工，同步，互斥"><span class="nav-number">1.1.</span> <span class="nav-text">抽象为三个部分：分工，同步，互斥</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#分工：例如生产-消费者模型，Future本质上都是一种分工方法"><span class="nav-number">1.1.1.</span> <span class="nav-text">分工：例如生产-消费者模型，Future本质上都是一种分工方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#同步：分工完之后，就是如何去具体的执行，这里就需要处理多线程之间的协同"><span class="nav-number">1.1.2.</span> <span class="nav-text">同步：分工完之后，就是如何去具体的执行，这里就需要处理多线程之间的协同</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#互斥：强调的是”线程安全“"><span class="nav-number">1.1.3.</span> <span class="nav-text">互斥：强调的是”线程安全“</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可见性、原子性和有序性问题：并发编程Bug的源头"><span class="nav-number">2.</span> <span class="nav-text">可见性、原子性和有序性问题：并发编程Bug的源头</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#并发程序的幕后故事"><span class="nav-number">2.1.</span> <span class="nav-text">并发程序的幕后故事</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#源头之一：缓存导致的可见性问题"><span class="nav-number">2.2.</span> <span class="nav-text">源头之一：缓存导致的可见性问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#源头之二：线程切换带来的原子性问题"><span class="nav-number">2.3.</span> <span class="nav-text">源头之二：线程切换带来的原子性问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#源头之三：编译器优化带来的有序性问题"><span class="nav-number">2.4.</span> <span class="nav-text">源头之三：编译器优化带来的有序性问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#thinking-在-32-位的机器上对-long-型变量进行加减操作存在并发隐患，到底是不是这样呢？"><span class="nav-number">2.5.</span> <span class="nav-text">:thinking:在 32 位的机器上对 long 型变量进行加减操作存在并发隐患，到底是不是这样呢？</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何学习并发编程"><span class="nav-number">1.</span> <span class="nav-text">如何学习并发编程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#抽象为三个部分：分工，同步，互斥"><span class="nav-number">1.1.</span> <span class="nav-text">抽象为三个部分：分工，同步，互斥</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#分工：例如生产-消费者模型，Future本质上都是一种分工方法"><span class="nav-number">1.1.1.</span> <span class="nav-text">分工：例如生产-消费者模型，Future本质上都是一种分工方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#同步：分工完之后，就是如何去具体的执行，这里就需要处理多线程之间的协同"><span class="nav-number">1.1.2.</span> <span class="nav-text">同步：分工完之后，就是如何去具体的执行，这里就需要处理多线程之间的协同</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#互斥：强调的是”线程安全“"><span class="nav-number">1.1.3.</span> <span class="nav-text">互斥：强调的是”线程安全“</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可见性、原子性和有序性问题：并发编程Bug的源头"><span class="nav-number">2.</span> <span class="nav-text">可见性、原子性和有序性问题：并发编程Bug的源头</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#并发程序的幕后故事"><span class="nav-number">2.1.</span> <span class="nav-text">并发程序的幕后故事</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#源头之一：缓存导致的可见性问题"><span class="nav-number">2.2.</span> <span class="nav-text">源头之一：缓存导致的可见性问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#源头之二：线程切换带来的原子性问题"><span class="nav-number">2.3.</span> <span class="nav-text">源头之二：线程切换带来的原子性问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#源头之三：编译器优化带来的有序性问题"><span class="nav-number">2.4.</span> <span class="nav-text">源头之三：编译器优化带来的有序性问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#thinking-在-32-位的机器上对-long-型变量进行加减操作存在并发隐患，到底是不是这样呢？"><span class="nav-number">2.5.</span> <span class="nav-text">:thinking:在 32 位的机器上对 long 型变量进行加减操作存在并发隐患，到底是不是这样呢？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java内存模型：Java如何解决可见性和有序性问题"><span class="nav-number">3.</span> <span class="nav-text">Java内存模型：Java如何解决可见性和有序性问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Happens-Before规则"><span class="nav-number">3.1.</span> <span class="nav-text">Happens-Before规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#容易被忽视的fianl"><span class="nav-number">3.2.</span> <span class="nav-text">容易被忽视的fianl</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#thinking-有一个共享变量-abc，在一个线程里设置了-abc-的值-abc-3，思考一下，有哪些办法可以让其他线程能够看到abc-3？"><span class="nav-number">3.3.</span> <span class="nav-text">:thinking:有一个共享变量 abc，在一个线程里设置了 abc 的值 abc=3，思考一下，有哪些办法可以让其他线程能够看到abc==3？</span></a></li></ol></li></ol></div>
             
 
           </div>
