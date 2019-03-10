@@ -91,7 +91,8 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/08/数据结构/排序/img/数据结构与算法/冒泡的优化.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/08/数据结构/排序/img/数据结构与算法/插入排序.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/08/数据结构/排序/img/数据结构与算法/选择排序.png">
-<meta property="og:updated_time" content="2019-03-08T09:52:10.660Z">
+<meta property="og:image" content="http://yoursite.com/2019/03/08/数据结构/排序/img/数据结构与算法/归并排序.png">
+<meta property="og:updated_time" content="2019-03-10T14:41:16.883Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="“排序">
 <meta name="twitter:description" content=":thinking:为什么插入排序比冒泡排序更受欢迎？ 如何分析一好“排序算法”？排序算法的执行效率 最好情况，最坏情况，平均情况时间复杂度 时间复杂度的系数，常数，低阶 比较次数和交换（或移动）次数  排序算法的内存消耗 这里引入一个原地排序（Sorted in place）。原地排序是指空间复杂度为O(1)的排序算法  排序算法的稳定性 稳定性：指定的是数组中值相同的元素，在排序之后的相对位置">
@@ -415,6 +416,11 @@
 <h5 id="问题三：插入排序的时间复杂度是多少？-1"><a href="#问题三：插入排序的时间复杂度是多少？-1" class="headerlink" title="问题三：插入排序的时间复杂度是多少？"></a>问题三：插入排序的时间复杂度是多少？</h5><ul>
 <li>最坏，最好，平均时间复杂度均为O(n^2)</li>
 </ul>
+<hr>
+<h3 id="时间复杂度为O-n-2-的排序算法-1"><a href="#时间复杂度为O-n-2-的排序算法-1" class="headerlink" title="时间复杂度为O(n^2)的排序算法"></a>时间复杂度为O(n^2)的排序算法</h3><h5 id="thinking-如何在O-n-的时间复杂度查找一个无序数组中的第K大元素？"><a href="#thinking-如何在O-n-的时间复杂度查找一个无序数组中的第K大元素？" class="headerlink" title=":thinking:如何在O(n)的时间复杂度查找一个无序数组中的第K大元素？"></a>:thinking:如何在O(n)的时间复杂度查找一个无序数组中的第K大元素？</h5><h4 id="归并排序（Merge-Sort）"><a href="#归并排序（Merge-Sort）" class="headerlink" title="归并排序（Merge Sort）"></a>归并排序（Merge Sort）</h4><ul>
+<li>归并排序的核心思想：如果要排序一个数组，我们先把数组从中间分成前后两部分，然后对前后两部分分别排序，再将排好序的两部分合并在一起，这样整个数组就都有序了。</li>
+</ul>
+<p><img src="img\数据结构与算法\归并排序.png" alt=""></p>
 
       
     </div>
@@ -454,6 +460,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/08/Java并发编程/互斥锁/" rel="prev" title="互斥锁">
+                互斥锁 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -532,7 +542,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -592,7 +602,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#thinking-为什么插入排序比冒泡排序更受欢迎？"><span class="nav-number">1.</span> <span class="nav-text">:thinking:为什么插入排序比冒泡排序更受欢迎？</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#如何分析一好“排序算法”？"><span class="nav-number"></span> <span class="nav-text">如何分析一好“排序算法”？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#排序算法的执行效率"><span class="nav-number"></span> <span class="nav-text">排序算法的执行效率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#排序算法的内存消耗"><span class="nav-number"></span> <span class="nav-text">排序算法的内存消耗</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#排序算法的稳定性"><span class="nav-number"></span> <span class="nav-text">排序算法的稳定性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#那么稳定排序有什么意义呢？"><span class="nav-number">1.</span> <span class="nav-text">那么稳定排序有什么意义呢？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间复杂度为O-n-2-的排序算法"><span class="nav-number"></span> <span class="nav-text">时间复杂度为O(n^2)的排序算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#冒泡排序（Bubble-Sort）"><span class="nav-number"></span> <span class="nav-text">冒泡排序（Bubble Sort）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#问题一：冒泡排序是原地排序算法吗？"><span class="nav-number">1.</span> <span class="nav-text">问题一：冒泡排序是原地排序算法吗？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题二：冒泡排序是稳定的排序算法吗？"><span class="nav-number">2.</span> <span class="nav-text">问题二：冒泡排序是稳定的排序算法吗？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题三：冒泡排序的时间复杂度是多少？"><span class="nav-number">3.</span> <span class="nav-text">问题三：冒泡排序的时间复杂度是多少？</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插入排序（Insertion-Sort）"><span class="nav-number"></span> <span class="nav-text">插入排序（Insertion Sort）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#问题一：插入排序是原地排序算法吗？"><span class="nav-number">1.</span> <span class="nav-text">问题一：插入排序是原地排序算法吗？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题二：插入排序是稳定的排序算法吗？"><span class="nav-number">2.</span> <span class="nav-text">问题二：插入排序是稳定的排序算法吗？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题三：插入排序的时间复杂度是多少？"><span class="nav-number">3.</span> <span class="nav-text">问题三：插入排序的时间复杂度是多少？</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#选择排序（Selection-Sort）"><span class="nav-number"></span> <span class="nav-text">选择排序（Selection Sort）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#问题一：插入排序是原地排序算法吗？-1"><span class="nav-number">1.</span> <span class="nav-text">问题一：插入排序是原地排序算法吗？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题二：插入排序是稳定的排序算法吗？-1"><span class="nav-number">2.</span> <span class="nav-text">问题二：插入排序是稳定的排序算法吗？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题三：插入排序的时间复杂度是多少？-1"><span class="nav-number">3.</span> <span class="nav-text">问题三：插入排序的时间复杂度是多少？</span></a></li></ol></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#thinking-为什么插入排序比冒泡排序更受欢迎？"><span class="nav-number">1.</span> <span class="nav-text">:thinking:为什么插入排序比冒泡排序更受欢迎？</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#如何分析一好“排序算法”？"><span class="nav-number"></span> <span class="nav-text">如何分析一好“排序算法”？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#排序算法的执行效率"><span class="nav-number"></span> <span class="nav-text">排序算法的执行效率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#排序算法的内存消耗"><span class="nav-number"></span> <span class="nav-text">排序算法的内存消耗</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#排序算法的稳定性"><span class="nav-number"></span> <span class="nav-text">排序算法的稳定性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#那么稳定排序有什么意义呢？"><span class="nav-number">1.</span> <span class="nav-text">那么稳定排序有什么意义呢？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间复杂度为O-n-2-的排序算法"><span class="nav-number"></span> <span class="nav-text">时间复杂度为O(n^2)的排序算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#冒泡排序（Bubble-Sort）"><span class="nav-number"></span> <span class="nav-text">冒泡排序（Bubble Sort）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#问题一：冒泡排序是原地排序算法吗？"><span class="nav-number">1.</span> <span class="nav-text">问题一：冒泡排序是原地排序算法吗？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题二：冒泡排序是稳定的排序算法吗？"><span class="nav-number">2.</span> <span class="nav-text">问题二：冒泡排序是稳定的排序算法吗？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题三：冒泡排序的时间复杂度是多少？"><span class="nav-number">3.</span> <span class="nav-text">问题三：冒泡排序的时间复杂度是多少？</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插入排序（Insertion-Sort）"><span class="nav-number"></span> <span class="nav-text">插入排序（Insertion Sort）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#问题一：插入排序是原地排序算法吗？"><span class="nav-number">1.</span> <span class="nav-text">问题一：插入排序是原地排序算法吗？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题二：插入排序是稳定的排序算法吗？"><span class="nav-number">2.</span> <span class="nav-text">问题二：插入排序是稳定的排序算法吗？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题三：插入排序的时间复杂度是多少？"><span class="nav-number">3.</span> <span class="nav-text">问题三：插入排序的时间复杂度是多少？</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#选择排序（Selection-Sort）"><span class="nav-number"></span> <span class="nav-text">选择排序（Selection Sort）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#问题一：插入排序是原地排序算法吗？-1"><span class="nav-number">1.</span> <span class="nav-text">问题一：插入排序是原地排序算法吗？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题二：插入排序是稳定的排序算法吗？-1"><span class="nav-number">2.</span> <span class="nav-text">问题二：插入排序是稳定的排序算法吗？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题三：插入排序的时间复杂度是多少？-1"><span class="nav-number">3.</span> <span class="nav-text">问题三：插入排序的时间复杂度是多少？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间复杂度为O-n-2-的排序算法-1"><span class="nav-number"></span> <span class="nav-text">时间复杂度为O(n^2)的排序算法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#thinking-如何在O-n-的时间复杂度查找一个无序数组中的第K大元素？"><span class="nav-number">1.</span> <span class="nav-text">:thinking:如何在O(n)的时间复杂度查找一个无序数组中的第K大元素？</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#归并排序（Merge-Sort）"><span class="nav-number"></span> <span class="nav-text">归并排序（Merge Sort）</span></a></li></div>
             
 
           </div>

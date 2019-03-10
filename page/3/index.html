@@ -250,6 +250,356 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/26/数据库/MySQL数据类型/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dyson">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/background.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dyson's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/26/数据库/MySQL数据类型/" itemprop="url">MySQL数据类型</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-26T09:41:40+08:00">
+                2018-12-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="数据类型分类"><a href="#数据类型分类" class="headerlink" title="数据类型分类"></a>数据类型分类</h3><hr>
+<h3 id="数值类型"><a href="#数值类型" class="headerlink" title="数值类型"></a>数值类型</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>字节</th>
+<th>最小值</th>
+<th>最大值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td>(带符号/无符号)</td>
+<td>(带符号/无符号)</td>
+</tr>
+<tr>
+<td>TINYINT</td>
+<td>1</td>
+<td>-128（-2^7）</td>
+<td>127（2^7-1）</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>0</td>
+<td>255（2^8-1）</td>
+</tr>
+<tr>
+<td>SMALLINT</td>
+<td>2</td>
+<td>-32768（-2^15）</td>
+<td>32767（2^15-1）</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>0</td>
+<td>65535（2^16-1）</td>
+</tr>
+<tr>
+<td>MEDIUMINT</td>
+<td>3</td>
+<td>-8388608</td>
+<td>8388607</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>0</td>
+<td>16777215</td>
+</tr>
+<tr>
+<td>INT</td>
+<td>4</td>
+<td>-2147483648</td>
+<td>2147483647</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>0</td>
+<td>4294967295</td>
+</tr>
+<tr>
+<td>BIGINT</td>
+<td>8</td>
+<td>-9223372036854775808</td>
+<td>9223372036854775807</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>0</td>
+<td>18446744073709551615</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>在MySQL中，整形是可以指定是有符号和无符号，默认是有符号的。</p>
+</li>
+<li><p>通过UNSINGNED来表明字段是无符号的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; create table tt2(num tinyint unsigned);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注意：尽量不要使用unsingned，对于int来兴可能放不下的数据，unsingned int同样可能存放不下，还不如在设计时将int提升为bigint类型，但是对于优化器而言，unsingned确实有一定的用处，比如当你要查询的数据为负数时，unsingned会直接返回，并不会进行查询。</li>
+</ul>
+</li>
+</ul>
+<h4 id="bit类型"><a href="#bit类型" class="headerlink" title="bit类型"></a>bit类型</h4><ul>
+<li><p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bit[(M)]：位字段类型。M表示每个值的位数，范围从1到64.如果M被忽略，默认为1</span><br></pre></td></tr></table></figure>
+<p>范例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; <span class="function">create table <span class="title">tt2</span> <span class="params">(id <span class="keyword">int</span>,a bit(<span class="number">64</span>)</span>)</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>bit字段在显示时，是按照ASCII码对应的值显示。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; insert into tt2 values(65,65);</span><br><span class="line">Query OK, 1 row affected (0.11 sec)</span><br><span class="line">mysql&gt; select * from tt2;</span><br><span class="line">+------+----------+</span><br><span class="line">| id   | a        |</span><br><span class="line">+------+----------+</span><br><span class="line">|   65 |        A |</span><br><span class="line">+------+----------+</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果我们只需要在表中存放0或1，这时就可以定义<strong>bit(1)</strong>。这样就可以节省空间。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; create table tt3 (a bit(1));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用十进制形式查看表中数据</p>
+<ul>
+<li>语法：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 字段名称+0 from 表名称：</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select a+0 from tt2;</span><br><span class="line">+------+</span><br><span class="line">| a+0  |</span><br><span class="line">+------+</span><br><span class="line">|   65 |</span><br><span class="line">+------+</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用其它方式产看表中数据</p>
+<ul>
+<li>二进制查看表中数据</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select bin(字段名称) from 表名称;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>八进制查看表中数据</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select oct(字段名称) from 表名称;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>十六进制查看表中数据</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select hex(字段名称) from 表名称;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：使用以上函数查看表中数据存储的数据类型时，是不能食用引索查询的</strong></p>
+</li>
+</ul>
+<h4 id="小数类型"><a href="#小数类型" class="headerlink" title="小数类型"></a>小数类型</h4><h5 id="float："><a href="#float：" class="headerlink" title="float："></a>float：</h5><ul>
+<li><p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">float[(m,d)][unsigned]：m定点数指定显示长度，d指定小数位数，占用空间4个字节</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>float(4,2)</strong>表示的范围是：-99.99~99.99，MySQL在保存值会进行四舍五入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; create table tt4 (id int,a float(4,2) unsigned);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>关于符号问题：</strong></p>
+<ul>
+<li><p>当将数据定义为float(4,2) unsingned时，由于是无符号，范围是0~99.99</p>
+</li>
+<li><p>当向表中插入一个负数时，比如-0.1，就会直接保存（超出范围），而不是进行四舍五入</p>
+<ul>
+<li>但是当我们要强制将数插入到表中时，可以使用如下语法：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert ignore into 表名称 values(id:100,data:-0.1);</span><br></pre></td></tr></table></figure>
+<p>范例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; insert ignore into tt4 values(100,-0.1);</span><br><span class="line">Query OK, 1 row affected, 1 warning (0.14 sec)</span><br><span class="line">mysql&gt; select * from tt4;</span><br><span class="line">+------+------+</span><br><span class="line">| id   | a    |</span><br><span class="line">+------+------+</span><br><span class="line">|  100 | 0.00 |</span><br><span class="line">+------+------+</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="decimal："><a href="#decimal：" class="headerlink" title="decimal："></a>decimal：</h5><ul>
+<li><p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">decimal(m,d) [unsigned]：定点数m指定长度，d指定小数位数</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>decimal与float的区别</strong>：</p>
+<ul>
+<li>精度不一样：float表示的进度大约是小数点后7位，高于7位就有可能造成进度的丢失（关于精度丢失，由于二进制小数点一直不能乘到1，小数点后面总会有数字），decimal表示的精度更加准确，M最大为65，D最大为30，它是将数值以字符串的形式存储的。<ul>
+<li>建议：如果希望小数的精度高，推荐使用decimal</li>
+</ul>
+</li>
+</ul>
+<h4 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h4><h5 id="char："><a href="#char：" class="headerlink" title="char："></a>char：</h5><ul>
+<li><p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">char(L)：固定长度字符串，L是可以存储的长度，单位为字符，最大长度可以为255</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注意：char最多规定255个字符长度</li>
+</ul>
+</li>
+</ul>
+<h5 id="varchar："><a href="#varchar：" class="headerlink" title="varchar："></a>varchar：</h5><ul>
+<li><p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">varchar(L)：可变长度字符串，L表示字符长度，最大长度65535个字节</span><br></pre></td></tr></table></figure>
+<p><strong>关于varchar(len)，len到底为多大，该len值和标的编码密切相关：</strong></p>
+<ul>
+<li><p>varchar长度可以指定为0~65535之间的值，但是其中有1~2个字节用于记录数据大小</p>
+</li>
+<li><p>当使用表的编码是utf8时，varchar(n)的参数n最大值为65535/2=21844（因为utf8中，每个每个字符占用3个字节），如果编码为gbk，varchar(n)的参数n最大值为65535/2=32766（在gbk编码中，一个字节占用2个字节）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; create table tt6(name varchar(21844)) charset=utf8;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="char和varchar比较"><a href="#char和varchar比较" class="headerlink" title="char和varchar比较"></a>char和varchar比较</h5><table>
+<thead>
+<tr>
+<th>实际存储</th>
+<th>char(4)</th>
+<th>varchar(4)</th>
+<th>char占用字节</th>
+<th>varchar占用字节</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>abcd</td>
+<td>abcd</td>
+<td>abcd</td>
+<td>4*3=12</td>
+<td>4*3+1=13</td>
+</tr>
+<tr>
+<td>A</td>
+<td>A</td>
+<td>A</td>
+<td>4*3=12</td>
+<td>1*3+1=4</td>
+</tr>
+<tr>
+<td>Abcde</td>
+<td>×</td>
+<td>×</td>
+<td>数据超出长度</td>
+<td>数据超出长度</td>
+</tr>
+</tbody>
+</table>
+<p><strong>如何选择定长或变长字符串？</strong></p>
+<ul>
+<li><p>如果数据长度都一样，就使用定长（char），比如：身份证，手机号，md5</p>
+<ul>
+<li><p>md5是一种加密方法，加密后的数据是不能逆行使用的，也就是说要查看用户密码信息，需要通过数据查询匹配来实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">如果数据库表User中有一列为passwd,存放的是md5加密的数据，如何更新新的数据。</span><br><span class="line">update user set passwd=md5(&quot;123321&quot;) where uName=&quot;lihua&quot;;</span><br><span class="line">插入新的数据：</span><br><span class="line">insert into user(uName,passwd) values(&quot;xiaoqiang&quot;,md5(&quot;123321&quot;)) ;</span><br><span class="line">这样存放在数据中的密码信息就是保密存放的，但是通过md5加密后的数据是不能逆向使用的，也就是说如果查看用户的密码信息，则需要通过数据查询匹配来实现。</span><br><span class="line">比如需要进行用户身份认证，则需要执行下面查询语句：</span><br><span class="line">select * from user where uName=&quot;lihua&quot; and passwd=md5(&quot;123321&quot;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>如果数据有变化，就用变长(varchar)，比如：名字，地址，但是你保证最长的数据能够存进去</p>
+</li>
+<li><p>定长的磁盘空间比较浪费，但是效率高</p>
+</li>
+<li><p>变长的磁盘空间比较节省，但是效率低</p>
+</li>
+</ul>
+<p><strong>注意：temp会根据varchar最大长度去创建临时表</strong></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/反射/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1460,130 +1810,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/24/动态顺序表/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dyson">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/img/background.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Dyson's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/24/动态顺序表/" itemprop="url">动态顺序表</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-24T22:12:41+08:00">
-                2018-10-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="标题：动态顺序表的功能实现"><a href="#标题：动态顺序表的功能实现" class="headerlink" title="标题：动态顺序表的功能实现"></a>标题：动态顺序表的功能实现</h3>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/10/24/动态顺序表/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1636,7 +1862,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
