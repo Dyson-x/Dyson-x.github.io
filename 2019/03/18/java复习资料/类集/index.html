@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="List接口 – 允许保存重复数据  java类集的引出，使用动态数组解决定长问题  ArrayList，Vector，LinkedList   每种集合的通用逻辑，都被抽象到相应的抽象类中，AbstractList集中了各种List操作的通用部分。这些集合不是完全孤立的，LinkList本身既是List，也是Deque  ArrayListArrayList类通过extends关键字继承Abst">
+<meta property="og:type" content="article">
+<meta property="og:title" content="类集">
+<meta property="og:url" content="http://yoursite.com/2019/03/18/java复习资料/类集/index.html">
+<meta property="og:site_name" content="Dyson&#39;s blog">
+<meta property="og:description" content="List接口 – 允许保存重复数据  java类集的引出，使用动态数组解决定长问题  ArrayList，Vector，LinkedList   每种集合的通用逻辑，都被抽象到相应的抽象类中，AbstractList集中了各种List操作的通用部分。这些集合不是完全孤立的，LinkList本身既是List，也是Deque  ArrayListArrayList类通过extends关键字继承Abst">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="c:/Users/ADMINI~1/AppData/Local/Temp/1552897701468.png">
+<meta property="og:image" content="c:/Users/ADMINI~1/AppData/Local/Temp/1552898663072.png">
+<meta property="og:updated_time" content="2019-03-18T09:57:50.730Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="类集">
+<meta name="twitter:description" content="List接口 – 允许保存重复数据  java类集的引出，使用动态数组解决定长问题  ArrayList，Vector，LinkedList   每种集合的通用逻辑，都被抽象到相应的抽象类中，AbstractList集中了各种List操作的通用部分。这些集合不是完全孤立的，LinkList本身既是List，也是Deque  ArrayListArrayList类通过extends关键字继承Abst">
+<meta name="twitter:image" content="c:/Users/ADMINI~1/AppData/Local/Temp/1552897701468.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/18/java复习资料/类集/">
+
+
+
+
+
+  <title>类集 | Dyson's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dyson's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">起风而益</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/18/java复习资料/类集/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dyson">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/background.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dyson's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">类集</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-18T16:22:12+08:00">
+                2019-03-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="List接口-–-允许保存重复数据"><a href="#List接口-–-允许保存重复数据" class="headerlink" title="List接口 – 允许保存重复数据"></a>List接口 – 允许保存重复数据</h3><p><--more--></--more--></p>
+<ul>
+<li>java类集的引出，使用动态数组解决定长问题</li>
+</ul>
+<p><strong>ArrayList，Vector，LinkedList</strong></p>
+<p><img src="C:\Users\ADMINI~1\AppData\Local\Temp\1552897701468.png" alt="1552897701468"></p>
+<ul>
+<li>每种集合的通用逻辑，都被抽象到相应的抽象类中，AbstractList集中了各种List操作的通用部分。这些集合不是完全孤立的，LinkList本身既是List，也是Deque</li>
+</ul>
+<h4 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h4><p><strong>ArrayList类</strong>通过extends关键字继承AbstractList抽象类，通过关键字implement实现List集合接口，RandomAccess标记接口，Cloneable克隆接口，Serializable序列化接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayList</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractList</span>&lt;<span class="title">E</span>&gt;</span></span><br><span class="line"><span class="class">        <span class="keyword">implements</span> <span class="title">List</span>&lt;<span class="title">E</span>&gt;, <span class="title">RandomAccess</span>, <span class="title">Cloneable</span>, <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span></span></span><br></pre></td></tr></table></figure>
+<p><img src="C:\Users\ADMINI~1\AppData\Local\Temp\1552898663072.png" alt="1552898663072"></p>
+<h5 id="接口RandomAccessa-java（实现随机访问）"><a href="#接口RandomAccessa-java（实现随机访问）" class="headerlink" title="接口RandomAccessa.java（实现随机访问）"></a>接口RandomAccessa.java（实现随机访问）</h5><ul>
+<li>此接口的主要目的是允许一般的算法更改其行为，从而在将其应用到随机或连续访问列表时能提供良好的性能。 </li>
+<li>接口RandomAccess 是一个标记接口，实现该接口的集合List 支持快速随机访问。List 集合尽量要实RandomAccess 接口，如果集合类是RandomAccess 的实现，则尽量用for(int i = 0; i &lt; size; i++) 来遍历效率高，而不要用Iterator迭代器来遍历(如果List是Sequence List，则最好用迭代器来进行迭代)</li>
+</ul>
+<h5 id="接口Cloneable"><a href="#接口Cloneable" class="headerlink" title="接口Cloneable"></a>接口Cloneable</h5><ul>
+<li><p>实现接口的目的是重写java.lang.Object的clone()的方法，实现浅拷贝。深拷贝和浅拷贝针对像 Object, Array 这样的复杂对象的。浅拷贝只复制一层对象的属性，而深拷贝则递归复制了所有层级。</p>
+<p><strong>关于深浅拷贝</strong></p>
+<ul>
+<li>浅拷贝</li>
+<li>深拷贝</li>
+</ul>
+</li>
+</ul>
+<h5 id="接口Serializable"><a href="#接口Serializable" class="headerlink" title="接口Serializable"></a>接口Serializable</h5><ul>
+<li><p>该接口无继承实现关系，实现给接口的类支持序列化。所以ArrayList支持序列化</p>
+<p><strong>关于序列化</strong></p>
+<ul>
+<li>序列化：将一个内存中保存的对象变成二进制数据流的形式进行传输，或者是将其保存在文本中。</li>
+<li>反序列化：可以将其他地方所存储的数据通过二进制数据流的方式读取出来</li>
+</ul>
+</li>
+</ul>
+<p>源码分析：</p>
+<p><strong>ArrayList的构造方法</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//序列版本号</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">8683452581122892189L</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//空数组</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object[] EMPTY_ELEMENTDATA = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//默认构造函数的空数组</span></span><br><span class="line"> <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = &#123;&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//数组缓冲区，存储元素的底层实现，真正存放元素的数组</span></span><br><span class="line"><span class="comment">//使用transient关键字修饰的elementData是不支持序列化的</span></span><br><span class="line"><span class="keyword">transient</span> Object[] elementData;<span class="comment">// non-private to simplify nested class access</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> <span class="comment">//指定初始化容量的构造方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">(<span class="keyword">int</span> initialCapacity)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//若初始容量大于0，则新建一个大小为指定容量的Object数组</span></span><br><span class="line">        <span class="keyword">if</span> (initialCapacity &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">this</span>.elementData = <span class="keyword">new</span> Object[initialCapacity];</span><br><span class="line">		<span class="comment">//若容量为0，则直接将空数组赋给elementData</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (initialCapacity == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">this</span>.elementData = EMPTY_ELEMENTDATA;</span><br><span class="line">		<span class="comment">//若容量小于0，则抛出异常</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Illegal Capacity: "</span>+</span><br><span class="line">                                               initialCapacity);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line"><span class="comment">//默认构造方法</span></span><br><span class="line"><span class="comment">//将默认的构造函数的空数组赋给elementData</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//利用别的集合类构建ArrayList的构造方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//用Collection.toArray()方法取得一个对象数组，并赋给elementData</span></span><br><span class="line">		<span class="comment">//浅拷贝</span></span><br><span class="line">        elementData = c.toArray();</span><br><span class="line">		<span class="comment">//size为集合元素数量，通过别的集合来构造ArrayList时，就需要给size赋值</span></span><br><span class="line">		<span class="comment">//如果size为0，直接空数组赋给elementData即可</span></span><br><span class="line">		<span class="comment">//如果size不为0，则要将Collection对象中的内容拷贝到elementData中</span></span><br><span class="line">        <span class="keyword">if</span> ((size = elementData.length) != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">// c.toArray might (incorrectly) not return Object[] (see 6260652)</span></span><br><span class="line">            <span class="comment">//深拷贝</span></span><br><span class="line">			<span class="keyword">if</span> (elementData.getClass() != Object[].class)</span><br><span class="line">                elementData = Arrays.copyOf(elementData, size, Object[].class);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// replace with empty array.</span></span><br><span class="line">            <span class="keyword">this</span>.elementData = EMPTY_ELEMENTDATA;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>无参构造方法中直接初始化Object[] elementData={}; </li>
+<li>带参构造方法是new Object()或者通过Arrays的方法转化为数组对象</li>
+</ul>
+<h5 id="问题一：ArrayList是数组还是集合"><a href="#问题一：ArrayList是数组还是集合" class="headerlink" title="问题一：ArrayList是数组还是集合"></a>问题一：ArrayList是数组还是集合</h5><ul>
+<li>ArrayList实现List接口，重写其中的add()，get()，remove()等方法，而方法的内部代码是基于数组来处理数据的。</li>
+<li>ArrayList是实现List接口的集合，是基于数组的集合，数据的存储容器是数组，集合方法是通过数组实现的（例如：泛型参数构造方法是将传入的集合c先转化为数组在进行处理的）。</li>
+</ul>
+<p><strong>通关add方法查看初始容量</strong></p>
+<ul>
+<li>ArrayList中定义了一个默认存储容器大小DEFAULT_CAPACITY=10，我们发现在构造方法创建ArrayList是并没有使用到该常量。在add添加元素的时候，先将size+1传入到ensureCapacityInternal()判断当前数组elementData是否需要扩容，足够size自增1，直接添加元素即可。<ul>
+<li>扩容：当数组还是默认的空数组时，这里的size+1=0 &lt; DEFAULT_CAPACITY 会将容器大小扩容为10，此时的elementData扩容为Object[10]</li>
+</ul>
+</li>
+</ul>
+<p><strong>问题二：</strong>ArrayList的初始容量是多少？</p>
+<ul>
+<li>当调用构造方法创建ArrayList时，默认无参构造对象的容器初始大小为0。而当调用add方法时才会将数组扩容为10.</li>
+</ul>
+<p><strong>ArrayList的扩容问题：</strong></p>
+<p>当elementData.length &lt; size+1时才会进行扩容，调用grow方法。</p>
+<ul>
+<li>先取到当前容器大小oldCapacity，进行扩容，判断扩容容量是否合法，是否溢出，然后处理为合理的大小<ul>
+<li>使用<code>newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1)</code>计算出来预计扩容的大小，如果该大小仍然小于数组所扩容后的大小，<code>newCapacity = minCapacity;</code>重新改写新扩容后数组容量，如果新数组大小大于数组的最大容量限度，调用huneCapacity()方法，直接将容量大小定义为Integer的最大值，最后调用Arrays方法进行拷贝</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">--------------------------------------------------------------------</span><br><span class="line"> <span class="comment">//默认初始化数组容量</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_CAPACITY = <span class="number">10</span>;</span><br><span class="line"> <span class="comment">// 集合最大容量     </span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAX_ARRAY_SIZE = Integer.MAX_VALUE - <span class="number">8</span>;</span><br><span class="line"> <span class="comment">//当前数组的大小</span></span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">int</span> size;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> size;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> size == <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">//添加元素，添加成功返回true</span></span><br><span class="line"> <span class="comment">//每次添加元素之前都会检查一下是否需要扩容</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//判断添加后的容量，选择是否需要扩容</span></span><br><span class="line">        ensureCapacityInternal(size + <span class="number">1</span>);  <span class="comment">// Increments modCount!!</span></span><br><span class="line">		<span class="comment">//在数组末尾添加元素，更新size</span></span><br><span class="line">        elementData[size++] = e;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ensureCapacityInternal</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">        ensureExplicitCapacity(calculateCapacity(elementData, minCapacity));</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line"> <span class="comment">//当第一次添加元素，需要获取数组初始容量，返回minCapacity和默认初始容量中的较大值</span></span><br><span class="line"> <span class="comment">//当不是第一次添加元素，则直接返回minCapacity</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">calculateCapacity</span><span class="params">(Object[] elementData, <span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) &#123;</span><br><span class="line">            <span class="keyword">return</span> Math.max(DEFAULT_CAPACITY, minCapacity);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> minCapacity;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line"> <span class="comment">//moCount(修改次数)自增1,判断是否需要扩充数组长度</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ensureExplicitCapacity</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">        modCount++;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// overflow-conscious code</span></span><br><span class="line">        <span class="keyword">if</span> (minCapacity - elementData.length &gt; <span class="number">0</span>)</span><br><span class="line">			<span class="comment">//增加数组长度</span></span><br><span class="line">            grow(minCapacity);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line"> <span class="comment">//数组扩容，默认需要扩容1.5倍</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">grow</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// overflow-conscious code</span></span><br><span class="line">        <span class="keyword">int</span> oldCapacity = elementData.length;</span><br><span class="line">		<span class="comment">//新数组大小为原数组的1.5倍</span></span><br><span class="line">        <span class="keyword">int</span> newCapacity = oldCapacity + (oldCapacity &gt;&gt; <span class="number">1</span>);</span><br><span class="line">		<span class="comment">//如果新数组大小仍然小于minCapacity，则更新newCapacity的值</span></span><br><span class="line">        <span class="keyword">if</span> (newCapacity - minCapacity &lt; <span class="number">0</span>)</span><br><span class="line">            newCapacity = minCapacity;</span><br><span class="line">		<span class="comment">//如果新数组大小大于数组的最大容量限度，调用huneCapacity()方法</span></span><br><span class="line">        <span class="keyword">if</span> (newCapacity - MAX_ARRAY_SIZE &gt; <span class="number">0</span>)</span><br><span class="line">            newCapacity = hugeCapacity(minCapacity);</span><br><span class="line">        <span class="comment">// minCapacity is usually close to size, so this is a win:</span></span><br><span class="line">		<span class="comment">//建立一个新数组进行扩容拷贝</span></span><br><span class="line">        elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line"> <span class="comment">//新数组的大小</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">hugeCapacity</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//若minCapacity小于0，抛异常</span></span><br><span class="line">        <span class="keyword">if</span> (minCapacity &lt; <span class="number">0</span>) <span class="comment">// overflow</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> OutOfMemoryError();</span><br><span class="line">        <span class="comment">//超过最大值不合法，直接将容量大小定义为Integer的最大值</span></span><br><span class="line">        <span class="keyword">return</span> (minCapacity &gt; MAX_ARRAY_SIZE) ?</span><br><span class="line">            Integer.MAX_VALUE :</span><br><span class="line">            MAX_ARRAY_SIZE;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">//指定位置添加元素</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> index, E element)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//越界判断，如果越界抛异常</span></span><br><span class="line">        rangeCheckForAdd(index);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//判断是否需要扩容，步骤和上面一样</span></span><br><span class="line">        ensureCapacityInternal(size + <span class="number">1</span>);  <span class="comment">// Increments modCount!!</span></span><br><span class="line">		<span class="comment">//将数组从index开始的数据往后移一位</span></span><br><span class="line">        System.arraycopy(elementData, index, elementData, index + <span class="number">1</span>,</span><br><span class="line">                         size - index);</span><br><span class="line">		<span class="comment">//添加元素</span></span><br><span class="line">        elementData[index] = element;</span><br><span class="line">        size++;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="ArrayList的序列化问题补充"><a href="#ArrayList的序列化问题补充" class="headerlink" title="ArrayList的序列化问题补充"></a>ArrayList的序列化问题补充</h5><ul>
+<li>集合的存储容器elementData 使用transient 关键字修饰不支持序列化，但是我们知道ArrayList 是支持序列化的，那我们是怎么序列化集合中的数据呢，这里不直接序列化elementData，而是遍历每个数据分别进行IO 流处理来实现存储容器中对象的序列化的。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ArrayList 列表结构被修改的次数。        </span></span><br><span class="line">   <span class="keyword">protected</span> <span class="keyword">transient</span> <span class="keyword">int</span> modCount = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">writeObject</span><span class="params">(java.io.ObjectOutputStream s)</span></span></span><br><span class="line"><span class="function">       <span class="keyword">throws</span> java.io.IOException</span>&#123;</span><br><span class="line">       <span class="comment">// Write out element count, and any hidden stuff</span></span><br><span class="line">       <span class="comment">//ArrayList 列表结构被修改的次数</span></span><br><span class="line">       <span class="keyword">int</span> expectedModCount = modCount;</span><br><span class="line">       s.defaultWriteObject();</span><br><span class="line">       <span class="comment">// Write out size as capacity for behavioural compatibility with clone()</span></span><br><span class="line">       s.writeInt(size);</span><br><span class="line">       <span class="comment">//对每一对象进行IO流的写处理</span></span><br><span class="line">       <span class="comment">// Write out all elements in the proper order.</span></span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;size; i++) &#123;</span><br><span class="line">           s.writeObject(elementData[i]);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span> (modCount != expectedModCount) &#123;</span><br><span class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>modCount是表示ArrayList对象被修改的次数，Iterator中有一个成员变量expectedModCount，在创建时会将modCount赋值给他，用来检验在迭代过程中List对象是否被修改，如果被修改就会抛出ConcurrentModificationException异常。在每次调用Iterator对象的next方法时都会调用checkForComodification()方法进行检验，将modCount与expectedModCount进行对比。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/08/Java并发编程/互斥锁/" rel="next" title="互斥锁">
+                <i class="fa fa-chevron-left"></i> 互斥锁
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/img/background.jpg" alt="Dyson">
+            
+              <p class="site-author-name" itemprop="name">Dyson</p>
+              <p class="site-description motion-element" itemprop="description">起风而沐！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Dyson-x" target="_blank" title="GitHub">
+                      GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/ds19980228" target="_blank" title="CSDN">
+                      CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#List接口-–-允许保存重复数据"><span class="nav-number">1.</span> <span class="nav-text">List接口 – 允许保存重复数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ArrayList"><span class="nav-number">1.1.</span> <span class="nav-text">ArrayList</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#接口RandomAccessa-java（实现随机访问）"><span class="nav-number">1.1.1.</span> <span class="nav-text">接口RandomAccessa.java（实现随机访问）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#接口Cloneable"><span class="nav-number">1.1.2.</span> <span class="nav-text">接口Cloneable</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#接口Serializable"><span class="nav-number">1.1.3.</span> <span class="nav-text">接口Serializable</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题一：ArrayList是数组还是集合"><span class="nav-number">1.1.4.</span> <span class="nav-text">问题一：ArrayList是数组还是集合</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ArrayList的序列化问题补充"><span class="nav-number">1.1.5.</span> <span class="nav-text">ArrayList的序列化问题补充</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dyson</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

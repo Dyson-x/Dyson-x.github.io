@@ -250,6 +250,487 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/31/数据库/数据库增删查改/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dyson">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/background.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dyson's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/31/数据库/数据库增删查改/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-31T21:23:46+08:00">
+                2018-12-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="数据库笔记"><a href="#数据库笔记" class="headerlink" title="数据库笔记"></a>数据库笔记</h2><p>###表的增删改差（CRUD：Creat，Retrieve，Update，Delete）</p>
+<h4 id="1-插入是否更新"><a href="#1-插入是否更新" class="headerlink" title="1. 插入是否更新"></a>1. 插入是否更新</h4><p>由于<strong>主键或者唯一键</strong>对应的值已经存在而导致插入失败</p>
+<ul>
+<li><p>选择性的进行同步更新操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">insert ... on duplicate key update</span><br><span class="line">	column = value [,column = value] ...</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>举例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">insert into students （id,sn,name）values （100,10010，&apos;lalala&apos;） </span><br><span class="line">	on delicate key update sn=10010,name=&apos;lalala&apos;;</span><br><span class="line"></span><br><span class="line">三种情况</span><br><span class="line">-- 0 row affected: 表中有冲突数据，但冲突数据的值和 update 的值相等</span><br><span class="line">-- 1 row affected: 表中没有冲突数据，数据被插⼊</span><br><span class="line">-- 2 row affected: 表中有冲突数据，并且数据已经被更新</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>查看函数获取受到影响的数据行数</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select row_count();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>####2.替换（replace） </p>
+<ul>
+<li>主键或者唯一键没有冲突，则直接插入</li>
+<li>主键或者唯一键有冲突，则删除后再插入</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">replace into students (sn,name) values (20001,&apos;曹阿瞒&apos;);</span><br><span class="line"></span><br><span class="line">两种情况</span><br><span class="line">-- 1 row affected: 表中没有冲突数据，数据被插⼊</span><br><span class="line">-- 2 row affected: 表中有冲突数据，删除后重新插⼊</span><br></pre></td></tr></table></figure>
+<h3 id="Retrieve"><a href="#Retrieve" class="headerlink" title="Retrieve"></a>Retrieve</h3><p>案例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE exam_result (   </span><br><span class="line">id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,   </span><br><span class="line">name VARCHAR(20) NOT NULL COMMENT &apos;同学姓名&apos;,   </span><br><span class="line">yuwen float DEFAULT 0.0 COMMENT &apos;语文成绩&apos;,    </span><br><span class="line">shuxue float DEFAULT 0.0 COMMENT &apos;数学成绩&apos;,    </span><br><span class="line">yingyu float DEFAULT 0.0 COMMENT &apos;英语成绩&apos; );</span><br><span class="line"></span><br><span class="line">INSERT INTO exam_result (name, yuwen, shuxue, yingyu) VALUES    </span><br><span class="line">(&apos;唐三藏&apos;, 67, 98, 56),   </span><br><span class="line">(&apos;孙悟空&apos;, 87, 78, 77),   </span><br><span class="line">(&apos;猪悟能&apos;, 88, 98, 90), </span><br><span class="line">(&apos;曹孟德&apos;, 82, 84, 67),  </span><br><span class="line">(&apos;刘玄德&apos;,55,85,45),</span><br><span class="line">(&apos;孙权&apos;, 70, 73, 78),</span><br><span class="line">(&apos;宋公明&apos;,75,65,30);</span><br></pre></td></tr></table></figure>
+<p>####1.select列</p>
+<ol>
+<li><p>全列查询</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from 表明;</span><br></pre></td></tr></table></figure>
+<ul>
+<li style="list-style: none"><input type="checkbox" checked> 查询的列越多，意味着传输的数据越大</li>
+<li style="list-style: none"><input type="checkbox"> 可能会影响引索的使用</li>
+</ul>
+</li>
+<li><p>指定列查询</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--- 指定列的顺序不需要按定义表的顺序进行查询</span><br><span class="line">select id,name,yuwen from exam_result;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查询字段为表达式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--- 表达式不包含字段</span><br><span class="line">select id,name,666 from exam_result;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--- 表达式包含一个字段</span><br><span class="line">select id,name,yuwen+10 from exam_result;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--- 表达式包含多个字段，并且将查询结果指定别名</span><br><span class="line"> select id,name,yuwen+shuxue+yingyu as total from exam_result;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查询结果去重（distinct）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select distinct shuxue from exam_result;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="2-where条件"><a href="#2-where条件" class="headerlink" title="2.where条件"></a>2.where条件</h4><ol>
+<li><p><strong>&gt;,&gt;=,&lt;,&lt;= </strong> 英语不及格的同学以及英语成绩（&lt;60）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select neme,yingyu from exam_result where yingyu&lt;60;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>between a0 and a1</strong>  语文成绩在[80,90]分的同学以及语文成绩</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select name,yuwen from exam_result where yuwen&gt;80 and yuwen&lt;90;</span><br><span class="line">--- 使用between...and... 条件</span><br><span class="line">select name,yuwen from exam_result where yuwen between 80 and 90;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>in(option,…)</strong>  数学成绩是58或者59或者98或者99分的同学及数学成绩</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select name,shuxue from exam_result where shuxue=58 or shuxue=59 or shuxue=98 or shuxue=99;</span><br><span class="line">--- 使用 in 条件,满足其中任意一个条件即可</span><br><span class="line">select name,shuxue from exam_result where shuxue in (58,59,98,99);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>like</strong>  姓孙的同学及孙某同学</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--- % 匹配多个任意字符  _ 匹配一个任意字符</span><br><span class="line">select name from exam_result where name like &apos;孙%&apos; or &apos;孙_&apos;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>语文成绩好于英语成绩的同学</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select name,yuwen,shuxue from exam_result where yuwen&gt;shuxue;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>总分在200分一下的同学</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--- 注意：由于执行顺序的原因(后面详细说明)，别名不能在where条件中使用</span><br><span class="line">select name ,yuwen+shuxue+yingyu as total from exam_result where yuwen+shuxue+yingyu&lt;200;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>not</strong>  语文成绩&gt;80且不姓孙的同学</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select name,yuwen from exam_result where yuwen&gt;80 and name not like &apos;孙%&apos;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>and,or</strong>   孙某同学，否则要求总成绩&gt;200并且语文成绩&lt;数学成绩并且英语成绩&gt;80</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select name,yuwen+shuxue+yingyu as total from exam_result where name like &apos;孙_&apos; or (yuwen+shuxue+yingyu&gt;200 and yuwen&lt;shuxue and yingyu&gt;80);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>NULL查询</p>
+<p><strong>&lt;=&gt;</strong>：等于，NULL安全，例如NULL&lt;=&gt;NULL的结果为TRUE(1)</p>
+<p><strong>=</strong>：等于，NULL不安全，；例如NULL=NULL的结果为NULL</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">--- NULL和NULL比较，=和&lt;=&gt;的区别</span><br><span class="line">select null=null,null=1,null=0;</span><br><span class="line">+-----------+--------+--------+</span><br><span class="line">| null=null | null=1 | null=0 |</span><br><span class="line">+-----------+--------+--------+</span><br><span class="line">|      NULL |   NULL |   NULL |</span><br><span class="line">+-----------+--------+--------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">select null&lt;=&gt;null,null&lt;=&gt;1,null&lt;=&gt;0;</span><br><span class="line">+-------------+----------+----------+</span><br><span class="line">| null&lt;=&gt;null | null&lt;=&gt;1 | null&lt;=&gt;0 |</span><br><span class="line">+-------------+----------+----------+</span><br><span class="line">|           1 |        0 |        0 |</span><br><span class="line">+-------------+----------+----------+</span><br><span class="line">1 row in set (0.03 sec)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>####3.排序结果</p>
+<p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-- ASC 为升序（从小到大）</span><br><span class="line">-- DESC 为降序（从大到小）</span><br><span class="line">-- 默认 ASC</span><br><span class="line"></span><br><span class="line">SELECT ... FROM table_name [WHERE ...]     </span><br><span class="line">	ORDER BY column [ASC|DESC], [...];</span><br></pre></td></tr></table></figure>
+<p><strong>注意：没有order by子句的查询，返回的顺序是未定义的，永远不要依赖这个顺序</strong></p>
+<ol>
+<li><p>同学及数学成绩，按数学成绩升序显示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select name,shuxue from exam_result order by shuxue;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>NULL</strong>视为比任何值都要小，升序出现在最上面，降序出现在最下面</p>
+</li>
+<li><p>查询同学各门成绩，一次按数学降序，英语升序，语文升序的方式显示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--- 多字段排序，排序优先级随书写顺序</span><br><span class="line">select name,yuwen,shuxue,yingyu from exam_result order by shuxue desc,yingyu,yuwen;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查询同学及总分，由高到低</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select name,yuwen+shuxue+yingyu as total from exam_result order by total desc;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查询姓孙的同学或者姓曹的同学数学成绩，结果按照数学成绩由高到低显示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select name,shuxue from exam_result where name like &apos;孙%&apos; or name like &apos;曹%&apos; order by shuxue desc;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="4-筛选分页结果"><a href="#4-筛选分页结果" class="headerlink" title="4.筛选分页结果"></a>4.筛选分页结果</h4><p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">---其实下标为0</span><br><span class="line"></span><br><span class="line">---从0开始，筛选n条结果</span><br><span class="line">SELECT ... FROM table_name [WHERE ...] [ORDER BY ...] LIMIT n</span><br><span class="line"></span><br><span class="line">---从s开始，筛选n条结果</span><br><span class="line">SELECT ... FROM table_name [WHERE ...] [ORDER BY ...] LIMIT s, n;</span><br><span class="line"></span><br><span class="line">---从s开始，筛选n条结果，比第二种用法更明确，建议使用</span><br><span class="line">SELECT ... FROM table_name [WHERE ...] [ORDER BY ...] LIMIT n OFFSET s;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>建议：队未知表进行查询时，最好加一条<strong>limit 1</strong>，避免因为表中数据过大，查询全表数据导致数据库卡死</li>
+</ul>
+<ol>
+<li><p>按id进行分页，每页3条记录，分别显示第1,2,3页</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">--- 第一页</span><br><span class="line">select id,name,yuwen,shuxue,yingyu from exam_result order by id limit 3 offset 0;</span><br><span class="line">+----+-----------+-------+--------+--------+</span><br><span class="line">| id | name      | yuwen | shuxue | yingyu |</span><br><span class="line">+----+-----------+-------+--------+--------+</span><br><span class="line">|  1 | 唐三藏    |    67 |     98 |     56 |</span><br><span class="line">|  2 | 孙悟空    |    87 |     78 |     77 |</span><br><span class="line">|  3 | 猪悟能    |    88 |     98 |     90 |</span><br><span class="line">+----+-----------+-------+--------+--------+</span><br><span class="line"></span><br><span class="line">--- 第二页</span><br><span class="line">select id,name,yuwen,shuxue,yingyu from exam_result order by id limit 3 offset 3;</span><br><span class="line">+----+-----------+-------+--------+--------+</span><br><span class="line">| id | name      | yuwen | shuxue | yingyu |</span><br><span class="line">+----+-----------+-------+--------+--------+</span><br><span class="line">|  4 | 曹孟德    |    82 |     84 |     67 |</span><br><span class="line">|  5 | 刘玄德    |    55 |     85 |     45 |</span><br><span class="line">|  6 | 孙权      |    70 |     73 |     78 |</span><br><span class="line">+----+-----------+-------+--------+--------+</span><br><span class="line"></span><br><span class="line">--- 第三页，如果结果不足3个，不会对数据有影响</span><br><span class="line">select id,name,yuwen,shuxue,yingyu from exam_result order by id limit 3 offset 6;</span><br><span class="line">+----+-----------+-------+--------+--------+</span><br><span class="line">| id | name      | yuwen | shuxue | yingyu |</span><br><span class="line">+----+-----------+-------+--------+--------+</span><br><span class="line">|  7 | 宋公明    |    75 |     65 |     30 |</span><br><span class="line">+----+-----------+-------+--------+--------+</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>####5.Updata</p>
+<p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UPDATE table_name SET column = expr [, column = expr ...]    	[WHERE ...] [ORDER BY ...] [LIMIT ...]</span><br></pre></td></tr></table></figure>
+<p><strong>对查询到的接轨进行列值更新</strong></p>
+<ol>
+<li><p>将孙悟空同学的数学成绩变更为80分</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">update exam_result set shuxue=80 where name=&apos;孙悟空&apos;;</span><br><span class="line">Query OK, 1 row affected (0.14 sec)</span><br><span class="line">Rows matched: 1  Changed: 1  Warnings: 0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将曹孟德同学成绩变更为60分，语文成绩变更为70分</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">update exam_result set shuxue=60,yuwen=70 where name=&apos;曹孟德&apos;;</span><br><span class="line">Query OK, 1 row affected (0.08 sec)</span><br><span class="line">Rows matched: 1  Changed: 1  Warnings: 0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将总成绩倒数前三的3位同学的数学成绩加上30分</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update exam_result set shuxue=shuxue+30 order by shuxue+yuwen+yingyu limit 3;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将所有同学的语文成绩更新为原来的2倍</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update exam_result set yuwen=yuwen*2;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="6-Delete"><a href="#6-Delete" class="headerlink" title="6.Delete"></a>6.Delete</h4><p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM  table_name [WHERE ...] [ORDER BY ...] [LIMIT ...]</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>删除孙悟空同学的考试成绩</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete from exam_result where name=&apos;孙悟空&apos;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除整张表数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete from 表明;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>截断表（truncate）</strong></p>
+<p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TRUNCATE [TABLE] table_name</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注意：该操作慎用<ol>
+<li>只能对整张表操作，不能像delete一样针对部分数据操作</li>
+<li>直接全部删除，不关心表中所存储的数据</li>
+<li>会重置auto_increment项</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="7-插入查询结果（将一张表查询结果插入到另外一张表中，再重命名即可）"><a href="#7-插入查询结果（将一张表查询结果插入到另外一张表中，再重命名即可）" class="headerlink" title="7. 插入查询结果（将一张表查询结果插入到另外一张表中，再重命名即可）"></a>7. 插入查询结果（将一张表查询结果插入到另外一张表中，再重命名即可）</h4><p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO table_name [(column [, column ...])] SELECT ...</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>案例：删除表中重复记录，重复的数据值能有一份</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">-- 创建原表数据</span><br><span class="line">mysql&gt; CREATE TABLE duplicate_table (id int, name varchar(20));</span><br><span class="line">Query OK, 0 rows affected (0.45 sec)</span><br><span class="line"></span><br><span class="line">-- 插入测试数据</span><br><span class="line">mysql&gt; INSERT INTO duplicate_table VALUES</span><br><span class="line">	(100, &apos;aaa&apos;),    </span><br><span class="line">	(100, &apos;aaa&apos;),   </span><br><span class="line">	(200, &apos;bbb&apos;),    </span><br><span class="line">	(200, &apos;bbb&apos;),    </span><br><span class="line">	(200, &apos;bbb&apos;),    </span><br><span class="line">	(300, &apos;ccc&apos;);</span><br><span class="line">Query OK, 6 rows affected (0.09 sec)</span><br><span class="line">Records: 6  Duplicates: 0  Warnings: 0</span><br><span class="line"></span><br><span class="line">-- 建立一张空表，空表的结构和原表的结构相同</span><br><span class="line">mysql&gt; CREATE TABLE no_duplicate_table LIKE duplicate_table;</span><br><span class="line">Query OK, 0 rows affected (0.42 sec)</span><br><span class="line"></span><br><span class="line">-- 将原表去重后的数据插入到新表中</span><br><span class="line">mysql&gt; INSERT INTO no_duplicate_table SELECT DISTINCT * FROM duplicate_table;</span><br><span class="line">Query OK, 3 rows affected (0.11 sec)</span><br><span class="line">Records: 3  Duplicates: 0  Warnings: 0</span><br><span class="line"></span><br><span class="line">-- 通过重命名表，实现原子操作（就不用担心在去重的过程中会有新的数据插入）</span><br><span class="line">mysql&gt; RENAME TABLE duplicate_table TO old_duplicate_table, no_duplicate_table TO duplicate_table;</span><br><span class="line">Query OK, 0 rows affected (0.47 sec)</span><br><span class="line"></span><br><span class="line">-- 查看结果</span><br><span class="line">mysql&gt; SELECT * FROM duplicate_table</span><br><span class="line">    -&gt; ;</span><br><span class="line">+------+------+</span><br><span class="line">| id   | name |</span><br><span class="line">+------+------+</span><br><span class="line">|  100 | aaa  |</span><br><span class="line">|  200 | bbb  |</span><br><span class="line">|  300 | ccc  |</span><br><span class="line">+------+------+</span><br><span class="line">3 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="8-聚合函数"><a href="#8-聚合函数" class="headerlink" title="8. 聚合函数"></a>8. 聚合函数</h4><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>COUNT([DISTINCT] expr)</td>
+<td>返回查询到的数据的数量</td>
+</tr>
+<tr>
+<td>SUM([DISTINCT] expr)</td>
+<td>返回查询到的数据的总和</td>
+</tr>
+<tr>
+<td>AVG([DISTINCT] expr)</td>
+<td>返回查询到的数据的平均值</td>
+</tr>
+<tr>
+<td>MAX([DISTINCT] expr)</td>
+<td>返回查询到的数据的最大值</td>
+</tr>
+<tr>
+<td>MIN([DISTINCT] expr)</td>
+<td>返回查询到的数据的最小值</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li><p>统计班级共有多少学生</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">-- 这里以 * 做统计，不受mull影响</span><br><span class="line">select count(*) from students;</span><br><span class="line">+----------+</span><br><span class="line">| count(*) |</span><br><span class="line">+----------+</span><br><span class="line">|        4 |</span><br><span class="line">+----------+</span><br><span class="line">1 row in set (0.05 sec)</span><br><span class="line"></span><br><span class="line">-- 使表达式做统计</span><br><span class="line">select count(10) from students;</span><br><span class="line">+-----------+</span><br><span class="line">| count(10) |</span><br><span class="line">+-----------+</span><br><span class="line">|         4 |</span><br><span class="line">+-----------+</span><br><span class="line">1 row in set (0.01 sec)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>统计班级收集qq号有多少</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-- null不会计入结果</span><br><span class="line">select count(qq) from students;</span><br><span class="line">+-----------+</span><br><span class="line">| count(qq) |</span><br><span class="line">+-----------+</span><br><span class="line">|         1 |</span><br><span class="line">+-----------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>统计本次考试的数学成绩分数个数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select count(shuxue) from exam_result;</span><br><span class="line"></span><br><span class="line">统计去重后数学成绩分数个数</span><br><span class="line">select count(distinct shuxue) from exam_result;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>统计数学成绩总分</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select sum(shuxue) from exam_result;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>统计平均总分</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select avg(shuxue+yingyu+yuwen) from exam_result;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>返回英语最高分</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select max(yingyu) from exam_result;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>返回&gt;70分以上的数学最低分</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select min(shuxue) from exam_result where shuxue&gt;70;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="9-group-by子句的使用"><a href="#9-group-by子句的使用" class="headerlink" title="9.group by子句的使用"></a>9.group by子句的使用</h4><p>语法：在select中使用group by子句可以对指定列进行分组查询</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select column1, column2, .. from table group by column;</span><br></pre></td></tr></table></figure>
+<p>案例：</p>
+<ul>
+<li><p>创建一个雇员信息表</p>
+<ul>
+<li>emp 员工表</li>
+<li>dept 部门表</li>
+<li>salgrade 工资等级表</li>
+</ul>
+</li>
+<li><p>显示每个部门的平均工资和最高工资</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select deptno,avg(sal),max(sal) from emp group by deptno;</span><br><span class="line">+--------+-------------+----------+</span><br><span class="line">| deptno | avg(sal)    | max(sal) |</span><br><span class="line">+--------+-------------+----------+</span><br><span class="line">|     10 | 2916.666667 |  5000.00 |</span><br><span class="line">|     20 | 2175.000000 |  3000.00 |</span><br><span class="line">|     30 | 1566.666667 |  2850.00 |</span><br><span class="line">+--------+-------------+----------+</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示每个部门的每种岗位的平均工资和最高工资</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">select avg(sal),min(sal),job,deptno from emp group by deptno,job;</span><br><span class="line">+-------------+----------+-----------+--------+</span><br><span class="line">| avg(sal)    | min(sal) | job       | deptno |</span><br><span class="line">+-------------+----------+-----------+--------+</span><br><span class="line">| 1300.000000 |  1300.00 | CLERK     |     10 |</span><br><span class="line">| 2450.000000 |  2450.00 | MANAGER   |     10 |</span><br><span class="line">| 5000.000000 |  5000.00 | PRESIDENT |     10 |</span><br><span class="line">| 3000.000000 |  3000.00 | ANALYST   |     20 |</span><br><span class="line">|  950.000000 |   800.00 | CLERK     |     20 |</span><br><span class="line">| 2975.000000 |  2975.00 | MANAGER   |     20 |</span><br><span class="line">|  950.000000 |   950.00 | CLERK     |     30 |</span><br><span class="line">| 2850.000000 |  2850.00 | MANAGER   |     30 |</span><br><span class="line">| 1400.000000 |  1250.00 | SALESMAN  |     30 |</span><br><span class="line">+-------------+----------+-----------+--------+</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示平均工资低于2000的部门和它的平均工资</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-- aving与group by配合使用，对group by结构进行筛选</span><br><span class="line">select avg(sal) as avg_sal from emp group by deptno having avg_sal&lt;2000;</span><br><span class="line">+-------------+</span><br><span class="line">| avg_sal     |</span><br><span class="line">+-------------+</span><br><span class="line">| 1566.666667 |</span><br><span class="line">+-------------+</span><br><span class="line">1 row in set (0.16 sec)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="面试题（重要）："><a href="#面试题（重要）：" class="headerlink" title="面试题（重要）："></a>面试题（重要）：</h4><ul>
+<li><p>SQL查询中各个关键字的执行先后顺序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from &gt; on &gt;join &gt; where &gt; group by &gt; with &gt; having &gt; select &gt; distinct &gt; order by &gt; limit</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="复合查询（重点）"><a href="#复合查询（重点）" class="headerlink" title="复合查询（重点）"></a>复合查询（重点）</h3><h4 id="基本查询回顾"><a href="#基本查询回顾" class="headerlink" title="基本查询回顾"></a>基本查询回顾</h4><ul>
+<li><p>查询工资高于或岗位为manager的雇员，同时满足他们的姓名首字母为大写的J</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from emp where (sal&gt;500 or job=&apos;manager&apos;) and ename like &apos;J%&apos;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>按照部门号升序雇员的工资降序排序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from emp order by deptno,sal desc;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用年薪进行将序排序   <code>isnuff</code>如果为第一个参数不为空就取第一个参数，为空取第二个参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select ename,sal*12+ifnull(comm,0) as &apos;年薪&apos; from emp order by 年薪 desc</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示工资最高的员工名字和岗位</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select ename,job from emp where sal=(select max(sal) from emp);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示工资高于平均工资的员工信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select ename,job from emp where sal&gt;(select avg(sal) from emp);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示每个部门的平均工资和最高工资  <code>fromat(29999,2)</code>含义是小数点后保留两位</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select deptno,max(sal),avg(sal) from emp group by deptno;</span><br><span class="line"></span><br><span class="line">select deptno, format(avg(sal), 2) , max(sal) from EMP group by deptno;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>显示平均工资低于2000的部门和它的平均工资</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select deptno,avg(sal) avg_sal from emp group by deptno having avg_sal&lt;2000;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示每中岗位的雇员总数，平均工资</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select job,count(job),avg(sal) from emp group by job;</span><br><span class="line"></span><br><span class="line">select job,count(*), format(avg(sal),2) from EMP group by job;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h4><ul>
+<li><p>显示雇员名，雇员工资以及所在部门的名字因为上面的数据来自emp和dept表，因此要联合查询</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select emp.ename,emp.sal,dept.dname from emp,dept where emp.deptno=dept.deptno;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示部门号为10的部门名，员工名和工资</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select ename,sal,dname from emp,dept where emp.deptno=dept.deptno and dept.deptno=10;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示各个员工姓名，工资，以及工资级别</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select ename,sal,grade from emp,salgrade where emp.sal between losal and hisal;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="自连接"><a href="#自连接" class="headerlink" title="自连接"></a>自连接</h4><p><strong>自连接是指在同一张表连接查询</strong></p>
+<ul>
+<li><p>显示员工ford的上级领导的编号和姓名（mgr是员工领导的编号–empno）</p>
+<ul>
+<li><p>使用的子查询</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select empno,ename from emp where empno=(select mgr from emp where ename=&apos;ford&apos;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用多表查询 – 使用别名将一张表分成两份分别使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select leader.empno,leader.ename from emp leader,emp worker where leader.empno=worker.mgr and worker.ename=&apos;ford&apos;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h4><h5 id="单行子查询"><a href="#单行子查询" class="headerlink" title="单行子查询"></a>单行子查询</h5><ul>
+<li><p>显示smith同一部门的员工</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select ename from emp where deptno=(select deptno from emp where ename=&apos;smith&apos;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="多行子查询"><a href="#多行子查询" class="headerlink" title="多行子查询"></a>多行子查询</h5><ul>
+<li><p><strong>in关键字</strong>：查询和10号部门的工作相同的雇员的名字，岗位，工资，部门号，但是不包含10自己</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select ename,job,sal,empno from emp where job in(select job from emp where deptno=10) and deptno&lt;&gt;10;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>all关键字</strong>：显示工资比部门30的所有员工的工资高的员工的姓名，工资和部门号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select ename,sal,deptno from emp where sal&gt;all(select sal from emp where deptno=30);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>any关键字</strong>：显示工资比部门30的任意员工的工资高的员工的姓名，工资和部门号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select ename, sal, deptno from emp where sal &gt; any(select sal from emp where deptno=30);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="多列子查询"><a href="#多列子查询" class="headerlink" title="多列子查询"></a>多列子查询</h5><ul>
+<li><p>查询和SMITH的部门和岗位完全相同的所有雇员，不含SMITH本人</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select ename from emp where (deptno, job)=(select deptno, job from emp where ename=&apos;smith&apos;) and ename&lt;&gt;&apos;smith&apos;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="在from子句中使用子查询"><a href="#在from子句中使用子查询" class="headerlink" title="在from子句中使用子查询"></a>在from子句中使用子查询</h4><ul>
+<li><p>显示高于自己部门平均工资的员工的姓名、部门、工资、平均工资</p>
+<ul>
+<li>将子查询当做成一个临时表</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select ename,deptno,sal,avg(sal) from emp,</span><br><span class="line">(select avg(sal) avg_sal,deptno dt from emp group by deptno) tmp</span><br><span class="line">where emp.sal&gt;tmp.avg_sal and emp.deptno=tmp.dt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示每个部门的信息（部门号，编号，地址）和人员数量</p>
+<ul>
+<li>使用多表查询</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select dept.dname,dept.deptno,dept.loc,count(*) from emp,dept where emp.deptno=dept.deptno group by dept.deptno;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用子查询 – 将emp表当做成临时表去使用</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select dept.dname,dept.deptno,dept.loc,mycount from dept,(select count(*) mycount,deptno from emp group by deptno) tmp where dept.deptno=tmp.deptno;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="合并查询"><a href="#合并查询" class="headerlink" title="合并查询"></a>合并查询</h4><ul>
+<li><p><strong>union</strong> 该操作符用于取得两结果集的并集。当使用该操作符时，会自动去掉结果集中的重复行。</p>
+<ul>
+<li><p>将工资大于2500或职位为manager的人找出来</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select ename,sal,job from emp where sal&gt;2500 union</span><br><span class="line">select ename,sal,job from emp where job=&apos;manager&apos;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>union all</strong> 该操作符取得两个结果的并集。当使用该操作符时，不会去掉集中的重复行</p>
+<ul>
+<li><p>将工资大于2500或职位为manager的人找出来</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select ename,sal,job from emp where sal&gt;2500 union all</span><br><span class="line">select ename,sal,job from emp where job=&apos;manager&apos;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>在SQL语句中 || 用于连接两个字符串</p>
+<h3 id="表的内连和外连"><a href="#表的内连和外连" class="headerlink" title="表的内连和外连"></a>表的内连和外连</h3><h4 id="内连接"><a href="#内连接" class="headerlink" title="内连接"></a>内连接</h4><ul>
+<li><p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 字段 from 表1 inner join 表2 on 连接条件 and 其他条件</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示smith的名字和部门名称</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select ename,dname from emp inner join dept on emp.deptno=dept.deptno and ename=&apos;smith&apos;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="外连接"><a href="#外连接" class="headerlink" title="外连接"></a>外连接</h4><p><strong>外连接分为左外连接和右外连接</strong></p>
+<p>#####左外连接</p>
+<ul>
+<li><p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 字段名 from 表明1 left join 表明2 on 连接条件</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>案例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-- 建两张表 </span><br><span class="line">create table stu (id int, name varchar(30)); -- 学生表 </span><br><span class="line">insert into stu values(1,&apos;jack&apos;),(2,&apos;tom&apos;),(3,&apos;kity&apos;),(4,&apos;nono&apos;); create table exam (id int, grade int); -- 成绩表 </span><br><span class="line">insert into exam values(1, 56),(2,76),(11, 8);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>查询所有学生的成绩，如果这个学生没有成绩，也要将学生的个人信息显示出来</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/26/数据库/MySQL数据类型/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1686,130 +2167,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/25/单链表/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dyson">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/img/background.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Dyson's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/25/单链表/" itemprop="url">单链表</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-25T17:20:44+08:00">
-                2018-10-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="标题：单链表的基本功能实现"><a href="#标题：单链表的基本功能实现" class="headerlink" title="标题：单链表的基本功能实现"></a>标题：单链表的基本功能实现</h3>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/10/25/单链表/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1862,7 +2219,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
